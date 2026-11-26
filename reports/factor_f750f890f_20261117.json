@@ -1,0 +1,251 @@
+{
+ "ok": true,
+ "rule_ref": "strong_pullback@v1",
+ "p_day": 20261117,
+ "expr": "same_time_vol_ratio + 1",
+ "opportunity_n": 255,
+ "covered_n": 0,
+ "coverage": 0.0,
+ "missing_n": 255,
+ "missing": [
+  {
+   "code": "000001",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000156",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000333",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000400",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000530",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000538",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000596",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000610",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000628",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000635",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000678",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000690",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000700",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000719",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000860",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000902",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "000995",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001201",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001219",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001228",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001283",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001308",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001318",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001328",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001330",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001872",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "001965",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002003",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002027",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002032",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002045",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002058",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002086",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002100",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002142",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002164",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002187",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002205",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002214",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002242",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002286",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002293",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002343",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002351",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002419",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002425",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002535",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002578",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002597",
+   "reason": "same_time_vol_ratio:MISSING"
+  },
+  {
+   "code": "002623",
+   "reason": "same_time_vol_ratio:MISSING"
+  }
+ ],
+ "hold_days": [
+  1,
+  3,
+  5
+ ],
+ "layers": [
+  {
+   "layer": 1,
+   "n": 0,
+   "value_min": null,
+   "value_max": null,
+   "mean_fwd_1d": null,
+   "labels_mature": 0,
+   "labels_incomplete": 0,
+   "codes": []
+  },
+  {
+   "layer": 2,
+   "n": 0,
+   "value_min": null,
+   "value_max": null,
+   "mean_fwd_1d": null,
+   "labels_mature": 0,
+   "labels_incomplete": 0,
+   "codes": []
+  },
+  {
+   "layer": 3,
+   "n": 0,
+   "value_min": null,
+   "value_max": null,
+   "mean_fwd_1d": null,
+   "labels_mature": 0,
+   "labels_incomplete": 0,
+   "codes": []
+  }
+ ],
+ "rows": [],
+ "limitation": "前向窗口未走完的样本标 INCOMPLETE；正式研究用后续窗口完整的数据"
+}

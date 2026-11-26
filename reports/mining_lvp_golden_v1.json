@@ -1,0 +1,107 @@
+{
+ "ok": true,
+ "rule_ref": "lvp_golden@v1",
+ "factor_names": [
+  "mom_5d",
+  "mom_20d",
+  "mom_60d",
+  "drawdown_60h",
+  "drawdown_20h",
+  "vol_atr14",
+  "vol_adj_mom",
+  "volratio_5_20",
+  "turnover_proxy",
+  "ma20_above",
+  "ma20_slope",
+  "rsi6_d",
+  "macd_hist_d"
+ ],
+ "labeled_days": [
+  20261111,
+  20261112,
+  20261113,
+  20261116,
+  20261117
+ ],
+ "purge": 1,
+ "folds": [
+  {
+   "test_day": 20261111,
+   "skipped": "TRAIN_DAYS_INSUFFICIENT"
+  },
+  {
+   "test_day": 20261112,
+   "skipped": "TRAIN_DAYS_INSUFFICIENT"
+  },
+  {
+   "test_day": 20261113,
+   "skipped": "TRAIN_DAYS_INSUFFICIENT"
+  },
+  {
+   "test_day": 20261116,
+   "train_days": [
+    20261111,
+    20261112
+   ],
+   "factors": [
+    "macd_hist_d",
+    "mom_20d",
+    "volratio_5_20"
+   ],
+   "train_ic": 0.4138,
+   "test_ic": 0.5785
+  },
+  {
+   "test_day": 20261117,
+   "train_days": [
+    20261111,
+    20261112,
+    20261113
+   ],
+   "factors": [
+    "drawdown_20h",
+    "macd_hist_d",
+    "volratio_5_20"
+   ],
+   "train_ic": 0.46,
+   "test_ic": 0.5215
+  }
+ ],
+ "candidates": [
+  {
+   "factors": [
+    "macd_hist_d",
+    "mom_20d",
+    "volratio_5_20"
+   ],
+   "folds_n": 1,
+   "mean_ic": 0.5785,
+   "pos_ratio": 1.0,
+   "gates": {
+    "folds_n": false,
+    "ic_abs": true,
+    "pos": true
+   },
+   "status": "pending",
+   "promotable": false
+  },
+  {
+   "factors": [
+    "drawdown_20h",
+    "macd_hist_d",
+    "volratio_5_20"
+   ],
+   "folds_n": 1,
+   "mean_ic": 0.5215,
+   "pos_ratio": 1.0,
+   "gates": {
+    "folds_n": false,
+    "ic_abs": true,
+    "pos": true
+   },
+   "status": "pending",
+   "promotable": false
+  }
+ ],
+ "note": "嵌套留出：训练窗与测试日之间隔 purge 个交易日；候选默认 pending，promotable=IC 口径门槛(|IC|>0.03 且正 IC 折>=2/3)"
+}

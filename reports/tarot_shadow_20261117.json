@@ -1,0 +1,3221 @@
+{
+ "summary": {
+  "candidates": 256,
+  "universe_scored": 5,
+  "universe_manual": 22,
+  "universe_failures": 0,
+  "universe_structure_excluded": 3695,
+  "scored_any": 4,
+  "arm_top10": 1,
+  "arm_scored_beyond_top10": 0,
+  "arm_manual_review": 3,
+  "arm_not_admitted": 252,
+  "coverage": 0.0156,
+  "model_sha256": {
+   "stargazer_ml/v5_hybrid/green_common_profile/tarot_a_second_leg_fit_20261022_v1/initial_node_cash_fit_20261023_v1/model.pkl": "451f769867086cd15df47f5c46e2e8d276e097d8159ede4044cf3b7daa43858e"
+  },
+  "scored_ranking": [
+   [
+    "300529",
+    0.01091894148366532
+   ],
+   [
+    "002578",
+    0.0007503002188236443
+   ],
+   [
+    "002811",
+    -0.0003325056917178799
+   ],
+   [
+    "605169",
+    -0.003377330130108545
+   ]
+  ],
+  "not_admitted_reasons": {
+   "未准入：下降三重顶结构否决（≥3 个下降主peak）": 43,
+   "NOT_DOWN_DAY(门槛：P 日为下跌日)": 103,
+   "NO_RECORD_FROM_LATEST(特征未形成)": 103,
+   "IS_ST": 1,
+   "AMOUNT_BELOW_5E7": 2
+  }
+ },
+ "table": [
+  {
+   "code": "000156",
+   "zone_lower": 7.024286,
+   "zone_upper": 7.408571,
+   "golden_nodes": [
+    7.6506,
+    7.45,
+    7.2494,
+    6.9638
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "000333",
+   "zone_lower": 90.074286,
+   "zone_upper": 92.018571,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "000400",
+   "zone_lower": 24.345714,
+   "zone_upper": 25.431429,
+   "golden_nodes": [
+    24.1548,
+    23.3226,
+    22.65,
+    21.9774,
+    21.0198
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "000530",
+   "zone_lower": 10.301429,
+   "zone_upper": 11.182857,
+   "golden_nodes": [
+    10.148,
+    9.126,
+    8.3,
+    7.474,
+    6.298
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "000538",
+   "zone_lower": 54.851429,
+   "zone_upper": 55.682857,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "000596",
+   "zone_lower": 101.578571,
+   "zone_upper": 107.827143,
+   "golden_nodes": [
+    102.1988,
+    98.3006,
+    95.15,
+    91.9994,
+    87.5138
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "000610",
+   "zone_lower": 6.398571,
+   "zone_upper": 6.747143,
+   "golden_nodes": [
+    6.556
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "000628",
+   "zone_lower": 44.83,
+   "zone_upper": 47.2,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "000678",
+   "zone_lower": 12.707143,
+   "zone_upper": 14.774286,
+   "golden_nodes": [
+    15.75,
+    13.9682,
+    11.4314
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "000690",
+   "zone_lower": 5.508571,
+   "zone_upper": 5.667143,
+   "golden_nodes": [
+    5.5168,
+    5.3416,
+    5.2,
+    5.0584,
+    4.8568
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "000700",
+   "zone_lower": 12.711429,
+   "zone_upper": 14.042857,
+   "golden_nodes": [
+    14.644,
+    13.7,
+    12.756,
+    11.412
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "000719",
+   "zone_lower": 13.594286,
+   "zone_upper": 14.078571,
+   "golden_nodes": [
+    13.7156,
+    13.2922,
+    12.95,
+    12.6078,
+    12.1206
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "000860",
+   "zone_lower": 11.441429,
+   "zone_upper": 11.922857,
+   "golden_nodes": [
+    11.9864,
+    11.6068,
+    11.3,
+    10.9932,
+    10.5564
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "000892",
+   "zone_lower": 3.832857,
+   "zone_upper": 4.155714,
+   "golden_nodes": [
+    4.135
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "000902",
+   "zone_lower": 14.235714,
+   "zone_upper": 14.621429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "000995",
+   "zone_lower": 14.157143,
+   "zone_upper": 15.734286,
+   "golden_nodes": [
+    16.2328,
+    15.1,
+    13.9672,
+    12.3544
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "001201",
+   "zone_lower": 16.822857,
+   "zone_upper": 17.585714,
+   "golden_nodes": [
+    15.9548,
+    15.1226,
+    14.45,
+    13.7774,
+    12.8198
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "001219",
+   "zone_lower": 13.06,
+   "zone_upper": 15.46,
+   "golden_nodes": [
+    14.9816
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "001228",
+   "zone_lower": 30.317143,
+   "zone_upper": 31.434286,
+   "golden_nodes": [
+    31.2042,
+    29.0034
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "001283",
+   "zone_lower": 43.131429,
+   "zone_upper": 46.062857,
+   "golden_nodes": [
+    46.366
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "001308",
+   "zone_lower": 18.784286,
+   "zone_upper": 20.058571,
+   "golden_nodes": [
+    20.1796,
+    18.8692
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "001318",
+   "zone_lower": 12.195714,
+   "zone_upper": 13.321429,
+   "golden_nodes": [
+    13.7754,
+    13.15,
+    12.5246,
+    11.6342
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "001328",
+   "zone_lower": 32.875714,
+   "zone_upper": 34.631429,
+   "golden_nodes": [
+    35.6748,
+    34.1126,
+    32.85,
+    31.5874,
+    29.7898
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "001330",
+   "zone_lower": 4.972857,
+   "zone_upper": 5.395714,
+   "golden_nodes": [
+    5.3062
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "001872",
+   "zone_lower": 25.435714,
+   "zone_upper": 26.111429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "001965",
+   "zone_lower": 10.417143,
+   "zone_upper": 10.624286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002003",
+   "zone_lower": 12.692857,
+   "zone_upper": 13.055714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002027",
+   "zone_lower": 5.441429,
+   "zone_upper": 5.592857,
+   "golden_nodes": [
+    5.4404,
+    5.2798,
+    5.15,
+    5.0202,
+    4.8354
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002032",
+   "zone_lower": 45.721429,
+   "zone_upper": 46.792857,
+   "golden_nodes": [
+    43.9592,
+    42.8204,
+    41.9,
+    40.9796,
+    39.6692
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002045",
+   "zone_lower": 9.205714,
+   "zone_upper": 9.911429,
+   "golden_nodes": [
+    9.9484,
+    9.5,
+    9.0516,
+    8.4132
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002058",
+   "zone_lower": 20.845714,
+   "zone_upper": 22.341429,
+   "golden_nodes": [
+    22.2452,
+    20.9,
+    19.5548,
+    17.6396
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002086",
+   "zone_lower": 3.344286,
+   "zone_upper": 3.838571,
+   "golden_nodes": [
+    3.9394,
+    3.55,
+    3.1606,
+    2.6062
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002100",
+   "zone_lower": 8.044286,
+   "zone_upper": 8.298571,
+   "golden_nodes": [
+    8.3224,
+    8.0888,
+    7.9,
+    7.7112,
+    7.4424
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002102",
+   "zone_lower": 2.362857,
+   "zone_upper": 2.435714,
+   "golden_nodes": [
+    2.491,
+    2.407
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002142",
+   "zone_lower": 34.378571,
+   "zone_upper": 34.977143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002164",
+   "zone_lower": 17.357143,
+   "zone_upper": 19.244286,
+   "golden_nodes": [
+    19.6172,
+    17.8,
+    15.9828,
+    13.3956
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002187",
+   "zone_lower": 7.352857,
+   "zone_upper": 7.855714,
+   "golden_nodes": [
+    6.146,
+    5.927,
+    5.75,
+    5.573,
+    5.321
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002205",
+   "zone_lower": 11.402857,
+   "zone_upper": 12.255714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002214",
+   "zone_lower": 15.405714,
+   "zone_upper": 15.901429,
+   "golden_nodes": [
+    16.25,
+    15.5538,
+    14.5626
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002242",
+   "zone_lower": 28.75,
+   "zone_upper": 30.54,
+   "golden_nodes": [
+    19.1544,
+    17.0228,
+    15.3,
+    13.5772,
+    11.1244
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002286",
+   "zone_lower": 8.572857,
+   "zone_upper": 8.995714,
+   "golden_nodes": [
+    9.1808,
+    8.8596,
+    8.6,
+    8.3404,
+    7.9708
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002293",
+   "zone_lower": 12.308571,
+   "zone_upper": 12.677143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002343",
+   "zone_lower": 7.732857,
+   "zone_upper": 8.495714,
+   "golden_nodes": [
+    8.608,
+    7.9,
+    7.192,
+    6.184
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002351",
+   "zone_lower": 11.682857,
+   "zone_upper": 12.125714,
+   "golden_nodes": [
+    12.0212,
+    11.5394,
+    11.15,
+    10.7606,
+    10.2062
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002419",
+   "zone_lower": 4.84,
+   "zone_upper": 5.12,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002425",
+   "zone_lower": 4.161429,
+   "zone_upper": 4.502857,
+   "golden_nodes": [
+    3.3112,
+    3.1944,
+    3.1,
+    3.0056,
+    2.8712
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002430",
+   "zone_lower": 24.591429,
+   "zone_upper": 25.482857,
+   "golden_nodes": [
+    25.5,
+    24.8156,
+    23.8412
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002535",
+   "zone_lower": 2.552857,
+   "zone_upper": 2.775714,
+   "golden_nodes": [
+    2.8112,
+    2.6944,
+    2.6,
+    2.5056,
+    2.3712
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002578",
+   "zone_lower": 3.61,
+   "zone_upper": 4.13,
+   "golden_nodes": [
+    4.2988,
+    3.7276
+   ],
+   "arm": "人工复核",
+   "tarot_score": 0.0007503002188236443,
+   "tarot_status": "OUTSIDE_FROZEN_ADMISSION",
+   "reason": "未准入：模型分超出冻结适用范围，仅供人工复核",
+   "model_sha256": null
+  },
+  {
+   "code": "002597",
+   "zone_lower": 21.254286,
+   "zone_upper": 21.928571,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002623",
+   "zone_lower": 18.17,
+   "zone_upper": 20.07,
+   "golden_nodes": [
+    21.0,
+    19.584,
+    17.568
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002638",
+   "zone_lower": 3.964286,
+   "zone_upper": 4.158571,
+   "golden_nodes": [
+    4.2876,
+    4.1562,
+    4.05,
+    3.9438,
+    3.7926
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002639",
+   "zone_lower": 12.931429,
+   "zone_upper": 13.752857,
+   "golden_nodes": [
+    13.8,
+    13.1864,
+    12.3128
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002685",
+   "zone_lower": 6.205714,
+   "zone_upper": 6.541429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002690",
+   "zone_lower": 16.867143,
+   "zone_upper": 17.404286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002708",
+   "zone_lower": 18.374286,
+   "zone_upper": 20.868571,
+   "golden_nodes": [
+    21.2532,
+    19.2,
+    17.1468,
+    14.2236
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002712",
+   "zone_lower": 4.552857,
+   "zone_upper": 4.995714,
+   "golden_nodes": [
+    5.1168,
+    4.7136
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002714",
+   "zone_lower": 43.94,
+   "zone_upper": 45.08,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002724",
+   "zone_lower": 8.708571,
+   "zone_upper": 9.707143,
+   "golden_nodes": [
+    10.2,
+    9.1144,
+    7.5688
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002727",
+   "zone_lower": 13.114286,
+   "zone_upper": 13.438571,
+   "golden_nodes": [
+    12.9684,
+    12.5158,
+    12.15,
+    11.7842,
+    11.2634
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002739",
+   "zone_lower": 9.115714,
+   "zone_upper": 9.551429,
+   "golden_nodes": [
+    9.1224,
+    8.8888,
+    8.7,
+    8.5112,
+    8.2424
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002748",
+   "zone_lower": 12.007143,
+   "zone_upper": 12.684286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002807",
+   "zone_lower": 4.35,
+   "zone_upper": 4.44,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002811",
+   "zone_lower": 14.348571,
+   "zone_upper": 16.257143,
+   "golden_nodes": [
+    15.5964
+   ],
+   "arm": "正式入选(TOP10)",
+   "tarot_rank": 1,
+   "tarot_score": -0.0003325056917178799,
+   "tarot_status": "GOLDEN_PLAN_READY",
+   "model_sha256": null
+  },
+  {
+   "code": "002813",
+   "zone_lower": 22.62,
+   "zone_upper": 23.8,
+   "golden_nodes": [
+    24.7,
+    23.5672,
+    21.9544
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002832",
+   "zone_lower": 27.822857,
+   "zone_upper": 28.555714,
+   "golden_nodes": [
+    27.8728,
+    27.1136,
+    26.5,
+    25.8864,
+    25.0128
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002855",
+   "zone_lower": 10.411429,
+   "zone_upper": 10.922857,
+   "golden_nodes": [
+    10.8808,
+    10.5596,
+    10.3,
+    10.0404,
+    9.6708
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002889",
+   "zone_lower": 13.014286,
+   "zone_upper": 14.278571,
+   "golden_nodes": [
+    14.75,
+    13.983,
+    12.891
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002905",
+   "zone_lower": 8.99,
+   "zone_upper": 9.75,
+   "golden_nodes": [
+    9.0572,
+    8.7214,
+    8.45,
+    8.1786,
+    7.7922
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002911",
+   "zone_lower": 12.021429,
+   "zone_upper": 12.442857,
+   "golden_nodes": [
+    12.5864,
+    12.2068,
+    11.9,
+    11.5932,
+    11.1564
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002946",
+   "zone_lower": 16.867143,
+   "zone_upper": 17.624286,
+   "golden_nodes": [
+    16.7268,
+    16.1866,
+    15.75,
+    15.3134,
+    14.6918
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002948",
+   "zone_lower": 6.29,
+   "zone_upper": 6.48,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "002959",
+   "zone_lower": 37.771429,
+   "zone_upper": 39.102857,
+   "golden_nodes": [
+    37.2412,
+    36.0294,
+    35.05,
+    34.0706,
+    32.6762
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "002966",
+   "zone_lower": 9.648571,
+   "zone_upper": 9.907143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002983",
+   "zone_lower": 22.052857,
+   "zone_upper": 23.115714,
+   "golden_nodes": [
+    23.3604,
+    22.4698,
+    21.75,
+    21.0302,
+    20.0054
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "002988",
+   "zone_lower": 24.512857,
+   "zone_upper": 26.265714,
+   "golden_nodes": [
+    26.2222,
+    24.1894
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "003006",
+   "zone_lower": 19.048571,
+   "zone_upper": 19.907143,
+   "golden_nodes": [
+    20.4542,
+    19.05,
+    17.6458,
+    15.6466
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "003816",
+   "zone_lower": 4.51,
+   "zone_upper": 4.61,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300006",
+   "zone_lower": 7.694286,
+   "zone_upper": 8.758571,
+   "golden_nodes": [
+    8.75,
+    7.8178,
+    6.4906
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300010",
+   "zone_lower": 3.24,
+   "zone_upper": 3.63,
+   "golden_nodes": [
+    3.5134,
+    2.8918
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "300133",
+   "zone_lower": 6.992857,
+   "zone_upper": 7.835714,
+   "golden_nodes": [
+    7.7984
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300154",
+   "zone_lower": 11.581429,
+   "zone_upper": 12.622857,
+   "golden_nodes": [
+    12.85,
+    12.1538,
+    11.1626
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300234",
+   "zone_lower": 10.094286,
+   "zone_upper": 10.658571,
+   "golden_nodes": [
+    10.7,
+    10.2752,
+    9.6704
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300237",
+   "zone_lower": 2.502857,
+   "zone_upper": 2.745714,
+   "golden_nodes": [
+    2.7652,
+    2.6,
+    2.4348,
+    2.1996
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300413",
+   "zone_lower": 23.981429,
+   "zone_upper": 27.102857,
+   "golden_nodes": [
+    26.35,
+    23.3882,
+    19.1714
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300426",
+   "zone_lower": 7.242857,
+   "zone_upper": 8.345714,
+   "golden_nodes": [
+    9.1,
+    8.3684,
+    7.3268
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300461",
+   "zone_lower": 33.571429,
+   "zone_upper": 37.692857,
+   "golden_nodes": [
+    39.55,
+    36.659,
+    32.543
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300473",
+   "zone_lower": 44.05,
+   "zone_upper": 48.95,
+   "golden_nodes": [
+    45.9818,
+    41.25,
+    36.5182,
+    29.7814
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300498",
+   "zone_lower": 16.8,
+   "zone_upper": 17.23,
+   "golden_nodes": [
+    16.2032,
+    15.6484,
+    15.2,
+    14.7516,
+    14.1132
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300501",
+   "zone_lower": 10.64,
+   "zone_upper": 11.28,
+   "golden_nodes": [
+    11.6338,
+    11.15,
+    10.6662,
+    9.9774
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300504",
+   "zone_lower": 15.757143,
+   "zone_upper": 16.714286,
+   "golden_nodes": [
+    16.69,
+    16.1,
+    15.51,
+    14.67
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300528",
+   "zone_lower": 12.798571,
+   "zone_upper": 14.147143,
+   "golden_nodes": [
+    14.7462,
+    14.05,
+    13.3538,
+    12.3626
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300529",
+   "zone_lower": 18.732857,
+   "zone_upper": 19.645714,
+   "golden_nodes": [
+    19.2604,
+    18.3698,
+    17.65,
+    16.9302,
+    15.9054
+   ],
+   "arm": "人工复核",
+   "tarot_score": 0.01091894148366532,
+   "tarot_status": "OUTSIDE_FROZEN_ADMISSION",
+   "reason": "未准入：模型分超出冻结适用范围，仅供人工复核",
+   "model_sha256": null
+  },
+  {
+   "code": "300550",
+   "zone_lower": 12.64,
+   "zone_upper": 13.39,
+   "golden_nodes": [
+    13.2212,
+    12.7394,
+    12.35,
+    11.9606,
+    11.4062
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "300556",
+   "zone_lower": 16.031429,
+   "zone_upper": 17.392857,
+   "golden_nodes": [
+    18.065,
+    16.805
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300637",
+   "zone_lower": 9.474286,
+   "zone_upper": 10.098571,
+   "golden_nodes": [
+    10.3922,
+    10.05,
+    9.7078,
+    9.2206
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "300761",
+   "zone_lower": 21.821429,
+   "zone_upper": 22.502857,
+   "golden_nodes": [
+    22.2076,
+    21.3462,
+    20.65,
+    19.9538,
+    18.9626
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300770",
+   "zone_lower": 36.204286,
+   "zone_upper": 37.778571,
+   "golden_nodes": [
+    38.7856,
+    37.7,
+    36.6144,
+    35.0688
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300788",
+   "zone_lower": 25.478571,
+   "zone_upper": 28.337143,
+   "golden_nodes": [
+    29.7614,
+    26.7878
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300793",
+   "zone_lower": 11.59,
+   "zone_upper": 12.18,
+   "golden_nodes": [
+    12.25,
+    11.8606,
+    11.3062
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300824",
+   "zone_lower": 9.2,
+   "zone_upper": 9.73,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "300829",
+   "zone_lower": 25.25,
+   "zone_upper": 27.79,
+   "golden_nodes": [
+    26.9296,
+    24.5352,
+    22.6,
+    20.6648,
+    17.9096
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "300916",
+   "zone_lower": 26.76,
+   "zone_upper": 28.79,
+   "golden_nodes": [
+    29.907,
+    28.55,
+    27.193,
+    25.261
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300949",
+   "zone_lower": 38.552857,
+   "zone_upper": 44.395714,
+   "golden_nodes": [
+    44.5368,
+    40.1,
+    35.6632,
+    29.3464
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300960",
+   "zone_lower": 16.65,
+   "zone_upper": 17.82,
+   "golden_nodes": [
+    17.85,
+    17.083,
+    15.991
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "300979",
+   "zone_lower": 35.002857,
+   "zone_upper": 36.525714,
+   "golden_nodes": [
+    37.271,
+    36.15,
+    35.029,
+    33.433
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "301000",
+   "zone_lower": 26.074286,
+   "zone_upper": 28.068571,
+   "golden_nodes": [
+    29.1624,
+    27.4688,
+    26.1,
+    24.7312,
+    22.7824
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301010",
+   "zone_lower": 19.581429,
+   "zone_upper": 21.692857,
+   "golden_nodes": [
+    22.3,
+    20.8604,
+    18.8108
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301046",
+   "zone_lower": 19.225714,
+   "zone_upper": 21.301429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301052",
+   "zone_lower": 37.125714,
+   "zone_upper": 41.661429,
+   "golden_nodes": [
+    42.6516,
+    38.7242,
+    35.55,
+    32.3758,
+    27.8566
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301109",
+   "zone_lower": 14.561429,
+   "zone_upper": 14.972857,
+   "golden_nodes": [
+    14.5628,
+    14.1686,
+    13.85,
+    13.5314,
+    13.0778
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301187",
+   "zone_lower": 16.658571,
+   "zone_upper": 17.667143,
+   "golden_nodes": [
+    16.6728,
+    15.9136,
+    15.3,
+    14.6864,
+    13.8128
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "301218",
+   "zone_lower": 69.6,
+   "zone_upper": 79.03,
+   "golden_nodes": [
+    82.166,
+    73.917,
+    67.25,
+    60.583,
+    51.091
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301262",
+   "zone_lower": 19.698571,
+   "zone_upper": 21.387143,
+   "golden_nodes": [
+    22.6,
+    21.4908,
+    19.9116
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301288",
+   "zone_lower": 18.194286,
+   "zone_upper": 19.388571,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "301313",
+   "zone_lower": 42.024286,
+   "zone_upper": 48.678571,
+   "golden_nodes": [
+    53.8,
+    47.2628,
+    37.9556
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301314",
+   "zone_lower": 39.607143,
+   "zone_upper": 44.464286,
+   "golden_nodes": [
+    46.778
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301361",
+   "zone_lower": 29.252857,
+   "zone_upper": 30.925714,
+   "golden_nodes": [
+    31.5996,
+    30.3002,
+    29.25,
+    28.1998,
+    26.7046
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "301395",
+   "zone_lower": 16.348571,
+   "zone_upper": 17.487143,
+   "golden_nodes": [
+    14.0324,
+    13.4338,
+    12.95,
+    12.4662,
+    11.7774
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "301513",
+   "zone_lower": 50.492857,
+   "zone_upper": 55.385714,
+   "golden_nodes": [
+    54.7486,
+    48.4822
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "301529",
+   "zone_lower": 139.972857,
+   "zone_upper": 152.725714,
+   "golden_nodes": [
+    153.362,
+    140.5,
+    127.638,
+    109.326
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301550",
+   "zone_lower": 89.658571,
+   "zone_upper": 97.827143,
+   "golden_nodes": [
+    99.6086,
+    88.3022
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301551",
+   "zone_lower": 20.748571,
+   "zone_upper": 22.427143,
+   "golden_nodes": [
+    22.9526,
+    21.3902
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "301578",
+   "zone_lower": 30.18,
+   "zone_upper": 32.92,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "301606",
+   "zone_lower": 55.265714,
+   "zone_upper": 58.711429,
+   "golden_nodes": [
+    56.8508,
+    53.9746,
+    51.65,
+    49.3254,
+    46.0158
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600000",
+   "zone_lower": 10.507143,
+   "zone_upper": 10.754286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600004",
+   "zone_lower": 8.058571,
+   "zone_upper": 8.197143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600007",
+   "zone_lower": 21.042857,
+   "zone_upper": 21.575714,
+   "golden_nodes": [
+    21.9088,
+    21.2956,
+    20.8,
+    20.3044,
+    19.5988
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600011",
+   "zone_lower": 7.598571,
+   "zone_upper": 7.767143,
+   "golden_nodes": [
+    7.5696,
+    7.3652,
+    7.2,
+    7.0348,
+    6.7996
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600012",
+   "zone_lower": 16.962857,
+   "zone_upper": 17.335714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600027",
+   "zone_lower": 5.141429,
+   "zone_upper": 5.222857,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600035",
+   "zone_lower": 3.695714,
+   "zone_upper": 3.761429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600060",
+   "zone_lower": 26.63,
+   "zone_upper": 27.37,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600079",
+   "zone_lower": 19.808571,
+   "zone_upper": 20.107143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600098",
+   "zone_lower": 6.638571,
+   "zone_upper": 6.797143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600103",
+   "zone_lower": 3.127143,
+   "zone_upper": 3.284286,
+   "golden_nodes": [
+    3.3348,
+    3.0996
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600177",
+   "zone_lower": 8.408571,
+   "zone_upper": 8.567143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600210",
+   "zone_lower": 6.667143,
+   "zone_upper": 6.814286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600258",
+   "zone_lower": 12.795714,
+   "zone_upper": 13.291429,
+   "golden_nodes": [
+    12.992,
+    12.554,
+    12.2,
+    11.846,
+    11.342
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600261",
+   "zone_lower": 4.787143,
+   "zone_upper": 5.344286,
+   "golden_nodes": [
+    5.5976,
+    5.1012,
+    4.7,
+    4.2988,
+    3.7276
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600285",
+   "zone_lower": 22.628571,
+   "zone_upper": 23.447143,
+   "golden_nodes": [
+    22.702,
+    21.899,
+    21.25,
+    20.601,
+    19.677
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600289",
+   "zone_lower": 4.472857,
+   "zone_upper": 4.785714,
+   "golden_nodes": [
+    4.8786,
+    4.4922
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "IS_ST"
+  },
+  {
+   "code": "600293",
+   "zone_lower": 2.911429,
+   "zone_upper": 3.302857,
+   "golden_nodes": [
+    3.3634
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600316",
+   "zone_lower": 30.234286,
+   "zone_upper": 31.748571,
+   "golden_nodes": [
+    31.9874,
+    30.1898
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600327",
+   "zone_lower": 4.238571,
+   "zone_upper": 4.857143,
+   "golden_nodes": [
+    4.9898,
+    4.3346
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600337",
+   "zone_lower": 3.511429,
+   "zone_upper": 3.622857,
+   "golden_nodes": [
+    3.5798,
+    3.45,
+    3.3202,
+    3.1354
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600368",
+   "zone_lower": 4.312857,
+   "zone_upper": 4.365714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600371",
+   "zone_lower": 9.15,
+   "zone_upper": 10.0,
+   "golden_nodes": [
+    9.854
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600377",
+   "zone_lower": 14.235714,
+   "zone_upper": 14.511429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600391",
+   "zone_lower": 32.477143,
+   "zone_upper": 34.664286,
+   "golden_nodes": [
+    35.8614,
+    32.8878
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600408",
+   "zone_lower": 3.135714,
+   "zone_upper": 3.341429,
+   "golden_nodes": [
+    3.4,
+    3.2348,
+    2.9996
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600467",
+   "zone_lower": 2.608571,
+   "zone_upper": 2.727143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600483",
+   "zone_lower": 11.418571,
+   "zone_upper": 11.777143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600506",
+   "zone_lower": 14.524286,
+   "zone_upper": 15.708571,
+   "golden_nodes": [
+    15.791
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600519",
+   "zone_lower": 1406.297143,
+   "zone_upper": 1437.934286,
+   "golden_nodes": [
+    1421.01,
+    1384.145,
+    1354.35,
+    1324.555,
+    1282.135
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600530",
+   "zone_lower": 4.897143,
+   "zone_upper": 5.224286,
+   "golden_nodes": [
+    3.9348,
+    3.8326,
+    3.75,
+    3.6674,
+    3.5498
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600566",
+   "zone_lower": 29.617143,
+   "zone_upper": 30.604286,
+   "golden_nodes": [
+    28.7076,
+    27.8462,
+    27.15,
+    26.4538,
+    25.4626
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600583",
+   "zone_lower": 6.108571,
+   "zone_upper": 6.267143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600642",
+   "zone_lower": 9.267143,
+   "zone_upper": 9.454286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600674",
+   "zone_lower": 17.792857,
+   "zone_upper": 18.195714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600710",
+   "zone_lower": 11.174286,
+   "zone_upper": 11.498571,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "600715",
+   "zone_lower": 2.882857,
+   "zone_upper": 3.215714,
+   "golden_nodes": [
+    2.4168,
+    2.2416,
+    2.1,
+    1.9584,
+    1.7568
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600757",
+   "zone_lower": 8.347143,
+   "zone_upper": 8.624286,
+   "golden_nodes": [
+    8.4978,
+    8.25,
+    8.0022,
+    7.6494
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600801",
+   "zone_lower": 25.374286,
+   "zone_upper": 26.598571,
+   "golden_nodes": [
+    26.03,
+    24.935,
+    24.05,
+    23.165,
+    21.905
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600802",
+   "zone_lower": 5.402857,
+   "zone_upper": 5.905714,
+   "golden_nodes": [
+    6.1898,
+    5.5346
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600803",
+   "zone_lower": 21.098571,
+   "zone_upper": 21.667143,
+   "golden_nodes": [
+    20.8908,
+    20.2046,
+    19.65,
+    19.0954,
+    18.3058
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600838",
+   "zone_lower": 7.987143,
+   "zone_upper": 9.114286,
+   "golden_nodes": [
+    8.8478
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600853",
+   "zone_lower": 3.581429,
+   "zone_upper": 3.832857,
+   "golden_nodes": [
+    3.9,
+    3.7348,
+    3.4996
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600863",
+   "zone_lower": 5.158571,
+   "zone_upper": 5.297143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600886",
+   "zone_lower": 15.327143,
+   "zone_upper": 15.634286,
+   "golden_nodes": [
+    15.7156,
+    15.2922,
+    14.95,
+    14.6078,
+    14.1206
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600887",
+   "zone_lower": 31.085714,
+   "zone_upper": 31.911429,
+   "golden_nodes": [
+    30.1188,
+    29.1406,
+    28.35,
+    27.5594,
+    26.4338
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600892",
+   "zone_lower": 4.712857,
+   "zone_upper": 5.165714,
+   "golden_nodes": [
+    5.2068,
+    4.9,
+    4.5932,
+    4.1564
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600901",
+   "zone_lower": 7.478571,
+   "zone_upper": 7.667143,
+   "golden_nodes": [
+    7.546,
+    7.327,
+    7.15,
+    6.973,
+    6.721
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600908",
+   "zone_lower": 5.98,
+   "zone_upper": 6.11,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600919",
+   "zone_lower": 13.122857,
+   "zone_upper": 13.415714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600939",
+   "zone_lower": 2.742857,
+   "zone_upper": 2.835714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "600977",
+   "zone_lower": 14.047143,
+   "zone_upper": 14.764286,
+   "golden_nodes": [
+    15.1616,
+    14.5192,
+    14.0,
+    13.4808,
+    12.7416
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "600993",
+   "zone_lower": 25.217143,
+   "zone_upper": 25.784286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601000",
+   "zone_lower": 4.938571,
+   "zone_upper": 5.027143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601009",
+   "zone_lower": 12.712857,
+   "zone_upper": 13.015714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601019",
+   "zone_lower": 7.202857,
+   "zone_upper": 7.445714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "601077",
+   "zone_lower": 7.171429,
+   "zone_upper": 7.292857,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601088",
+   "zone_lower": 48.685714,
+   "zone_upper": 49.721429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "601098",
+   "zone_lower": 11.041429,
+   "zone_upper": 11.302857,
+   "golden_nodes": [
+    11.228,
+    10.936,
+    10.7,
+    10.464,
+    10.128
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601107",
+   "zone_lower": 6.984286,
+   "zone_upper": 7.228571,
+   "golden_nodes": [
+    6.9224,
+    6.6888,
+    6.5,
+    6.3112,
+    6.0424
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601166",
+   "zone_lower": 19.642857,
+   "zone_upper": 19.985714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601169",
+   "zone_lower": 6.074286,
+   "zone_upper": 6.218571,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601188",
+   "zone_lower": 4.058571,
+   "zone_upper": 4.447143,
+   "golden_nodes": [
+    4.2516,
+    3.9742,
+    3.75,
+    3.5258,
+    3.2066
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601288",
+   "zone_lower": 7.357143,
+   "zone_upper": 7.484286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601330",
+   "zone_lower": 8.017143,
+   "zone_upper": 8.184286,
+   "golden_nodes": [
+    8.1224,
+    7.8888,
+    7.7,
+    7.5112,
+    7.2424
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601333",
+   "zone_lower": 3.181429,
+   "zone_upper": 3.252857,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601528",
+   "zone_lower": 5.377143,
+   "zone_upper": 5.514286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601566",
+   "zone_lower": 7.697143,
+   "zone_upper": 8.654286,
+   "golden_nodes": [
+    9.27
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "601577",
+   "zone_lower": 10.0,
+   "zone_upper": 10.18,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601595",
+   "zone_lower": 29.001429,
+   "zone_upper": 32.552857,
+   "golden_nodes": [
+    31.25,
+    27.5802,
+    22.3554
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "601598",
+   "zone_lower": 7.071429,
+   "zone_upper": 7.262857,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601599",
+   "zone_lower": 3.724286,
+   "zone_upper": 4.208571,
+   "golden_nodes": [
+    4.45,
+    4.1078,
+    3.6206
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "601658",
+   "zone_lower": 5.652857,
+   "zone_upper": 5.735714,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601665",
+   "zone_lower": 6.691429,
+   "zone_upper": 6.862857,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "601766",
+   "zone_lower": 6.435714,
+   "zone_upper": 6.571429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601816",
+   "zone_lower": 5.27,
+   "zone_upper": 5.34,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601825",
+   "zone_lower": 9.337143,
+   "zone_upper": 9.554286,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601857",
+   "zone_lower": 11.595714,
+   "zone_upper": 12.061429,
+   "golden_nodes": [
+    12.25,
+    11.8134,
+    11.1918
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "601929",
+   "zone_lower": 2.468571,
+   "zone_upper": 2.667143,
+   "golden_nodes": [
+    2.382,
+    2.309,
+    2.25,
+    2.191,
+    2.107
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "601939",
+   "zone_lower": 11.858571,
+   "zone_upper": 12.107143,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601965",
+   "zone_lower": 14.954286,
+   "zone_upper": 15.408571,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "601985",
+   "zone_lower": 9.515714,
+   "zone_upper": 9.671429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "601998",
+   "zone_lower": 9.181429,
+   "zone_upper": 9.362857,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603037",
+   "zone_lower": 10.307143,
+   "zone_upper": 11.354286,
+   "golden_nodes": [
+    11.592,
+    10.584
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603081",
+   "zone_lower": 9.445714,
+   "zone_upper": 10.111429,
+   "golden_nodes": [
+    10.2988,
+    9.7276
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603103",
+   "zone_lower": 16.691429,
+   "zone_upper": 18.012857,
+   "golden_nodes": [
+    17.5672,
+    16.8664,
+    16.3,
+    15.7336,
+    14.9272
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603151",
+   "zone_lower": 21.368571,
+   "zone_upper": 22.607143,
+   "golden_nodes": [
+    20.2008,
+    19.1496,
+    18.3,
+    17.4504,
+    16.2408
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603170",
+   "zone_lower": 13.455714,
+   "zone_upper": 13.891429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603198",
+   "zone_lower": 40.545714,
+   "zone_upper": 42.611429,
+   "golden_nodes": [
+    42.8,
+    41.3604,
+    39.3108
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603258",
+   "zone_lower": 13.995714,
+   "zone_upper": 15.401429,
+   "golden_nodes": [
+    16.15,
+    15.2414,
+    13.9478
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603278",
+   "zone_lower": 10.064286,
+   "zone_upper": 11.368571,
+   "golden_nodes": [
+    11.054
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603286",
+   "zone_lower": 46.592857,
+   "zone_upper": 50.655714,
+   "golden_nodes": [
+    50.75,
+    47.4106,
+    42.6562
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603323",
+   "zone_lower": 4.535714,
+   "zone_upper": 4.631429,
+   "golden_nodes": [],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603366",
+   "zone_lower": 9.588571,
+   "zone_upper": 10.717143,
+   "golden_nodes": [
+    10.45,
+    9.565,
+    8.305
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603369",
+   "zone_lower": 31.021429,
+   "zone_upper": 32.412857,
+   "golden_nodes": [
+    32.989,
+    31.75,
+    30.511,
+    28.747
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603389",
+   "zone_lower": 50.095714,
+   "zone_upper": 54.001429,
+   "golden_nodes": [
+    53.8736,
+    50.9,
+    47.9264,
+    43.6928
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603466",
+   "zone_lower": 11.92,
+   "zone_upper": 13.19,
+   "golden_nodes": [
+    13.7032,
+    12.4264
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603529",
+   "zone_lower": 21.681429,
+   "zone_upper": 22.392857,
+   "golden_nodes": [
+    21.456,
+    20.872,
+    20.4,
+    19.928,
+    19.256
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603533",
+   "zone_lower": 22.517143,
+   "zone_upper": 24.574286,
+   "golden_nodes": [
+    25.0188,
+    22.7676
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603587",
+   "zone_lower": 14.294286,
+   "zone_upper": 15.028571,
+   "golden_nodes": [
+    14.174,
+    13.663,
+    13.25,
+    12.837,
+    12.249
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603626",
+   "zone_lower": 23.071429,
+   "zone_upper": 25.052857,
+   "golden_nodes": [
+    25.7678,
+    23.75,
+    21.7322,
+    18.8594
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603636",
+   "zone_lower": 7.27,
+   "zone_upper": 7.85,
+   "golden_nodes": [
+    8.15,
+    7.7606,
+    7.2062
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603706",
+   "zone_lower": 19.444286,
+   "zone_upper": 21.458571,
+   "golden_nodes": [
+    21.3424,
+    19.1248
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "AMOUNT_BELOW_5E7"
+  },
+  {
+   "code": "603816",
+   "zone_lower": 24.642857,
+   "zone_upper": 25.455714,
+   "golden_nodes": [
+    25.5144,
+    24.8428,
+    24.3,
+    23.7572,
+    22.9844
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603868",
+   "zone_lower": 34.487143,
+   "zone_upper": 35.624286,
+   "golden_nodes": [
+    35.5536,
+    34.4732,
+    33.6,
+    32.7268,
+    31.4836
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603883",
+   "zone_lower": 14.327143,
+   "zone_upper": 14.634286,
+   "golden_nodes": [
+    14.592,
+    14.154,
+    13.8,
+    13.446,
+    12.942
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "603898",
+   "zone_lower": 12.55,
+   "zone_upper": 13.0,
+   "golden_nodes": [
+    13.0448,
+    12.5776,
+    12.2,
+    11.8224,
+    11.2848
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603939",
+   "zone_lower": 25.134286,
+   "zone_upper": 25.948571,
+   "golden_nodes": [
+    26.3312,
+    25.4844,
+    24.8,
+    24.1156,
+    23.1412
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "603955",
+   "zone_lower": 25.745714,
+   "zone_upper": 28.631429,
+   "golden_nodes": [
+    28.65,
+    26.2074,
+    22.7298
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "603967",
+   "zone_lower": 12.21,
+   "zone_upper": 12.59,
+   "golden_nodes": [
+    12.745,
+    12.45,
+    12.155,
+    11.735
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "AMOUNT_BELOW_5E7"
+  },
+  {
+   "code": "605169",
+   "zone_lower": 11.098571,
+   "zone_upper": 11.807143,
+   "golden_nodes": [
+    11.9132
+   ],
+   "arm": "人工复核",
+   "tarot_score": -0.003377330130108545,
+   "tarot_status": "OUTSIDE_FROZEN_ADMISSION",
+   "reason": "未准入：模型分超出冻结适用范围，仅供人工复核",
+   "model_sha256": null
+  },
+  {
+   "code": "605338",
+   "zone_lower": 20.072857,
+   "zone_upper": 21.215714,
+   "golden_nodes": [
+    21.302,
+    20.499,
+    19.85,
+    19.201,
+    18.277
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "605378",
+   "zone_lower": 14.948571,
+   "zone_upper": 15.777143,
+   "golden_nodes": [
+    14.5156,
+    14.0922,
+    13.75,
+    13.4078,
+    12.9206
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "605488",
+   "zone_lower": 39.592857,
+   "zone_upper": 44.935714,
+   "golden_nodes": [
+    44.4,
+    39.7744,
+    33.1888
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "605577",
+   "zone_lower": 12.951429,
+   "zone_upper": 14.282857,
+   "golden_nodes": [
+    14.0076,
+    12.0252
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "688004",
+   "zone_lower": 23.811429,
+   "zone_upper": 27.772857,
+   "golden_nodes": [
+    25.4266
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "688018",
+   "zone_lower": 129.741429,
+   "zone_upper": 140.552857,
+   "golden_nodes": [
+    142.45,
+    132.6678,
+    118.7406
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "688026",
+   "zone_lower": 18.185714,
+   "zone_upper": 19.801429,
+   "golden_nodes": [
+    21.021,
+    18.417
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "688036",
+   "zone_lower": 61.341429,
+   "zone_upper": 64.222857,
+   "golden_nodes": [
+    62.108,
+    58.896,
+    56.3,
+    53.704,
+    50.008
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "688078",
+   "zone_lower": 25.081429,
+   "zone_upper": 27.182857,
+   "golden_nodes": [
+    28.35,
+    26.9222,
+    24.8894
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NO_RECORD_FROM_LATEST(特征未形成)"
+  },
+  {
+   "code": "688137",
+   "zone_lower": 90.528571,
+   "zone_upper": 103.467143,
+   "golden_nodes": [
+    111.4,
+    98.0424,
+    79.0248
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "688169",
+   "zone_lower": 129.298571,
+   "zone_upper": 136.027143,
+   "golden_nodes": [
+    130.5128,
+    124.6436,
+    119.9,
+    115.1564,
+    108.4028
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "688543",
+   "zone_lower": 41.362857,
+   "zone_upper": 43.555714,
+   "golden_nodes": [
+    44.45,
+    42.739,
+    40.303
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "688552",
+   "zone_lower": 29.018571,
+   "zone_upper": 31.237143,
+   "golden_nodes": [
+    31.6,
+    30.1132,
+    27.9964
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "688696",
+   "zone_lower": 96.508571,
+   "zone_upper": 102.417143,
+   "golden_nodes": [
+    95.732,
+    90.184,
+    85.7,
+    81.216,
+    74.832
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "688781",
+   "zone_lower": 44.437143,
+   "zone_upper": 47.894286,
+   "golden_nodes": [
+    48.4522,
+    45.75,
+    43.0478,
+    39.2006
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "920005",
+   "zone_lower": 24.632857,
+   "zone_upper": 25.585714,
+   "golden_nodes": [
+    25.599,
+    24.95,
+    24.301,
+    23.377
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "920006",
+   "zone_lower": 16.647143,
+   "zone_upper": 17.814286,
+   "golden_nodes": [
+    18.75,
+    17.8178,
+    16.4906
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "NOT_DOWN_DAY(门槛：P 日为下跌日)"
+  },
+  {
+   "code": "920021",
+   "zone_lower": 7.024286,
+   "zone_upper": 7.668571,
+   "golden_nodes": [
+    8.0044,
+    7.2988
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "920627",
+   "zone_lower": 16.451429,
+   "zone_upper": 17.912857,
+   "golden_nodes": [
+    17.9,
+    16.6492,
+    14.8684
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  },
+  {
+   "code": "920873",
+   "zone_lower": 7.102857,
+   "zone_upper": 7.605714,
+   "golden_nodes": [
+    7.8224,
+    7.2848
+   ],
+   "arm": "未准入",
+   "tarot_score": null,
+   "reason": "未准入：下降三重顶结构否决（≥3 个下降主peak）"
+  }
+ ]
+}

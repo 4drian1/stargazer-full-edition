@@ -1,0 +1,108 @@
+{
+ "contract": "STARGAZER_RULES_LAB_RULE_V1",
+ "created_at": "2026-11-12T00:00:00+08:00",
+ "evaluation_time": "POST_CLOSE_P",
+ "events": {
+  "indicator_supplement": {
+   "enabled": true,
+   "kind": "INDICATOR_SUPPLEMENT",
+   "period_minutes": 15
+  },
+  "touch": {
+   "enabled": true,
+   "kind": "TOUCH"
+  }
+ },
+ "execution": {
+  "fee_rate": 0.0003,
+  "fill": "NEXT_COMPLETED_BAR",
+  "slippage_rate": 0.001,
+  "t_plus_1": true
+ },
+ "factor_refs": [
+  "close@f1",
+  "history_days@f1",
+  "ret_60d@f1",
+  "dist_60h@f1",
+  "atr14@f1",
+  "ma20_slope5@f1",
+  "vol_ratio_5d@f1",
+  "zone_width_atr@f1"
+ ],
+ "notes": "绿盘低吸+黄金分割：强势股回调至最近确认波段的黄金分割回撤位（观察区=黄金档下沿..上沿），盘中下跌触达观察区提醒。全部条件由本 JSON 定义；不含模型。",
+ "notification": {
+  "address": "lab_data/state/inbox/inbox.jsonl",
+  "channel": "local_inbox",
+  "dedupe": "event_id+kind",
+  "note": "运行时实际写入 run 目录内 receipts.jsonl，不写正式推送回执"
+ },
+ "rule_id": "lvp_golden",
+ "scope": {
+  "board_limitation": "仅单一时点成分快照，历史成分不可证",
+  "board_source": "boards@snapshot",
+  "exclude_st": true,
+  "universe": "SNAPSHOT_MINUTE_CODES"
+ },
+ "selection": {
+  "children": [
+   {
+    "field": "ret_60d",
+    "op": ">=",
+    "value": 0.1
+   },
+   {
+    "field": "dist_60h",
+    "op": ">=",
+    "value": -0.45
+   },
+   {
+    "field": "ma20_slope5",
+    "op": ">=",
+    "value": -0.02
+   },
+   {
+    "field": "vol_ratio_5d",
+    "op": ">=",
+    "value": 0.8
+   },
+   {
+    "field": "vol_ratio_5d",
+    "op": "<=",
+    "value": 3.0
+   },
+   {
+    "field": "atr14",
+    "op": ">",
+    "value": 0.0
+   }
+  ],
+  "op": "AND"
+ },
+ "status": "DRAFT",
+ "title": "绿盘低吸+黄金分割（内置默认）",
+ "trigger": {
+  "children": [
+   {
+    "field": "quote_fresh",
+    "op": "==",
+    "value": 1
+   },
+   {
+    "field": "decline_from_prev_close",
+    "op": ">=",
+    "value": 0.035
+   },
+   {
+    "field": "zone_distance_atr",
+    "op": "<=",
+    "value": 0.2
+   }
+  ],
+  "op": "AND"
+ },
+ "version": "v1",
+ "zone": {
+  "tolerance_atr": 0.2,
+  "type": "GOLDEN_FIB"
+ }
+}

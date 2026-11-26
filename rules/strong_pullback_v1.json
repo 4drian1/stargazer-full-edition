@@ -1,0 +1,66 @@
+{
+  "contract": "STARGAZER_RULES_LAB_RULE_V1",
+  "rule_id": "strong_pullback",
+  "version": "v1",
+  "title": "强势股回调 · 触位（第一阶段可编辑规则）",
+  "status": "DRAFT",
+  "notes": "参考正式版强势波段/观察区意图，但全部条件由本 JSON 定义；不含模型、不含 T+1 行情特征。",
+  "scope": {
+    "universe": "SNAPSHOT_MINUTE_CODES",
+    "exclude_st": true,
+    "board_source": "boards@snapshot",
+    "board_limitation": "仅单一时点成分快照，历史成分不可证"
+  },
+  "evaluation_time": "POST_CLOSE_P",
+  "factor_refs": [
+    "close@f1",
+    "history_days@f1",
+    "ret_60d@f1",
+    "dist_60h@f1",
+    "atr14@f1",
+    "ma20_slope5@f1",
+    "vol_ratio_5d@f1",
+    "zone_width_atr@f1"
+  ],
+  "selection": {
+    "op": "AND",
+    "children": [
+      {"op": ">=", "field": "ret_60d", "value": 0.10},
+      {"op": ">=", "field": "dist_60h", "value": -0.45},
+      {"op": ">=", "field": "ma20_slope5", "value": -0.02},
+      {"op": ">=", "field": "vol_ratio_5d", "value": 0.8},
+      {"op": "<=", "field": "vol_ratio_5d", "value": 3.0},
+      {"op": ">", "field": "atr14", "value": 0.0}
+    ]
+  },
+  "zone": {
+    "type": "ATR_BAND",
+    "k_lower": 1.0,
+    "k_upper": 0.6,
+    "tolerance_atr": 0.2
+  },
+  "trigger": {
+    "op": "AND",
+    "children": [
+      {"op": "==", "field": "quote_fresh", "value": 1},
+      {"op": ">=", "field": "decline_from_prev_close", "value": 0.035},
+      {"op": "<=", "field": "zone_distance_atr", "value": 0.2}
+    ]
+  },
+  "events": {
+    "touch": {"enabled": true, "kind": "TOUCH"},
+    "indicator_supplement": {"enabled": true, "period_minutes": 15, "kind": "INDICATOR_SUPPLEMENT"}
+  },
+  "notification": {
+    "channel": "local_inbox",
+    "address": "lab_data/state/inbox/inbox.jsonl",
+    "dedupe": "event_id+kind",
+    "note": "运行时实际写入 run 目录内 receipts.jsonl，不写正式推送回执"
+  },
+  "execution": {
+    "fee_rate": 0.0003,
+    "slippage_rate": 0.001,
+    "fill": "NEXT_COMPLETED_BAR",
+    "t_plus_1": true
+  }
+}

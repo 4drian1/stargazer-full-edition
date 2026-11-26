@@ -1,0 +1,2682 @@
+{
+ "ok": true,
+ "rule_ref": "strong_pullback@v1",
+ "p_day": 20261116,
+ "expr": "ret_5d",
+ "opportunity_n": 321,
+ "covered_n": 321,
+ "coverage": 1.0,
+ "missing_n": 0,
+ "missing": [],
+ "hold_days": [
+  1,
+  3,
+  5
+ ],
+ "layers": [
+  {
+   "layer": 1,
+   "n": 107,
+   "value_min": -0.38533178,
+   "value_max": -0.12981455,
+   "mean_fwd_1d": -0.062647,
+   "labels_mature": 11,
+   "labels_incomplete": 96,
+   "codes": [
+    "600802",
+    "002696",
+    "000892",
+    "600281",
+    "603381",
+    "002811",
+    "603258",
+    "600838",
+    "002578",
+    "601566",
+    "601086",
+    "002623",
+    "002187",
+    "603396",
+    "688137",
+    "002949",
+    "301210",
+    "600327",
+    "600865",
+    "600293"
+   ]
+  },
+  {
+   "layer": 2,
+   "n": 107,
+   "value_min": -0.12914485,
+   "value_max": -0.0175394,
+   "mean_fwd_1d": -0.036595,
+   "labels_mature": 25,
+   "labels_incomplete": 82,
+   "codes": [
+    "601949",
+    "603955",
+    "301513",
+    "002362",
+    "300494",
+    "300081",
+    "301106",
+    "000995",
+    "600510",
+    "301550",
+    "688315",
+    "603598",
+    "000610",
+    "300788",
+    "603657",
+    "002813",
+    "600551",
+    "603286",
+    "300478",
+    "300473"
+   ]
+  },
+  {
+   "layer": 3,
+   "n": 107,
+   "value_min": -0.01690141,
+   "value_max": 0.40690506,
+   "mean_fwd_1d": -0.010538,
+   "labels_mature": 21,
+   "labels_incomplete": 86,
+   "codes": [
+    "603391",
+    "001201",
+    "300761",
+    "300237",
+    "301218",
+    "601900",
+    "601156",
+    "003816",
+    "688781",
+    "300007",
+    "300969",
+    "002311",
+    "601098",
+    "301265",
+    "601577",
+    "600079",
+    "601598",
+    "605296",
+    "002597",
+    "603369"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "code": "600802",
+   "value": -0.38533178,
+   "ret_1d": -0.097701,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002696",
+   "value": -0.3510274,
+   "ret_1d": -0.100423,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000892",
+   "value": -0.33608247,
+   "ret_1d": -0.098969,
+   "ret_3d": -0.22268,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600281",
+   "value": -0.32815199,
+   "ret_1d": -0.08498,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603381",
+   "value": -0.32565352,
+   "ret_1d": -0.100109,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002811",
+   "value": -0.31359223,
+   "ret_1d": -0.09171,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603258",
+   "value": -0.30492324,
+   "ret_1d": -0.10011,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600838",
+   "value": -0.30352748,
+   "ret_1d": -0.100092,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002578",
+   "value": -0.28642384,
+   "ret_1d": -0.1,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601566",
+   "value": -0.28307939,
+   "ret_1d": -0.099617,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601086",
+   "value": -0.28161765,
+   "ret_1d": -0.058076,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002623",
+   "value": -0.27825409,
+   "ret_1d": -0.099873,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002187",
+   "value": -0.27037037,
+   "ret_1d": 0.056063,
+   "ret_3d": -0.14472,
+   "ret_5d": -0.245111,
+   "labels_mature": true
+  },
+  {
+   "code": "603396",
+   "value": -0.26938648,
+   "ret_1d": -0.100031,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688137",
+   "value": -0.26814434,
+   "ret_1d": -0.032483,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002949",
+   "value": -0.26544118,
+   "ret_1d": -0.058347,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301210",
+   "value": -0.26314181,
+   "ret_1d": -0.104054,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600327",
+   "value": -0.26183844,
+   "ret_1d": -0.099828,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600865",
+   "value": -0.261563,
+   "ret_1d": -0.100177,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600293",
+   "value": -0.26004728,
+   "ret_1d": -0.049451,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601599",
+   "value": -0.25555556,
+   "ret_1d": -0.100791,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600391",
+   "value": -0.25486975,
+   "ret_1d": -0.013802,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002712",
+   "value": -0.2516129,
+   "ret_1d": -0.099494,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688552",
+   "value": -0.25138889,
+   "ret_1d": 0.001829,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "605287",
+   "value": -0.2433694,
+   "ret_1d": -0.057855,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688026",
+   "value": -0.24143364,
+   "ret_1d": -0.043852,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300061",
+   "value": -0.24064171,
+   "ret_1d": -0.094521,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600316",
+   "value": -0.23910025,
+   "ret_1d": 0.014778,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600261",
+   "value": -0.23861852,
+   "ret_1d": 0.100386,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600278",
+   "value": -0.23324397,
+   "ret_1d": -0.095652,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300461",
+   "value": -0.23138958,
+   "ret_1d": -0.064277,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300006",
+   "value": -0.23076923,
+   "ret_1d": -0.127189,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600853",
+   "value": -0.2304038,
+   "ret_1d": -0.096847,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603278",
+   "value": -0.22951886,
+   "ret_1d": -0.099926,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688543",
+   "value": -0.22673367,
+   "ret_1d": 0.012752,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603037",
+   "value": -0.22642857,
+   "ret_1d": -0.081307,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301314",
+   "value": -0.2234767,
+   "ret_1d": -0.065975,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300987",
+   "value": -0.22229595,
+   "ret_1d": -0.087919,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600506",
+   "value": -0.22222222,
+   "ret_1d": -0.1,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600963",
+   "value": -0.22084367,
+   "ret_1d": -0.100775,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301079",
+   "value": -0.21967213,
+   "ret_1d": -0.144263,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301591",
+   "value": -0.21573245,
+   "ret_1d": -0.047118,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300154",
+   "value": -0.21059783,
+   "ret_1d": -0.017712,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300133",
+   "value": -0.21011673,
+   "ret_1d": -0.133401,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600229",
+   "value": -0.20900322,
+   "ret_1d": -0.08804,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002639",
+   "value": -0.20748523,
+   "ret_1d": -0.027721,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688135",
+   "value": -0.20586493,
+   "ret_1d": -0.010884,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301578",
+   "value": -0.20453172,
+   "ret_1d": -0.035674,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688611",
+   "value": -0.19937107,
+   "ret_1d": -0.141241,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300291",
+   "value": -0.19847328,
+   "ret_1d": -0.100977,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002419",
+   "value": -0.1984127,
+   "ret_1d": -0.011111,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688517",
+   "value": -0.19824923,
+   "ret_1d": -0.050976,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688360",
+   "value": -0.19534658,
+   "ret_1d": -0.089448,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603636",
+   "value": -0.19444444,
+   "ret_1d": -0.06734,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601595",
+   "value": -0.18956109,
+   "ret_1d": -0.078312,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603500",
+   "value": -0.18938701,
+   "ret_1d": -0.027959,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603366",
+   "value": -0.18678815,
+   "ret_1d": -0.09992,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002205",
+   "value": -0.18671875,
+   "ret_1d": -0.099859,
+   "ret_3d": -0.270745,
+   "ret_5d": -0.296062,
+   "labels_mature": true
+  },
+  {
+   "code": "600228",
+   "value": -0.18600192,
+   "ret_1d": -0.100304,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300695",
+   "value": -0.18442748,
+   "ret_1d": -0.075873,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301046",
+   "value": -0.18401421,
+   "ret_1d": -0.055739,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600892",
+   "value": -0.18348624,
+   "ret_1d": -0.1,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603389",
+   "value": -0.18258664,
+   "ret_1d": 0.017563,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002724",
+   "value": -0.18202943,
+   "ret_1d": -0.099915,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "605169",
+   "value": -0.18154982,
+   "ret_1d": -0.041893,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300182",
+   "value": -0.18104907,
+   "ret_1d": -0.082312,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002889",
+   "value": -0.18012422,
+   "ret_1d": 0.099783,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301231",
+   "value": -0.17884131,
+   "ret_1d": -0.093729,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301361",
+   "value": -0.1738255,
+   "ret_1d": 0.02784,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603721",
+   "value": -0.17337032,
+   "ret_1d": -0.099953,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000665",
+   "value": -0.17330211,
+   "ret_1d": -0.099156,
+   "ret_3d": -0.229958,
+   "ret_5d": -0.234177,
+   "labels_mature": true
+  },
+  {
+   "code": "601366",
+   "value": -0.17195767,
+   "ret_1d": -0.005168,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002058",
+   "value": -0.17130621,
+   "ret_1d": 0.042411,
+   "ret_3d": -0.155357,
+   "ret_5d": -0.110714,
+   "labels_mature": true
+  },
+  {
+   "code": "603767",
+   "value": -0.16986981,
+   "ret_1d": -0.1,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002683",
+   "value": -0.16791604,
+   "ret_1d": 0.018856,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603375",
+   "value": -0.16391753,
+   "ret_1d": -0.043831,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601929",
+   "value": -0.16370107,
+   "ret_1d": -0.067568,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600609",
+   "value": -0.16223404,
+   "ret_1d": -0.05615,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301069",
+   "value": -0.16134454,
+   "ret_1d": -0.059572,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002697",
+   "value": -0.16074766,
+   "ret_1d": -0.070039,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002343",
+   "value": -0.16026345,
+   "ret_1d": -0.099802,
+   "ret_3d": -0.270751,
+   "ret_5d": -0.271739,
+   "labels_mature": true
+  },
+  {
+   "code": "001233",
+   "value": -0.15998372,
+   "ret_1d": -0.052093,
+   "ret_3d": -0.162068,
+   "ret_5d": -0.166313,
+   "labels_mature": true
+  },
+  {
+   "code": "300501",
+   "value": -0.15971676,
+   "ret_1d": -0.027477,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "605398",
+   "value": -0.15457042,
+   "ret_1d": -0.094787,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301551",
+   "value": -0.15335343,
+   "ret_1d": -0.106415,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603098",
+   "value": -0.15321101,
+   "ret_1d": -0.000907,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603706",
+   "value": -0.15295869,
+   "ret_1d": -0.10008,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603533",
+   "value": -0.15059222,
+   "ret_1d": -0.074468,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688279",
+   "value": -0.1503471,
+   "ret_1d": -0.065934,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600822",
+   "value": -0.15005599,
+   "ret_1d": -0.035979,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301010",
+   "value": -0.14871795,
+   "ret_1d": -0.020168,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001318",
+   "value": -0.14689266,
+   "ret_1d": -0.031464,
+   "ret_3d": -0.215458,
+   "ret_5d": -0.188782,
+   "labels_mature": true
+  },
+  {
+   "code": "600386",
+   "value": -0.1440678,
+   "ret_1d": -0.068241,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000701",
+   "value": -0.14340344,
+   "ret_1d": -0.099828,
+   "ret_3d": -0.192771,
+   "ret_5d": -0.209983,
+   "labels_mature": true
+  },
+  {
+   "code": "300825",
+   "value": -0.14225648,
+   "ret_1d": -0.098235,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300148",
+   "value": -0.14175258,
+   "ret_1d": -0.051151,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603626",
+   "value": -0.14032787,
+   "ret_1d": -0.073596,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300960",
+   "value": -0.14004044,
+   "ret_1d": -0.040638,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "302132",
+   "value": -0.13977706,
+   "ret_1d": -0.001226,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000719",
+   "value": -0.13699583,
+   "ret_1d": -0.002082,
+   "ret_3d": -0.002082,
+   "ret_5d": -0.084663,
+   "labels_mature": true
+  },
+  {
+   "code": "002045",
+   "value": -0.13697318,
+   "ret_1d": 0.0,
+   "ret_3d": -0.145594,
+   "ret_5d": -0.154215,
+   "labels_mature": true
+  },
+  {
+   "code": "600088",
+   "value": -0.13609023,
+   "ret_1d": -0.071481,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300313",
+   "value": -0.13479924,
+   "ret_1d": -0.050545,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002238",
+   "value": -0.13364055,
+   "ret_1d": -0.09205,
+   "ret_3d": -0.185495,
+   "ret_5d": -0.193863,
+   "labels_mature": true
+  },
+  {
+   "code": "301262",
+   "value": -0.13282504,
+   "ret_1d": -0.076358,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301529",
+   "value": -0.13159181,
+   "ret_1d": -0.041201,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "605288",
+   "value": -0.12981455,
+   "ret_1d": -0.089929,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601949",
+   "value": -0.12914485,
+   "ret_1d": -0.061404,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603955",
+   "value": -0.12803598,
+   "ret_1d": -0.085457,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301513",
+   "value": -0.12502106,
+   "ret_1d": -0.094125,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002362",
+   "value": -0.12281796,
+   "ret_1d": -0.099888,
+   "ret_3d": -0.200898,
+   "ret_5d": -0.219416,
+   "labels_mature": true
+  },
+  {
+   "code": "300494",
+   "value": -0.12181303,
+   "ret_1d": -0.058706,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300081",
+   "value": -0.12121212,
+   "ret_1d": -0.035608,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301106",
+   "value": -0.11892797,
+   "ret_1d": -0.012533,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000995",
+   "value": -0.11886458,
+   "ret_1d": -0.100053,
+   "ret_3d": -0.233635,
+   "ret_5d": -0.238957,
+   "labels_mature": true
+  },
+  {
+   "code": "600510",
+   "value": -0.11838791,
+   "ret_1d": -0.045213,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301550",
+   "value": -0.11837874,
+   "ret_1d": -0.052038,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688315",
+   "value": -0.11779704,
+   "ret_1d": -0.036091,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603598",
+   "value": -0.11428571,
+   "ret_1d": -0.081831,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000610",
+   "value": -0.11396011,
+   "ret_1d": -0.015428,
+   "ret_3d": 0.02805,
+   "ret_5d": -0.056101,
+   "labels_mature": true
+  },
+  {
+   "code": "300788",
+   "value": -0.11254199,
+   "ret_1d": -0.083485,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603657",
+   "value": -0.10892857,
+   "ret_1d": -0.059451,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002813",
+   "value": -0.10871212,
+   "ret_1d": -0.013168,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600551",
+   "value": -0.10709677,
+   "ret_1d": -0.028758,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603286",
+   "value": -0.10201661,
+   "ret_1d": -0.100067,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300478",
+   "value": -0.10174419,
+   "ret_1d": -0.022789,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300473",
+   "value": -0.09989485,
+   "ret_1d": -0.050596,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688585",
+   "value": -0.09920188,
+   "ret_1d": -0.127264,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688608",
+   "value": -0.0990566,
+   "ret_1d": -0.03876,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300915",
+   "value": -0.0987248,
+   "ret_1d": -0.030423,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300877",
+   "value": -0.09587074,
+   "ret_1d": -0.034581,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002095",
+   "value": -0.09584665,
+   "ret_1d": -0.033951,
+   "ret_3d": -0.066049,
+   "ret_5d": -0.114815,
+   "labels_mature": true
+  },
+  {
+   "code": "003006",
+   "value": -0.09569378,
+   "ret_1d": -0.048646,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603967",
+   "value": -0.09477612,
+   "ret_1d": -0.009274,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "605488",
+   "value": -0.09307245,
+   "ret_1d": -0.1,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000156",
+   "value": -0.0923277,
+   "ret_1d": -0.099532,
+   "ret_3d": -0.197892,
+   "ret_5d": -0.176815,
+   "labels_mature": true
+  },
+  {
+   "code": "920021",
+   "value": -0.09211987,
+   "ret_1d": -0.117773,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300556",
+   "value": -0.09156627,
+   "ret_1d": -0.069402,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002988",
+   "value": -0.09045226,
+   "ret_1d": 0.021513,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301187",
+   "value": -0.0901937,
+   "ret_1d": 0.058824,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002911",
+   "value": -0.08894045,
+   "ret_1d": 0.008723,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002181",
+   "value": -0.08790072,
+   "ret_1d": -0.099628,
+   "ret_3d": -0.182495,
+   "ret_5d": -0.164804,
+   "labels_mature": true
+  },
+  {
+   "code": "603081",
+   "value": -0.08734403,
+   "ret_1d": -0.100255,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002347",
+   "value": -0.08731466,
+   "ret_1d": -0.096726,
+   "ret_3d": -0.174107,
+   "ret_5d": -0.177083,
+   "labels_mature": true
+  },
+  {
+   "code": "300845",
+   "value": -0.08680556,
+   "ret_1d": -0.070236,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603160",
+   "value": -0.08573826,
+   "ret_1d": -0.023322,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688078",
+   "value": -0.08414749,
+   "ret_1d": -0.088459,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600210",
+   "value": -0.08333333,
+   "ret_1d": 0.023634,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300234",
+   "value": -0.08326325,
+   "ret_1d": -0.038095,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300314",
+   "value": -0.08149633,
+   "ret_1d": -0.048537,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300426",
+   "value": -0.08048104,
+   "ret_1d": -0.124158,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002708",
+   "value": -0.08007968,
+   "ret_1d": -0.02831,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "920627",
+   "value": -0.07742998,
+   "ret_1d": 0.005263,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688686",
+   "value": -0.07675063,
+   "ret_1d": -0.086151,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301025",
+   "value": -0.07670182,
+   "ret_1d": -0.064577,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300793",
+   "value": -0.0754717,
+   "ret_1d": -0.004743,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600368",
+   "value": -0.07356322,
+   "ret_1d": -0.004556,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000860",
+   "value": -0.07334963,
+   "ret_1d": -0.033858,
+   "ret_3d": -0.082677,
+   "ret_5d": -0.098425,
+   "labels_mature": true
+  },
+  {
+   "code": "920087",
+   "value": -0.07153076,
+   "ret_1d": 0.022871,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002905",
+   "value": -0.07111111,
+   "ret_1d": -0.05877,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301061",
+   "value": -0.07050832,
+   "ret_1d": 0.023961,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603666",
+   "value": -0.0696899,
+   "ret_1d": -0.05,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603179",
+   "value": -0.06670836,
+   "ret_1d": -0.028212,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000628",
+   "value": -0.06631082,
+   "ret_1d": 0.046402,
+   "ret_3d": -0.032868,
+   "ret_5d": -0.065091,
+   "labels_mature": true
+  },
+  {
+   "code": "600959",
+   "value": -0.06583072,
+   "ret_1d": -0.08,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001308",
+   "value": -0.06015399,
+   "ret_1d": -0.005266,
+   "ret_3d": -0.081379,
+   "ret_5d": -0.061752,
+   "labels_mature": true
+  },
+  {
+   "code": "002285",
+   "value": -0.06008584,
+   "ret_1d": -0.045082,
+   "ret_3d": -0.081967,
+   "ret_5d": -0.098361,
+   "labels_mature": true
+  },
+  {
+   "code": "688004",
+   "value": -0.05914918,
+   "ret_1d": -0.061181,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603466",
+   "value": -0.05676856,
+   "ret_1d": -0.085509,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300528",
+   "value": -0.05670447,
+   "ret_1d": -0.107867,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688018",
+   "value": -0.05641662,
+   "ret_1d": -0.029104,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002027",
+   "value": -0.05457746,
+   "ret_1d": 0.007092,
+   "ret_3d": -0.003546,
+   "ret_5d": -0.035461,
+   "labels_mature": true
+  },
+  {
+   "code": "300413",
+   "value": -0.05407855,
+   "ret_1d": -0.060155,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601019",
+   "value": -0.05401845,
+   "ret_1d": -0.028205,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600289",
+   "value": -0.05400372,
+   "ret_1d": -0.019763,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002100",
+   "value": -0.05269321,
+   "ret_1d": -0.006977,
+   "ret_3d": -0.052326,
+   "ret_5d": -0.045349,
+   "labels_mature": true
+  },
+  {
+   "code": "300529",
+   "value": -0.05192108,
+   "ret_1d": -0.003956,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002520",
+   "value": -0.05142857,
+   "ret_1d": -0.076216,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000607",
+   "value": -0.04947917,
+   "ret_1d": -0.072464,
+   "ret_3d": -0.181159,
+   "ret_5d": -0.091787,
+   "labels_mature": true
+  },
+  {
+   "code": "001330",
+   "value": -0.04920914,
+   "ret_1d": -0.099684,
+   "ret_3d": -0.19462,
+   "ret_5d": -0.140823,
+   "labels_mature": true
+  },
+  {
+   "code": "001228",
+   "value": -0.04868217,
+   "ret_1d": -0.047549,
+   "ret_3d": -0.043119,
+   "ret_5d": -0.102776,
+   "labels_mature": true
+  },
+  {
+   "code": "920873",
+   "value": -0.04842615,
+   "ret_1d": -0.006188,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000690",
+   "value": -0.04802744,
+   "ret_1d": 0.024605,
+   "ret_3d": 0.02812,
+   "ret_5d": -0.012302,
+   "labels_mature": true
+  },
+  {
+   "code": "603151",
+   "value": -0.04727448,
+   "ret_1d": 0.041481,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002102",
+   "value": -0.04471545,
+   "ret_1d": 0.0,
+   "ret_3d": -0.01626,
+   "ret_5d": -0.044715,
+   "labels_mature": true
+  },
+  {
+   "code": "601188",
+   "value": -0.04237288,
+   "ret_1d": 0.002114,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601330",
+   "value": -0.04116223,
+   "ret_1d": -0.001211,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600189",
+   "value": -0.04004329,
+   "ret_1d": -0.058621,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301273",
+   "value": -0.03983229,
+   "ret_1d": -0.016408,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600371",
+   "value": -0.0384,
+   "ret_1d": -0.037138,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000596",
+   "value": -0.03738904,
+   "ret_1d": -0.010469,
+   "ret_3d": -0.047112,
+   "ret_5d": -0.056694,
+   "labels_mature": true
+  },
+  {
+   "code": "002853",
+   "value": -0.03688732,
+   "ret_1d": -0.087128,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002164",
+   "value": -0.03567937,
+   "ret_1d": -0.063616,
+   "ret_3d": -0.176201,
+   "ret_5d": -0.178947,
+   "labels_mature": true
+  },
+  {
+   "code": "601107",
+   "value": -0.03516174,
+   "ret_1d": 0.0,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301381",
+   "value": -0.03347775,
+   "ret_1d": -0.008832,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002293",
+   "value": -0.0326087,
+   "ret_1d": 0.023034,
+   "ret_3d": 0.051628,
+   "ret_5d": 0.011914,
+   "labels_mature": true
+  },
+  {
+   "code": "002351",
+   "value": -0.0322841,
+   "ret_1d": 0.004866,
+   "ret_3d": -0.062449,
+   "ret_5d": -0.055961,
+   "labels_mature": true
+  },
+  {
+   "code": "002445",
+   "value": -0.0308642,
+   "ret_1d": -0.027108,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600678",
+   "value": -0.03084416,
+   "ret_1d": -0.097826,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002286",
+   "value": -0.02903226,
+   "ret_1d": -0.002146,
+   "ret_3d": -0.026824,
+   "ret_5d": -0.023605,
+   "labels_mature": true
+  },
+  {
+   "code": "600583",
+   "value": -0.02861685,
+   "ret_1d": -0.02,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603323",
+   "value": -0.02850877,
+   "ret_1d": -0.002146,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300504",
+   "value": -0.02728823,
+   "ret_1d": -0.025224,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600928",
+   "value": -0.02638522,
+   "ret_1d": -0.012853,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601528",
+   "value": -0.02389706,
+   "ret_1d": 0.0,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002425",
+   "value": -0.02222222,
+   "ret_1d": 0.066514,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600908",
+   "value": -0.01996672,
+   "ret_1d": -0.009662,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000538",
+   "value": -0.01936401,
+   "ret_1d": 0.006617,
+   "ret_3d": 0.004649,
+   "ret_5d": 0.001609,
+   "labels_mature": true
+  },
+  {
+   "code": "600337",
+   "value": -0.01933702,
+   "ret_1d": 0.019231,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600098",
+   "value": -0.01917404,
+   "ret_1d": 0.010219,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601333",
+   "value": -0.01834862,
+   "ret_1d": 0.0,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301252",
+   "value": -0.01825745,
+   "ret_1d": -0.063442,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002003",
+   "value": -0.01803156,
+   "ret_1d": 0.016031,
+   "ret_3d": 0.012214,
+   "ret_5d": -0.00229,
+   "labels_mature": true
+  },
+  {
+   "code": "300770",
+   "value": -0.0175394,
+   "ret_1d": -0.074769,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603391",
+   "value": -0.01690141,
+   "ret_1d": 0.01739,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001201",
+   "value": -0.0160221,
+   "ret_1d": 0.043228,
+   "ret_3d": -0.059366,
+   "ret_5d": 0.024207,
+   "labels_mature": true
+  },
+  {
+   "code": "300761",
+   "value": -0.0114487,
+   "ret_1d": -0.008193,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300237",
+   "value": -0.01102941,
+   "ret_1d": -0.076677,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301218",
+   "value": -0.01062356,
+   "ret_1d": -0.112408,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601900",
+   "value": -0.00899654,
+   "ret_1d": -0.027304,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601156",
+   "value": -0.00820934,
+   "ret_1d": -0.001005,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "003816",
+   "value": -0.00646552,
+   "ret_1d": -0.022965,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688781",
+   "value": -0.00514851,
+   "ret_1d": 0.033811,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300007",
+   "value": -0.00473343,
+   "ret_1d": -0.09751,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300969",
+   "value": -0.00221729,
+   "ret_1d": -0.059687,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002311",
+   "value": -0.00181855,
+   "ret_1d": 0.0,
+   "ret_3d": -0.003839,
+   "ret_5d": 0.002425,
+   "labels_mature": true
+  },
+  {
+   "code": "601098",
+   "value": -0.00179051,
+   "ret_1d": 0.002611,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301265",
+   "value": -0.00167364,
+   "ret_1d": -0.008696,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601577",
+   "value": -0.000998,
+   "ret_1d": 0.004897,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600079",
+   "value": -0.00050277,
+   "ret_1d": 0.006439,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601598",
+   "value": 0.0,
+   "ret_1d": 0.008219,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "605296",
+   "value": 0.00152068,
+   "ret_1d": -0.01757,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002597",
+   "value": 0.00193143,
+   "ret_1d": 0.014033,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603369",
+   "value": 0.00369572,
+   "ret_1d": -0.004491,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000001",
+   "value": 0.00408163,
+   "ret_1d": -0.004065,
+   "ret_3d": -0.021138,
+   "ret_5d": 0.003252,
+   "labels_mature": true
+  },
+  {
+   "code": "000400",
+   "value": 0.0045977,
+   "ret_1d": -0.003436,
+   "ret_3d": -0.015273,
+   "ret_5d": -0.017946,
+   "labels_mature": true
+  },
+  {
+   "code": "301052",
+   "value": 0.00546946,
+   "ret_1d": -0.062695,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601077",
+   "value": 0.00554785,
+   "ret_1d": -0.005384,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001965",
+   "value": 0.00555556,
+   "ret_1d": 0.020794,
+   "ret_3d": 0.02741,
+   "ret_5d": 0.023629,
+   "labels_mature": true
+  },
+  {
+   "code": "301109",
+   "value": 0.00677507,
+   "ret_1d": -0.004584,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600007",
+   "value": 0.00782329,
+   "ret_1d": -0.014811,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000902",
+   "value": 0.00938967,
+   "ret_1d": -0.005337,
+   "ret_3d": -0.003336,
+   "ret_5d": -0.00934,
+   "labels_mature": true
+  },
+  {
+   "code": "000333",
+   "value": 0.0096432,
+   "ret_1d": 0.007013,
+   "ret_3d": 0.02514,
+   "ret_5d": 0.015645,
+   "labels_mature": true
+  },
+  {
+   "code": "300010",
+   "value": 0.01028278,
+   "ret_1d": -0.053398,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600004",
+   "value": 0.01108374,
+   "ret_1d": 0.002421,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600566",
+   "value": 0.01372615,
+   "ret_1d": 0.009715,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600011",
+   "value": 0.01441678,
+   "ret_1d": 0.0,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002714",
+   "value": 0.01569155,
+   "ret_1d": -0.010367,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600715",
+   "value": 0.01618123,
+   "ret_1d": -0.09893,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002032",
+   "value": 0.01622761,
+   "ret_1d": 0.02043,
+   "ret_3d": 0.034194,
+   "ret_5d": 0.026882,
+   "labels_mature": true
+  },
+  {
+   "code": "600408",
+   "value": 0.01643836,
+   "ret_1d": -0.069333,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600863",
+   "value": 0.0170778,
+   "ret_1d": -0.014679,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600012",
+   "value": 0.01848642,
+   "ret_1d": -0.007271,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001328",
+   "value": 0.01923077,
+   "ret_1d": 0.008148,
+   "ret_3d": 0.019949,
+   "ret_5d": -0.005339,
+   "labels_mature": true
+  },
+  {
+   "code": "601665",
+   "value": 0.02111614,
+   "ret_1d": 0.004292,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600169",
+   "value": 0.02262443,
+   "ret_1d": 0.004425,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600642",
+   "value": 0.02297593,
+   "ret_1d": 0.027778,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600977",
+   "value": 0.02322581,
+   "ret_1d": -0.083134,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600901",
+   "value": 0.02509908,
+   "ret_1d": 0.002567,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600027",
+   "value": 0.0254902,
+   "ret_1d": 0.001905,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001211",
+   "value": 0.02642998,
+   "ret_1d": -0.050562,
+   "ret_3d": -0.092509,
+   "ret_5d": -0.085019,
+   "labels_mature": true
+  },
+  {
+   "code": "601857",
+   "value": 0.02660017,
+   "ret_1d": -0.005613,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "605338",
+   "value": 0.02711864,
+   "ret_1d": -0.023545,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300498",
+   "value": 0.0283353,
+   "ret_1d": -0.00057,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300916",
+   "value": 0.03,
+   "ret_1d": -0.042115,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002948",
+   "value": 0.03333333,
+   "ret_1d": -0.010463,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601939",
+   "value": 0.03497086,
+   "ret_1d": 0.003263,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001283",
+   "value": 0.03830228,
+   "ret_1d": -0.052384,
+   "ret_3d": -0.119874,
+   "ret_5d": -0.046302,
+   "labels_mature": true
+  },
+  {
+   "code": "601088",
+   "value": 0.03982843,
+   "ret_1d": -0.001777,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601985",
+   "value": 0.04037267,
+   "ret_1d": -0.006054,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603103",
+   "value": 0.04045584,
+   "ret_1d": -0.1,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601998",
+   "value": 0.04148472,
+   "ret_1d": 0.0,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000635",
+   "value": 0.04210526,
+   "ret_1d": null,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601816",
+   "value": 0.04247104,
+   "ret_1d": -0.005525,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001872",
+   "value": 0.04434423,
+   "ret_1d": -0.004117,
+   "ret_3d": 0.031063,
+   "ret_5d": 0.017964,
+   "labels_mature": true
+  },
+  {
+   "code": "688696",
+   "value": 0.04608105,
+   "ret_1d": 0.006325,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002172",
+   "value": 0.04651163,
+   "ret_1d": -0.042672,
+   "ret_3d": -0.137291,
+   "ret_5d": -0.048237,
+   "labels_mature": true
+  },
+  {
+   "code": "600886",
+   "value": 0.04679487,
+   "ret_1d": 0.003151,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600000",
+   "value": 0.04701273,
+   "ret_1d": 0.007421,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002690",
+   "value": 0.04844498,
+   "ret_1d": 0.014917,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600919",
+   "value": 0.04868624,
+   "ret_1d": 0.008922,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601658",
+   "value": 0.04982206,
+   "ret_1d": -0.005172,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600377",
+   "value": 0.05126354,
+   "ret_1d": 0.008253,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601169",
+   "value": 0.0515807,
+   "ret_1d": -0.001582,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002966",
+   "value": 0.05179704,
+   "ret_1d": 0.00998,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601919",
+   "value": 0.0521327,
+   "ret_1d": 0.009275,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600814",
+   "value": 0.05416667,
+   "ret_1d": 0.01776,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603816",
+   "value": 0.05441899,
+   "ret_1d": -0.008397,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "688169",
+   "value": 0.055271,
+   "ret_1d": 0.050052,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000700",
+   "value": 0.0557047,
+   "ret_1d": -0.019092,
+   "ret_3d": -0.103357,
+   "ret_5d": -0.050691,
+   "labels_mature": true
+  },
+  {
+   "code": "601766",
+   "value": 0.05901116,
+   "ret_1d": 0.019697,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002946",
+   "value": 0.06015485,
+   "ret_1d": 0.004989,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600803",
+   "value": 0.06225869,
+   "ret_1d": 0.010531,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600674",
+   "value": 0.06335616,
+   "ret_1d": 0.009825,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600066",
+   "value": 0.06507304,
+   "ret_1d": -0.003778,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600801",
+   "value": 0.06558672,
+   "ret_1d": 0.019352,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601000",
+   "value": 0.06776181,
+   "ret_1d": 0.011928,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002638",
+   "value": 0.06888361,
+   "ret_1d": -0.016166,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601009",
+   "value": 0.07398568,
+   "ret_1d": 0.005331,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603587",
+   "value": 0.0792011,
+   "ret_1d": 0.006472,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "601288",
+   "value": 0.0922865,
+   "ret_1d": 0.002635,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600483",
+   "value": 0.09571559,
+   "ret_1d": 0.018723,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002086",
+   "value": 0.09661836,
+   "ret_1d": -0.046083,
+   "ret_3d": -0.214286,
+   "ret_5d": -0.048387,
+   "labels_mature": true
+  },
+  {
+   "code": "600312",
+   "value": 0.1004878,
+   "ret_1d": 0.0,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "603898",
+   "value": 0.10160428,
+   "ret_1d": -0.009701,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "001219",
+   "value": 0.10445104,
+   "ret_1d": -0.099893,
+   "ret_3d": -0.034722,
+   "ret_5d": -0.042735,
+   "labels_mature": true
+  },
+  {
+   "code": "605577",
+   "value": 0.10833841,
+   "ret_1d": -0.099764,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002242",
+   "value": 0.11199239,
+   "ret_1d": 0.100175,
+   "ret_3d": 0.089354,
+   "ret_5d": 0.112042,
+   "labels_mature": true
+  },
+  {
+   "code": "301606",
+   "value": 0.1175022,
+   "ret_1d": 0.074296,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000819",
+   "value": 0.12056738,
+   "ret_1d": -0.1,
+   "ret_3d": -0.061702,
+   "ret_5d": -0.001418,
+   "labels_mature": true
+  },
+  {
+   "code": "000530",
+   "value": 0.13248945,
+   "ret_1d": 0.077273,
+   "ret_3d": 0.015455,
+   "ret_5d": 0.229091,
+   "labels_mature": true
+  },
+  {
+   "code": "300829",
+   "value": 0.14190376,
+   "ret_1d": 0.039492,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301413",
+   "value": 0.15486612,
+   "ret_1d": -0.065505,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301000",
+   "value": 0.18481375,
+   "ret_1d": -0.004728,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301313",
+   "value": 0.1852276,
+   "ret_1d": -0.138764,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "301395",
+   "value": 0.19194824,
+   "ret_1d": 0.191826,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "300949",
+   "value": 0.19772435,
+   "ret_1d": -0.026327,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "600530",
+   "value": 0.2173913,
+   "ret_1d": 0.014925,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "000678",
+   "value": 0.22375,
+   "ret_1d": -0.100112,
+   "ret_3d": -0.058493,
+   "ret_5d": 0.050619,
+   "labels_mature": true
+  },
+  {
+   "code": "300539",
+   "value": 0.23861766,
+   "ret_1d": -0.066382,
+   "ret_3d": null,
+   "ret_5d": null,
+   "labels_mature": false
+  },
+  {
+   "code": "002148",
+   "value": 0.40690506,
+   "ret_1d": -0.073143,
+   "ret_3d": 0.062857,
+   "ret_5d": 0.265143,
+   "labels_mature": true
+  }
+ ],
+ "limitation": "前向窗口未走完的样本标 INCOMPLETE；正式研究用后续窗口完整的数据"
+}

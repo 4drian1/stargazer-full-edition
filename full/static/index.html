@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090a0b">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>Stargazer 完整版 · 规则工作区</title>
+<link rel="stylesheet" href="/static/stargazer_ui.css">
+<link rel="stylesheet" href="/static/stargazer_ui_next.css">
+<style>
+/* 完整版补充样式（沿用生产版设计变量） */
+.main-nav{overflow-x:auto;scrollbar-width:none}
+.main-nav::-webkit-scrollbar{display:none}
+.main-nav button{flex-shrink:0;white-space:nowrap;padding:0 9px;font-size:12px}
+.stat-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.cond{display:grid;grid-template-columns:minmax(220px,1fr) 66px 96px 60px minmax(140px,200px) 34px;gap:8px;align-items:center;padding:7px 14px;border-bottom:1px solid #24282b}
+.cond select,.cond input{background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:6px 8px;color:#e4e8eb;font-size:11px;min-width:0}
+.cond .unit{color:#9aa2a9;font-size:10px}
+.cond .hint{color:#777f86;font-size:10px;line-height:1.5}
+.logic-line{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#9aa2a9;font-size:11px;flex-wrap:wrap}
+.sentence{border-left:3px solid var(--orange);background:#14171a;margin:10px 14px;padding:10px 14px;color:#dfe3e7;font-size:12px;line-height:1.9}
+.sentence b{color:#ffb12d;font-weight:600}
+.sentence i{color:#78aefb;font-style:normal}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px 14px}
+.diff-col{border:1px solid #2a3034;border-radius:4px}
+.diff-col h3{margin:0;padding:9px 12px;font-size:11px;border-bottom:1px solid #2a3034}
+.diff-col ul{margin:0;padding:8px 12px 10px 26px;max-height:240px;overflow:auto;font-size:11px;line-height:1.9;color:#c5cacf}
+.diff-col li small{color:#858c93;display:block}
+.statusbar2{position:fixed;bottom:0;left:0;right:0;height:30px;background:#0c0e0f;border-top:2px solid var(--orange);display:flex;align-items:center;gap:24px;padding:0 20px;color:var(--green);font-size:10px;z-index:9}
+.statusbar2 .fr{margin-left:auto;color:#81878d}
+.kv .row2{display:flex;justify-content:space-between;gap:14px;padding:9px 14px;border-bottom:1px solid #252a2d;color:#9aa2a9;font-size:11px}
+.kv .row2 b{color:#e2e6e9;font-weight:600;font-family:"DM Mono",monospace}
+.kv .row2:last-child{border-bottom:0}
+.ik-chart{width:100%;height:190px;display:block}
+.plan-cards{padding:10px 12px;display:grid;gap:10px}
+.plan-card{border:1px solid #33383c;border-radius:4px;background:#151719;padding:12px 14px}
+.plan-card .head{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.plan-card .grid2{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.plan-card .grid2>div{display:grid;gap:3px;color:#858c93;font-size:10px}
+.plan-card .grid2 b{color:#e5e8eb;font-size:12px;font-family:"DM Mono",monospace}
+.chat-log{min-height:420px;max-height:56vh;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.msg{display:flex;gap:9px;max-width:92%}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.avatar2{width:26px;height:26px;border-radius:4px;display:grid;place-items:center;flex-shrink:0;font-size:11px;font-weight:700}
+.msg.ai .avatar2{background:#2b2112;color:#ffb12d}
+.msg.user .avatar2{background:#17283a;color:#8fc0ff}
+.bubble2{border:1px solid #2e3438;background:#14181a;border-radius:5px;padding:10px 12px;font-size:12px;line-height:1.75;color:#e3e7ea;white-space:pre-wrap;overflow-wrap:anywhere;min-width:0}
+.msg.user .bubble2{background:#17222c;border-color:#2b4257}
+.quick-row{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid #252a2d}
+.chat-in{border-top:1px solid #2a2f33;padding:12px;display:flex;gap:9px}
+.chat-in input{flex:1;min-width:0;background:#0c0e0f;border:1px solid #343a3e;border-radius:4px;padding:9px 12px;color:#e7e9ec;font-size:12px;outline:0}
+.chat-in input:focus{border-color:#9a6218}
+@media(max-width:1100px){.stat-grid{grid-template-columns:repeat(2,1fr)}.cond{grid-template-columns:1fr 60px 80px;flex-wrap:wrap}.cond .hint{grid-column:1/-1}.diff-grid{grid-template-columns:1fr}.plan-card .grid2{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar">
+  <div class="brand"><span>STARGAZER</span><small>完整版 · RULES DESK</small></div>
+  <nav class="main-nav" id="mainNav">
+    <button data-p="overview" class="active">总览</button>
+    <button data-p="plan">交易计划</button>
+    <button data-p="monitor">盘中监控</button>
+    <button data-p="positions">持仓</button>
+    <button data-p="watch">观察名单</button>
+    <button data-p="strategy">策略规则</button>
+    <button data-p="review">复盘 · 研究</button>
+    <button data-p="assistant">Stargazer 助手</button>
+    <button data-p="corvus">Corvus 信息</button>
+  </nav>
+  <div class="top-status">
+    <span class="top-muted" id="topDataDay">数据日：读取中…</span>
+    <span class="top-muted" id="topSnap">快照：—</span>
+    <b id="topCheck">—</b>
+  </div>
+</header>
+<main class="main-content" id="view"><div class="empty">正在从后端读取…</div></main>
+<footer class="statusbar2">
+  <span><i class="live-dot"></i>后端：Flask 同源 /api</span>
+  <span>模拟环境：提醒进本地收件箱，可配钉钉/Pushplus 推送</span>
+  <span>未接通功能标「待接入」，不会假报成功</span>
+  <span class="fr">STARGAZER 完整版 · 规则 / 研究 / 数据闭环</span>
+</footer>
+</div>
+<div id="modalRoot"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const V=$('#view');
+let UI={}, RULE=null, CURRENT_REF=null, TAROT=false, STATE={};
+function recentDaysStr(n){ const d=(STATE.recent_days||[]).slice(-n); return d.join(','); }
+function latestLvp(pubs){
+  const vs=pubs.filter(x=>x.startsWith('lvp_golden@')).sort();
+  return vs.length?vs[vs.length-1]:null;
+}
+function defaultRef(pubs){ return (CURRENT_REF&&pubs.includes(CURRENT_REF))?CURRENT_REF:(latestLvp(pubs)||pubs[0]); }
+
+async function api(p, body){
+  const r=await fetch(p, body!==undefined?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:undefined);
+  return r.json();
+}
+function toast(msg, bad){
+  const t=document.createElement('div');
+  t.className='toast';
+  if(bad){t.style.background='#2b1515';t.style.borderColor='#6b2928';t.style.color='#ff9f9a';}
+  t.textContent=msg; document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 4200);
+}
+function pct(x){return x==null?'—':(x*100).toFixed(2)+'%';}
+function fmtTs(t){return t?String(t).replace(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2}).*$/,'$2-$3 $4:$5'):'—';}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function go(p){const b=document.querySelector(`#mainNav button[data-p="${p}"]`); if(b) b.click();}
+function pageShell(title, sub, inner){
+  V.innerHTML=`<div class="page-heading"><div><div class="eyebrow">STARGAZER FULL EDITION</div><h1>${title}</h1>${sub?`<p>${sub}</p>`:''}</div><div class="heading-actions"></div></div>${inner}`;
+}
+function panel(title, body, extra){
+  return `<section class="panel"><div class="section-title"><span>${title}</span>${extra||''}</div>${body}</section>`;
+}
+const spacing='<div style="height:12px"></div>';
+function modal(title, bodyHtml, footHtml){
+  $('#modalRoot').innerHTML=`<div class="modal-backdrop" onclick="closeModal()">
+    <div class="modal" style="width:min(680px,calc(100vw - 30px))" onclick="event.stopPropagation()">
+      <div class="modal-head"><strong>${title}</strong><button class="icon-btn" onclick="closeModal()">✕</button></div>
+      ${bodyHtml}${footHtml?`<div class="modal-actions">${footHtml}</div>`:''}
+    </div></div>`;
+}
+function closeModal(){$('#modalRoot').innerHTML='';}
+
+/* ================= 指数 K 线（SVG：价格轴/网格/日期轴/黄金位线/悬停） ================= */
+const KSYM_LABEL={SSE:'沪指',SZSE:'深证成指',CYB:'创业板指'};
+let K_PERIOD='1d', INDEX_MAPS=null;
+async function getIndexMaps(){
+  if(!INDEX_MAPS) INDEX_MAPS=await api('/api/prod/index_maps').catch(()=>({ok:false}));
+  return INDEX_MAPS;
+}
+function drawKline(el, bars, golden){
+  if(!bars||!bars.length){el.innerHTML='<div class="empty compact">后端未返回 K 线数据（不拼造）</div>';return;}
+  const CW=640,AH=64,DH=18,H=190,pad=8,ibH=26;
+  const W=CW+AH;
+  const vals=bars.flatMap(b=>[b.high,b.low]).filter(Number.isFinite);
+  let hi=Math.max(...vals), lo=Math.min(...vals);
+  const padV=(hi-lo)*0.06||1; hi+=padV; lo-=padV;
+  const span=hi-lo||1;
+  const step=(CW-pad*2)/bars.length, bw=Math.max(1,Math.min(step*0.62,9));
+  const y=v=>pad+(hi-v)/span*(H-pad*2-8);
+  const fmtP=v=>v>=1000?v.toFixed(2):v.toFixed(2);
+  let s='';
+  // 网格 + 右侧价格轴
+  const ticks=5;
+  for(let t=0;t<=ticks;t++){
+    const pv=hi-span*t/ticks, yy=y(pv);
+    s+=`<line x1="${pad}" x2="${CW-pad}" y1="${yy}" y2="${yy}" stroke="#1f2428" stroke-width="0.6"/>`;
+    s+=`<text x="${CW+4}" y="${yy+3}" font-size="9" fill="#687078" font-family="DM Mono,monospace">${fmtP(pv)}</text>`;
+  }
+  // 黄金位线（生产版指数地图归档，只读）
+  if(golden){
+    const gl=[['upper',golden.upper],['lower',golden.lower],['following',golden.following]];
+    for(const [k,v] of gl){
+      if(v==null||v<lo||v>hi) continue;
+      const yy=y(v);
+      s+=`<line x1="${pad}" x2="${CW-pad}" y1="${yy}" y2="${yy}" stroke="#ff9d19" stroke-width="1" opacity="0.9"/>`;
+      s+=`<text x="${CW-2}" y="${yy-2}" font-size="9" fill="#ffb12d" text-anchor="end" font-family="DM Mono,monospace">${v}</text>`;
+    }
+  }
+  // K 线
+  for(let i=0;i<bars.length;i++){
+    const b=bars[i], x=pad+i*step+step/2, up=b.close>=b.open, c=up?'#e2695f':'#4aa889';
+    const top=y(Math.max(b.open,b.close)), bot=y(Math.min(b.open,b.close));
+    s+=`<line x1="${x}" x2="${x}" y1="${y(b.high)}" y2="${y(b.low)}" stroke="${c}" stroke-width="1"/>`;
+    s+=`<rect x="${x-bw/2}" y="${top}" width="${bw}" height="${Math.max(1,bot-top)}" fill="${up?'none':c}" stroke="${c}" stroke-width="1"/>`;
+  }
+  // 底部日期轴（均布 5 个）
+  const nD=Math.min(5,bars.length);
+  for(let t=0;t<nD;t++){
+    const i=Math.round(t*(bars.length-1)/(nD-1||1));
+    const x=pad+i*step+step/2;
+    s+=`<text x="${x}" y="${H-4}" font-size="9" fill="#687078" text-anchor="middle" font-family="DM Mono,monospace">${String(bars[i].ts).slice(0,4)}-${String(bars[i].ts).slice(4,6)}-${String(bars[i].ts).slice(6,8)}</text>`;
+  }
+  // 悬停十字光标
+  s+=`<line id="kxCross" x1="0" x2="0" y1="${pad}" y2="${H-8}" stroke="#ffb12d" stroke-width="0.6" stroke-dasharray="3,3" visibility="hidden"/>`;
+  el.innerHTML=`<div style="position:relative">
+    <svg class="ik-chart" id="ikSvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="指数 K 线（本地通达信）" style="cursor:crosshair">${s}
+    <rect id="ikHover" x="0" y="0" width="${W}" height="${H}" fill="transparent"/></svg>
+    <div id="ikInfo" style="height:${ibH}px;font-size:10px;color:#9aa2a9;font-family:'DM Mono',monospace;padding:4px 2px"></div>
+  </div>`;
+  const svg=el.querySelector('#ikSvg'), cross=el.querySelector('#kxCross'), info=el.querySelector('#ikInfo');
+  const showBar=i=>{
+    const b=bars[i]; if(!b) return;
+    const x=pad+i*step+step/2;
+    cross.setAttribute('x1',x); cross.setAttribute('x2',x); cross.setAttribute('visibility','visible');
+    const prev=bars[i-1], chg=prev?((b.close/prev.close-1)*100):null;
+    info.innerHTML=`<b style="color:#e2e6e9">${b.ts}</b> 开 ${b.open} 高 ${b.high} 低 ${b.low} 收 <b style="color:${chg==null?'#e2e6e9':(chg>=0?'#ff554d':'#22c78b')}">${b.close}${chg!=null?(' '+chg.toFixed(2)+'%'):''}</b> 量 ${(b.volume/1e8).toFixed(1)} 亿`;
+  };
+  showBar(bars.length-1);
+  svg.addEventListener('mousemove',e=>{
+    const r=svg.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width*W;
+    const i=Math.max(0,Math.min(bars.length-1,Math.floor((px-pad)/step)));
+    showBar(i);
+  });
+  svg.addEventListener('mouseleave',()=>{cross.setAttribute('visibility','hidden');showBar(bars.length-1);});
+}
+async function loadKline(symbol){
+  const el=$('#klineBox'); if(!el) return;
+  if(K_PERIOD==='5m'){el.innerHTML='<div class="empty compact">五分钟 K：本地通达信归档不含指数 5 分钟数据，完整版不伪造；生产版该页签读取实时行情源。</div>';const n=$('#klineNote');if(n)n.textContent='';return;}
+  el.innerHTML='<div class="empty compact">读取本地 K 线…</div>';
+  const r=await api('/api/index_kline?symbol='+symbol);
+  if(!r.ok){el.innerHTML=`<div class="error-view"><b>K 线读取失败</b><span>${esc(r.error)}</span></div>`;return;}
+  const maps=await getIndexMaps();
+  const key={SSE:'sse',SZSE:'szse',CYB:'cyb'}[symbol];
+  const golden=maps.ok?(maps.maps.find(m=>m.symbol===key)||{}):null;
+  drawKline(el, r.bars, golden&&golden.upper!=null?golden:null);
+  const n=$('#klineNote');
+  if(n) n.textContent=`来源：sh999999.day（本地通达信） · 最后完整 K 线 ${r.last_complete_ts}${r.dropped_records?(' · 剔除历史不一致记录 '+r.dropped_records+' 条'):''}${maps.ok?(' · 黄金位线：生产版指数地图归档 '+String(maps.requested_day||'')):' · 指数地图归档未找到，未画黄金位线'}`;
+}
+
+/* ================= 总览 ================= */
+async function pageOverview(){
+  const st=await api('/api/state'); STATE=st;
+  $('#topDataDay').textContent='数据日：'+(st.data_through||'—');
+  $('#topSnap').textContent='快照：'+(st.snapshot_fingerprint||'—');
+  const lr=await api('/api/last_run').catch(()=>({error:'NO_RUN'}));
+  const tc=$('#topCheck');
+  if(tc) tc.textContent=lr.error?'尚无运行':('最近运行 '+(lr.run_id||'—'));
+  const sw=st.model_switch||{};
+  const src=st.source||{source:'tdx'};
+  const srcLabel=src.source==='tdx'?'本地通达信':'StockDB';
+  const srcPath=src.source==='tdx'?(src.tdx_path||''):(src.stockdb_base||'');
+  pageShell('总览','',
+  `<div class="stat-grid">
+    <div class="stat-card"><div class="stat-sub">数据更新至</div><div class="stat-value green">${st.data_through||'—'}</div><div class="stat-sub">日历至 ${st.calendar_through||'—'}</div></div>
+    <div class="stat-card"><div class="stat-sub">选股日 P / 监控日 D</div><div class="stat-value">${st.p_day||'—'}<small style="font-size:11px;color:#858c93"> / ${st.monitor_day||'—'}</small></div><div class="stat-sub">分钟历史 ${st.minute_days||0} 天</div></div>
+    <div class="stat-card"><div class="stat-sub">最近运行</div><div class="stat-value orange">${lr.error?'—':(lr.touches??0)}<small style="font-size:11px;color:#858c93"> 次触位</small></div><div class="stat-sub">${lr.error?'尚未运行':'回执 '+(lr.inbox?Object.values(lr.inbox).reduce((a,b)=>a+b,0):0)+' 条'}</div></div>
+    <div class="stat-card"><div class="stat-sub">选股模型</div><div class="stat-value ${sw.selection?'green':''}" style="font-size:16px">${sw.selection?'开启':'关闭 · 纯规则'}</div><div class="stat-sub">风险模型 ${sw.risk?'开':'关'}</div></div>
+    <div class="stat-card"><div class="stat-sub">数据源</div><div class="stat-value" style="font-size:16px">${srcLabel}</div><div class="stat-sub cell-wrap">${esc(srcPath)||'未配置'}</div></div>
+  </div>
+  ${panel('指数 K 线',`
+    <div class="button-row" style="padding:12px">
+      <button class="mini-primary" data-sym="SSE" onclick="klineTab('SSE')">沪指</button>
+      <button class="mini-outline" data-sym="SZSE" onclick="klineTab('SZSE')">深证成指</button>
+      <button class="mini-outline" data-sym="CYB" onclick="klineTab('CYB')">创业板指</button>
+      <span style="width:8px"></span>
+      <button class="mini-primary" data-per="1d" onclick="klinePeriod('1d')">日 K</button>
+      <button class="mini-outline" data-per="5m" onclick="klinePeriod('5m')">五分钟 K</button>
+      <span style="flex:1"></span>
+      <button class="outline-btn" onclick="loadKline(KSYM)" id="klineRefresh">读取行情源</button>
+    </div>
+    <div id="klineBox"></div>
+    <div class="panel-note" id="klineNote"></div>`)}
+  ${spacing}
+  <div class="overview-grid">
+    ${panel('Corvus 近期快讯','<div class="empty compact">生产版在线采集（财联社等），本地无归档；完整版不虚构新闻内容。全球市场快照见「Corvus 信息」页（生产版归档只读）。</div>')}
+    <div id="riskPanel"></div>
+  </div>
+  ${spacing}
+  ${panel('最近运行', lr.error
+      ? `<div class="empty compact">尚未运行：到「盘后选股」发起第一次全流程。</div>`
+      : `<div class="kv">
+          <div class="row2"><span>运行 ID</span><b>${lr.run_id}</b></div>
+          <div class="row2"><span>筛中 / 冻结 / 触位</span><b>${lr.selected_n??'—'} / ${lr.frozen_n??'—'} / ${lr.touches??0}</b></div>
+          <div class="row2"><span>收件箱回执</span><b>${lr.inbox?JSON.stringify(lr.inbox):'—'}</b></div>
+          <div class="row2"><span>未冻结（缺盘前参考价等）</span><b>${(lr.not_frozen||[]).length} 只</b></div>
+        </div>`)}
+  ${spacing}
+  <div class="overview-grid">
+    ${panel('模型开关（关闭 = 直走规则层）',`<div class="model-status">
+        <div><label class="check-label"><input type="checkbox" id="swSelection" ${sw.selection?'checked':''}> 选股模型（Tarot 影子评分）</label><i class="status-led ${sw.selection?'':'gray'}"></i><span>${sw.selection?'参与运行':'关闭'}</span></div>
+        <div><label class="check-label"><input type="checkbox" id="swRisk" ${sw.risk?'checked':''}> 风险模型</label><i class="status-led gray"></i><span>未接入，先记录状态</span></div>
+      </div>
+      <div class="button-row" style="padding:0 16px 14px"><button class="primary-btn small" onclick="saveSwitch()">保存开关</button><span class="tiny muted" id="swNote">Tarot 状态载入中…</span></div>`)}
+    ${panel('数据源与推送',`<div class="context-list">
+        <span>当前数据源 <b>${srcLabel}</b></span>
+        <span>路径 <b class="cell-wrap">${esc(srcPath)||'未配置'}</b></span>
+        <span>推送渠道 <b id="pushChannelView2">读取中…</b></span>
+      </div>
+      <div class="button-row" style="padding:0 14px 14px">
+        <button class="outline-btn" onclick="openDataModal()">数据来源 / 更新数据</button>
+        <button class="outline-btn" onclick="openPushModal()">推送配置</button>
+      </div>`)}
+  </div>
+  `);
+  loadKline('SSE');
+  loadPushView();
+  loadRiskPanel();
+  const ts=await api('/api/tarot_status').catch(()=>null);
+  const n=$('#swNote'); if(n&&ts) n.textContent=ts.available?'Tarot 可用（本地冻结权重）':'Tarot 不可用（'+(!ts.repo_ok?'缺主仓库权重':'缺依赖')+'）';
+}
+function klineTab(sym){
+  KSYM=sym;
+  document.querySelectorAll('[data-sym]').forEach(b=>{b.className=b.dataset.sym===sym?'mini-primary':'mini-outline';});
+  loadKline(sym);
+}
+function klinePeriod(p){
+  K_PERIOD=p;
+  document.querySelectorAll('[data-per]').forEach(b=>{b.className=b.dataset.per===p?'mini-primary':'mini-outline';});
+  loadKline(KSYM);
+}
+let KSYM='SSE';
+async function loadRiskPanel(){
+  const el=$('#riskPanel'); if(!el) return;
+  const maps=await getIndexMaps();
+  if(!maps.ok){el.innerHTML=panel('风险分析',`<div class="empty compact">指数地图归档未找到（${esc(maps.error||'')}）；完整版不虚构指数关键位。</div>`);return;}
+  const row=m=>`<div style="padding:10px 14px;border-bottom:1px solid #24282b">
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:baseline;color:#c5cacf;font-size:11px">
+        <b style="color:#e2e6e9;font-size:13px">${esc(m.label)}</b>
+        <span>当前 <b style="color:#ffb12d">${m.close??'—'}</b></span>
+        <span class="tiny muted">${m.asof??''}</span>
+        <span>日内低点 ${m.session_low!=null?m.session_low:'待核验'}</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;color:#9aa2a9;font-size:11px;margin-top:6px">
+        <span>上方黄金位 <b style="color:#e2e6e9">${m.upper??'—'}</b> · 冲高回落站稳需留意</span>
+        <span>下方黄金支撑 <b style="color:#e2e6e9">${m.lower??'—'}</b> · 连续两根五分钟收盘失守且较昨收跌幅超 2% 时提示风险</span>
+        <span>下一观察位 <b style="color:#e2e6e9">${m.following??'—'}</b></span>
+      </div>
+    </div>`;
+  el.innerHTML=`<section class="panel"><div class="section-title"><span>风险分析</span><span class="tiny muted">地图日 ${maps.requested_day??'—'}（生产版归档只读）</span></div>
+    ${maps.maps.map(row).join('')}
+    <details style="padding:10px 14px"><summary style="cursor:pointer;color:#ffb12d;font-size:11px">▸ 板块、资金与简评</summary>
+      <div style="margin-top:8px;color:#9aa2a9;font-size:11px;line-height:1.8">
+        生产版的「板块、资金与简评」由风险模型（AI 研判）生成，完整版本地无 AI 研判、不虚构简评。以下为同一归档内的波段关键位明细，供对照参考：
+        ${maps.maps.map(m=>`<div style="margin-top:6px"><b style="color:#e2e6e9">${esc(m.label)}</b> 近端关键位：${(m.short_wave_levels||[]).map(v=>`<span class="mono" style="color:#c5cacf">${v}</span>`).join(' · ')||'未提供'}</div>`).join('')}
+      </div>
+    </details>
+    <div class="panel-note">${esc(maps.note||'')}</div></section>`;
+}
+async function saveSwitch(){
+  const r=await api('/api/model_switch',{selection:$('#swSelection').checked,risk:$('#swRisk').checked});
+  toast('已保存：选股模型 '+(r.selection?'开':'关')+'，风险模型 '+(r.risk?'开':'关'));
+}
+
+/* ---------- 数据来源弹窗（原数据中心） ---------- */
+async function openDataModal(){
+  modal('数据来源与更新',`<div id="dmBody"><div class="empty compact">载入中…</div></div>`);
+  const c=await api('/api/source/config');
+  $('#dmBody').innerHTML=`
+    <div style="padding:14px 16px 0">
+    <div class="logic-line" style="padding:0;flex-wrap:wrap">
+      数据源 <select id="srcSel"><option value="tdx">本地通达信</option><option value="stockdb">StockDB（离线研究）</option></select>
+      通达信路径 <input id="srcTdx" size="30" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+      StockDB 地址 <input id="srcSdb" size="20" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+      <button class="primary-btn small" onclick="saveSource()">保存</button>
+      <button class="outline-btn" onclick="loadDiag()">诊断</button>
+    </div>
+    <div id="diagOut" style="margin-top:10px"></div>
+    <div class="logic-line" style="padding:10px 0 0">
+      导入目录 <input id="importSrc" value="import_dir" size="14" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+      <button class="outline-btn" onclick="dataOp('scan')">扫描</button>
+      <button class="outline-btn" onclick="dataOp('import')">导入</button>
+      <button class="primary-btn small" onclick="dataOp('fill_gaps')">联网补缺</button>
+    </div>
+    <div id="dataOut" style="margin-top:10px"><div class="panel-note" style="border:0;padding-left:0">扫描显示 新增 / 重复 / 冲突 / 缺口；补缺失败保留上一份有效快照。</div></div>
+    <div style="margin-top:10px"><div class="tiny muted" style="margin-bottom:6px">最近任务（刷新仍在）</div><div class="table-wrap"><table id="taskTbl"></table></div></div>
+    </div>`;
+  $('#srcSel').value=c.source||'tdx';
+  $('#srcTdx').value=c.tdx_path||'';
+  $('#srcSdb').value=c.stockdb_base||'';
+  loadDiag(); loadTasks();
+}
+async function loadDiag(){
+  const d=await api('/api/source/diagnostics');
+  const el=$('#diagOut'); if(!el) return;
+  el.innerHTML=`<div class="kv">
+    <div class="row2"><span>结论</span><b>${esc(d.verdict||'')}</b></div>
+    <div class="row2"><span>通达信</span><b class="cell-wrap">${esc(d.tdx.path)} · 日线文件 ${d.tdx.daily_files} 个</b></div>
+    <div class="row2"><span>StockDB</span><b class="cell-wrap">${d.stockdb.ok?('连接正常 '+d.stockdb.ms+'ms，个股 '+d.stockdb.rows+' 行，'+d.stockdb.first+' ~ '+d.stockdb.last):('不可用：'+esc(String(d.stockdb.reason).slice(0,80)))}</b></div>
+    <div class="row2"><span>StockDB 指数</span><b>${esc(d.stockdb.index.status)}</b></div>
+  </div>`;
+}
+async function loadTasks(){
+  const t=await api('/api/data/tasks');
+  const el=$('#taskTbl'); if(!el) return;
+  const rows=(t.tasks||[]).slice(-12).reverse();
+  el.innerHTML=rows.length
+    ?'<tr><th>时间</th><th>任务</th><th>结果</th></tr>'+rows.map(x=>`<tr><td>${x.started_at}</td><td>${x.name}</td><td class="cell-wrap">${esc(JSON.stringify(x.detail).slice(0,140))}</td></tr>`).join('')
+    :'<tr><td><div class="empty compact">暂无任务</div></td></tr>';
+}
+async function saveSource(){
+  const r=await api('/api/source/config',{source:$('#srcSel').value,tdx_path:$('#srcTdx').value,stockdb_base:$('#srcSdb').value});
+  toast('已保存数据源：'+(r.source==='tdx'?'本地通达信':'StockDB'));
+  STATE=await api('/api/state');
+  $('#topDataDay').textContent='数据日：'+(STATE.data_through||'—');
+  loadDiag();
+}
+async function dataOp(op){
+  const out=$('#dataOut');
+  out.innerHTML='<div class="empty compact">处理中…（联网补缺可能需要 1–2 分钟）</div>';
+  const r=await api('/api/data/'+op,{src:$('#importSrc').value});
+  if(r.error||r.ok===false){
+    out.innerHTML=`<div class="error-view"><b>${op} 未完成</b><span>${esc(JSON.stringify(r).slice(0,300))}</span></div>`;
+  }else{
+    const lines=Object.entries(r).filter(([k])=>k!=='ok').map(([k,v])=>`<div class="row2"><span>${k}</span><b class="cell-wrap">${esc(typeof v==='object'?JSON.stringify(v).slice(0,160):String(v)).slice(0,160)}</b></div>`).join('');
+    out.innerHTML=`<div class="kv">${lines}</div>`;
+  }
+  loadTasks();
+}
+
+/* ---------- 推送配置弹窗 ---------- */
+async function openPushModal(){
+  modal('推送配置',`<div id="pmBody"><div class="empty compact">载入中…</div></div>`);
+  const c=await api('/api/push/config');
+  $('#pmBody').innerHTML=`
+    <div style="padding:14px 16px 0">
+    <div class="logic-line" style="padding:0">
+      渠道 <select id="pushCh">
+        <option value="none">不推送（仅本地收件箱）</option>
+        <option value="dingtalk">钉钉机器人</option>
+        <option value="pushplus">Pushplus（微信）</option>
+      </select>
+    </div>
+    <div id="pushFields" style="margin-top:10px"></div>
+    <div class="button-row" style="margin-top:12px">
+      <button class="primary-btn small" onclick="savePush()">保存</button>
+      <button class="outline-btn" onclick="testPush()">发送测试</button>
+      <span id="pushState" class="tiny muted"></span>
+    </div>
+    <div class="panel-note" style="border:0;padding-left:0;margin-top:10px">密钥不回显完整内容；留空的密钥字段保存时保持原值。钉钉支持加签 secret。</div>
+    </div>`;
+  $('#pushCh').value=c.channel||'none';
+  const render=()=>{
+    const ch=$('#pushCh').value;
+    $('#pushFields').innerHTML = ch==='dingtalk'
+      ? `<label class="field-hint">钉钉 Webhook${c.dingtalk_webhook_set?'（已配置 '+c.dingtalk_webhook_tail+'）':''}</label>
+         <input id="dtWebhook" placeholder="https://oapi.dingtalk.com/robot/send?access_token=…" style="width:100%;background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:7px;color:#e4e8eb;margin-top:4px">
+         <label class="field-hint" style="margin-top:10px">加签 Secret${c.dingtalk_secret_set?'（已配置）':''}（可选）</label>
+         <input id="dtSecret" placeholder="SEC…" style="width:100%;background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:7px;color:#e4e8eb;margin-top:4px">`
+      : ch==='pushplus'
+      ? `<label class="field-hint">Pushplus Token${c.pushplus_token_set?'（已配置 '+c.pushplus_token_tail+'）':''}</label>
+         <input id="ppToken" placeholder="token" style="width:100%;background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:7px;color:#e4e8eb;margin-top:4px">`
+      : `<div class="empty compact">不推送：提醒只进本地收件箱（盘中监控页可见）。</div>`;
+  };
+  $('#pushCh').onchange=render; render();
+}
+async function savePush(){
+  const ch=$('#pushCh').value;
+  const body={channel:ch};
+  if(ch==='dingtalk'){body.dingtalk_webhook=$('#dtWebhook').value; body.dingtalk_secret=$('#dtSecret').value;}
+  if(ch==='pushplus'){body.pushplus_token=$('#ppToken').value;}
+  const r=await api('/api/push/config',body);
+  toast('已保存推送渠道：'+({none:'不推送',dingtalk:'钉钉机器人',pushplus:'Pushplus'}[r.channel]||r.channel));
+  loadPushView();
+}
+async function testPush(){
+  $('#pushState').textContent='发送中…';
+  await savePushSilent();
+  const r=await api('/api/push/test',{});
+  $('#pushState').textContent=r.ok?'测试推送成功':('失败：'+(r.reason||JSON.stringify(r.resp||'').slice(0,120)));
+}
+async function savePushSilent(){
+  const ch=$('#pushCh').value;
+  const body={channel:ch};
+  if(ch==='dingtalk'){body.dingtalk_webhook=$('#dtWebhook')&&$('#dtWebhook').value; body.dingtalk_secret=$('#dtSecret')&&$('#dtSecret').value;}
+  if(ch==='pushplus'){body.pushplus_token=$('#ppToken')&&$('#ppToken').value;}
+  await api('/api/push/config',body);
+}
+async function loadPushView(){
+  const c=await api('/api/push/config').catch(()=>null);
+  if(!c) return;
+  const txt={none:'不推送（仅本地收件箱）',dingtalk:'钉钉机器人 '+(c.dingtalk_webhook_set?c.dingtalk_webhook_tail:'未配置'),pushplus:'Pushplus '+(c.pushplus_token_set?c.pushplus_token_tail:'未配置')}[c.channel]||c.channel;
+  for(const id of ['pushChannelView','pushChannelView2']){const el=$('#'+id); if(el) el.textContent=txt;}
+}
+
+/* ================= 交易计划（生产版结构：草案 / 生效计划 / 监控板块强势股） ================= */
+let planDraftOpen=false;
+async function pagePlan(){
+  pageShell('交易计划','','');
+  const ha=$('.heading-actions');
+  if(ha) ha.innerHTML='<button class="outline-btn" onclick="openDataModal()">更新数据</button>';
+  try{
+    await loadTradePlan();
+    await loadBoards();
+  }catch(e){
+    $('#view').innerHTML=`<div class="page-heading"><div><div class="eyebrow">TRADING PLAN</div><h1>交易计划</h1></div></div>
+      <div class="error-view"><b>交易计划读取失败</b><span>${esc(String(e&&e.message||e))}</span><button class="outline-btn" onclick="pagePlan()">重试</button></div>`;
+  }
+}
+function fmtDay(v){return v?String(v).replace(/^(\d{4})(\d{2})(\d{2})$/,'$1-$2-$3'):'—';}
+function fmtStamp(v){return v?String(v).replace('T',' ').slice(0,19):'—';}
+async function loadTradePlan(){
+  const V2=$('#view');
+  const r=await api('/api/plan/production');
+  if(!r.ok){
+    V2.innerHTML=`<div class="page-heading"><div><div class="eyebrow">TRADING PLAN</div><h1>交易计划</h1></div></div>
+      ${panel('当前生效计划',`<div class="empty compact">${esc(r.error)}；完整版不生成模型计划、不虚构标的。</div>`)}
+      ${'<div style="height:12px"></div>'}
+      <div id="boardsBody"></div>`;
+    return;
+  }
+  const f=r.formal, d=r.draft||{};
+  const meta=`<div class="plan-meta">
+    <div><span class="tiny muted">数据更新至</span><b>${fmtDay(f.data_date)}</b></div>
+    <div><span class="tiny muted">观察日</span><b>${fmtDay(f.monitor_date)}</b></div>
+    <div><span class="tiny muted">草案生成</span><b>${fmtStamp(d.created_at)}</b></div>
+    <div><span class="tiny muted">规则版本</span><b>${esc(f.rule_version||'未提供')}</b></div>
+    <div><span class="tiny muted">证据状态</span><b class="${f.plan_ready?'green':'red'}">${f.plan_ready?'证据与当前快照一致':'未提供'}</b></div>
+  </div>`;
+  const draftPanel=panel('待确认草案',`
+    <div class="confirm-summary">
+      <span>草案 ID <b class="mono">${esc(String(d.id||'未提供').slice(0,12))}…</b></span>
+      <span>来源 <b>${esc(d.origin||'未提供')}</b></span>
+      <span>股票数 <b>${d.stock_count??0}</b></span>
+      <span>状态 <b class="green">${d.confirmed?'已确认':'待确认'}</b></span>
+    </div>
+    ${planDraftOpen?`<div class="sg-change-list modal">${(d.selected_codes||[]).map(c=>`<div class="sg-change-row"><b>${c}</b></div>`).join('')||'<div class="empty compact">无</div>'}</div>`:''}
+    <div class="button-row end" style="padding:0 14px 14px">
+      <button class="text-btn" onclick="planDraftOpen=!planDraftOpen;loadTradePlan()">${planDraftOpen?'收起':'展开'}</button>
+    </div>
+    <div class="panel-note">草案由生产版模型生成（只读引用）；完整版不在本地重算模型、不确认草案。</div>`,
+    `<span class="pill ${d.confirmed?'green':'orange'}">${d.confirmed?'已确认':'待确认'}</span>`);
+  const card=s=>{
+    const zone=s.zone_lower!=null?(`${s.zone_lower} ~ ${s.zone_upper}`):null;
+    return `<div class="plan-item">
+      <div class="plan-item-head">
+        <div class="stock-identity"><b>${s.code}</b><small>${esc(s.name)}</small></div>
+        <span class="pill ${s.observe_only?'blue':'green'}">${s.observe_only?'仅观察':'正式候选'}</span>
+        <span class="pill">${s.observe_only?'仅观察，不执行':'执行状态未提供'}</span>
+        <div class="plan-price-summary">
+          <span>${s.observe_only?'仅观察':'关注区'}<b>${s.observe_only?'不显示买入价/提醒':zone}</b></span>
+          <span>有效期<b>${fmtStamp(s.valid_until)}</b></span>
+        </div>
+      </div>
+      <div class="plan-editor-body"><div class="editor-grid">
+        <div><span class="tiny muted">关注区</span><div>${zone||(s.observe_only?'仅观察，不设置买入价':'未提供')}</div></div>
+        <div><span class="tiny muted">入场信号</span><div>${esc(s.entry_condition)}</div></div>
+        <div><span class="tiny muted">补仓安排</span><div>未提供</div></div>
+        <div><span class="tiny muted">有效期</span><div>${fmtStamp(s.valid_until)}</div></div>
+      </div>
+      <div class="source-row"><span>放弃条件：未提供</span><span>原始字段 source=${esc(s.source||'未提供')}</span></div>
+      </div>
+    </div>`;
+  };
+  const formalPanel=panel('当前生效计划',
+    (f.stocks||[]).map(card).join('')||'<div class="empty compact">计划中没有股票</div>',
+    `<span class="pill green">v${esc(String(f.version||'1'))}</span>`);
+  V2.innerHTML=`<div class="page-heading"><div><div class="eyebrow">TRADING PLAN</div><h1>交易计划</h1></div>
+      <div class="heading-actions"><button class="outline-btn" onclick="openDataModal()">更新数据</button></div></div>
+    ${meta}
+    <div style="height:12px"></div>
+    ${draftPanel}
+    <div style="height:12px"></div>
+    ${formalPanel}
+    <div style="height:12px"></div>
+    <div class="panel-note">${esc(r.note||'')}</div>
+    <div style="height:12px"></div>
+    <div id="boardsBody"></div>`;
+}
+let poolData=null, poolExpanded=null;
+async function loadBoards(refresh){
+  const B=$('#boardsBody'); if(!B) return;
+  if(refresh){B.innerHTML=panel('监控板块强势股（与正式选股分开）','<div class="empty compact">重算中（约 1 分钟）…</div>');}
+  const r=await api(refresh?'/api/strong_pool/prepare':'/api/strong_pool/state', refresh?{}:undefined);
+  if(!r.ok){B.innerHTML=panel('监控板块强势股（与正式选股分开）',`<div class="empty compact">${esc(r.error||'板块数据未就绪')}</div>`);return;}
+  poolData=r;
+  B.innerHTML=panel('监控板块强势股（与正式选股分开） <button class="mini-outline" style="margin-left:8px" onclick="go(\'watch\')">添加/删除板块</button>',`
+    <div class="context-list compact-list">
+      <span>来源 <b class="cell-wrap">${r.source==='PRODUCTION_POOL_READONLY'?('生产版强势池 · '+esc(r.source_file||'')):'本地计算'}</b></span>
+      <span>数据日 / 观察日 <b>${r.p_day||'—'} / ${r.observation_day||'—'}</b></span>
+      <span>池状态 <b>${r.status||'—'}</b>　总入池 <b>${r.total_rows??'—'}</b></span>
+    </div>
+    <div class="table-wrap"><table class="sg-market-table">
+      <tr><th>板块</th><th>成员来源/日期</th><th>成员数</th><th>状态</th><th>入池数</th></tr>
+      ${r.boards.map((b,i)=>{
+        const st=b.pool_status==='READY'?['就绪','green']:b.pool_status==='READY_EMPTY'?['筛选完成，0只','orange']:['数据缺失','orange'];
+        return `<tr>
+          <td><button class="text-btn" onclick="toggleBoard(${i})" title="展开入池股票与黄金观察区（只读）">${poolExpanded===i?'▾':'▸'} <b>${esc(b.board)}</b></button>
+            ${poolExpanded===i?boardDetailHtml(b):''}</td>
+          <td>${esc(b.member_source||'')}<div class="tiny muted">${b.member_source_date||''}</div></td>
+          <td>${b.member_count}</td>
+          <td><span class="pill ${st[1]}">${st[0]}</span></td>
+          <td><b>${b.qualified_count}</b></td>
+        </tr>`;}).join('')}
+    </table></div>
+    <div class="button-row" style="padding:10px 14px">
+      <button class="outline-btn" onclick="loadBoards(true)">重新读取最新池</button>
+    </div>
+    <div class="panel-note">展开股票来自生产版已核验池（只读），不启动计算、不加入正式个股计划、不触发推送。${esc(r.note||'')}</div>`);
+}
+function boardDetailHtml(b){
+  if(b.pool_status!=='READY'||!b.qualified.length) return `<div class="tiny muted" style="padding:6px 0 2px 18px">${b.pool_status==='READY_EMPTY'?'该板块筛选完成，0 只':esc(b.note||'未就绪')}</div>`;
+  return `<ul class="rule-list" style="padding-top:4px">${b.qualified.slice(0,20).map(q=>
+    `<li><b>${q.code}</b> ${esc(q.name||'')} 参考收盘 ${q.reference_close??'—'}${q.neckline?(' 颈线 '+q.neckline):''}${q.wave_return!=null?(' 波段涨幅 '+pct(q.wave_return)):''} 观察区：${(q.zones||[]).join('、')||'未提供'}（仅观察数据，不加入正式个股计划）</li>`).join('')}
+    ${b.qualified.length>20?`<li class="muted">…另 ${b.qualified.length-20} 只</li>`:''}</ul>`;
+}
+function toggleBoard(i){poolExpanded=poolExpanded===i?null:i; loadBoards();}
+/* ================= 盘中监控 ================= */
+async function pageMonitor(){
+  const st=STATE;
+  pageShell('盘中监控','',
+  panel('运行',`<div class="logic-line">
+      规则 <select id="runRef" style="min-width:240px;background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb"></select>
+      监控日 <input id="runDay" value="${st.monitor_day||20261118}" size="9" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+      <label class="check-label"><input type="checkbox" id="useModel"> 经过模型评分（关 = 纯规则）</label>
+      <button class="primary-btn small" onclick="runNow()">运行</button>
+      <span id="runState" class="tiny muted"></span>
+    </div>
+    <div id="runOut"></div>`)
+  +spacing+
+  panel('最近提醒（最近 30 条，新→旧）','<div class="table-wrap"><table id="inboxTbl"></table></div>'));
+  const rs=await api('/api/rules');
+  const pubs=rs.published.map(p=>p.ref);
+  $('#runRef').innerHTML=rs.published.map(p=>`<option value="${p.ref}">${p.title?esc(p.title)+' · ':''}${p.ref}</option>`).join('');
+  $('#runRef').value=defaultRef(pubs);
+  showInbox();
+}
+async function runNow(){
+  const withModel=$('#useModel')&&$('#useModel').checked&&TAROT;
+  $('#runState').textContent='运行中（约 1–2 分钟）…';
+  const r=await api('/api/run',{rule:$('#runRef').value,days:[+$('#runDay').value],with_tarot_shadow:withModel});
+  $('#runState').textContent=r.ok?('完成'+(r.push?' · '+r.push:'')):'失败';
+  const lr=await api('/api/last_run').catch(()=>({error:'NO_RUN'}));
+  const out=$('#runOut');
+  if(lr.error||!r.ok){
+    out.innerHTML=`<div class="error-view"><b>运行${r.ok?'完成但读取结果失败':'失败'}</b><span>${esc(JSON.stringify(r.ok?lr:r).slice(0,300))}</span></div>`;
+  }else{
+    const nf=(lr.not_frozen||[]);
+    out.innerHTML=`<div class="kv">
+      <div class="row2"><span>运行 ID</span><b>${lr.run_id}</b></div>
+      <div class="row2"><span>筛中</span><b>${lr.selected_n??'—'} 只</b></div>
+      <div class="row2"><span>已冻结</span><b>${lr.frozen_n??'—'} 只</b></div>
+      <div class="row2"><span>未冻结</span><b>${nf.length} 只${nf.length?('（'+nf.slice(0,3).map(x=>x.code+':'+(x.reason||'')).join('；')+(nf.length>3?' …':'')+'）'):''}</b></div>
+      <div class="row2"><span>触位 / 回执</span><b>${lr.touches??0} 次 / ${lr.inbox?JSON.stringify(lr.inbox):'—'}</b></div>
+      <div class="row2"><span>进行中事件</span><b>${lr.pending_events??0}</b></div>
+    </div>`;
+  }
+  showInbox();
+
+}
+const KIND_CN={TOUCH:'触位提醒',INDICATOR_SUPPLEMENT:'指标补充',WEBHOOK_TEST:'推送测试'};
+async function showInbox(){
+  const ib=await api('/api/inbox');
+  const tb=$('#inboxTbl'); if(!tb) return;
+  const rows=(ib.messages||[]).slice(-30).reverse();
+  if(!rows.length){tb.innerHTML='<tr><td><div class="empty compact">暂无提醒</div></td></tr>';return;}
+  tb.innerHTML='<tr><th>时间</th><th>代码</th><th>类型</th><th>送达</th></tr>'+rows.map(m=>`<tr><td>${fmtTs(m.sent_at)}</td><td><b>${m.code||''}</b></td><td>${KIND_CN[m.kind]||m.kind||''}</td><td><span class="pill ${m.delivery==='SENT'?'green':'orange'}">${m.delivery||''}</span></td></tr>`).join('');
+}
+
+/* ================= 持仓（模拟） ================= */
+async function pagePositions(){
+  pageShell('持仓','',`<div id="posBody"><div class="empty">计算中（首次约 1–3 分钟，随后读缓存）…</div></div>`);
+  const r=await api('/api/positions');
+  const B=$('#posBody');
+  if(!r.ok){B.innerHTML=`<div class="empty">${esc(r.error||'暂无持仓：先跑一次盘后选股 + 监控')}</div>`;return;}
+  const pos=r.positions||[];
+  const win=pos.filter(p=>(p.pnl??0)>0).length;
+  const totalPnl=pos.reduce((a,p)=>a+(p.pnl||0),0);
+  B.innerHTML=panel(`模拟持仓明细（${pos.length}）`,`<span class="pill">模拟口径</span>`).replace('</section>',
+    `<div class="stat-grid" style="grid-template-columns:repeat(4,1fr);padding:12px 14px 0">
+      <div class="stat-card"><div class="stat-sub">持仓数</div><div class="stat-value">${pos.length}</div></div>
+      <div class="stat-card"><div class="stat-sub">浮盈 / 浮亏</div><div class="stat-value"><span class="red">${win}</span> / <span class="green">${pos.length-win}</span></div></div>
+      <div class="stat-card"><div class="stat-sub">合计浮动盈亏（元）</div><div class="stat-value ${totalPnl>=0?'red':'green'}">${totalPnl.toFixed(0)}</div></div>
+      <div class="stat-card"><div class="stat-sub">最新收盘数据日</div><div class="stat-value" style="font-size:15px">${(pos[0]&&pos[0].latest_day)||'—'}</div></div>
+    </div>
+    <div class="table-wrap"><table><tr><th>股票</th><th>成本（入场）</th><th>现价</th><th>涨跌</th><th>数量</th><th>盈亏</th></tr>
+    ${pos.map(p=>`<tr>
+      <td><b>${p.code}</b> <small>${esc(p.name)}</small><small class="muted">相关公告：生产版在线采集，本地无归档</small></td>
+      <td>${p.entry??'—'}<div class="tiny muted">${fmtTs(p.entry_ts)}</div></td>
+      <td>${p.latest_close??'未知'}</td>
+      <td class="${(p.change_pct??0)>=0?'up':'down'}">${p.change_pct!=null?p.change_pct.toFixed(2)+'%':'—'}</td>
+      <td>${p.shares||'—'}</td>
+      <td class="${(p.pnl??0)>=0?'up':'down'}"><b>${p.pnl!=null?(p.pnl.toFixed(0)+' 元'):'未知'}</b> ${p.pnl!=null?pct(p.pnl_pct):''}</td>
+    </tr>`).join('')||'<tr><td colspan="6"><div class="empty compact">无成交信号</div></td></tr>'}</table></div>
+    <div class="panel-note">${esc(r.note||'')}</div></section>`);
+}
+
+/* ================= 策略规则 ================= */
+function fieldOptions(sec, sel){
+  const order=['日K选股','黄金观察区','量比与换手','5分钟监控','15分钟监控','30分钟监控'];
+  const cats={};
+  for(const [k,v] of Object.entries(UI)){
+    const selOk = sec==='selection' ? v.category==='日K选股' : v.category!=='日K选股';
+    if(!selOk) continue;
+    (cats[v.category]=cats[v.category]||[]).push([k,v]);
+  }
+  const keys=Object.keys(cats).sort((a,b)=>(order.indexOf(a)<0?99:order.indexOf(a))-(order.indexOf(b)<0?99:order.indexOf(b)));
+  return keys.map(cat=>`<optgroup label="── ${cat} ──">${cats[cat].map(([k,v])=>`<option value="${k}" ${k===sel?'selected':''}>${esc(v.label||k)}</option>`).join('')}</optgroup>`).join('');
+}
+function condRow(sec, c){
+  const div=document.createElement('div'); div.className='cond';
+  const m=c.field?(UI[c.field]||{}):{};
+  div.innerHTML=`<select class="f">${fieldOptions(sec,c.field)}</select>
+    <select class="o">${['>=','<=','>','<','==','!='].map(o=>`<option ${o===c.op?'selected':''}>${o}</option>`).join('')}</select>
+    <input class="v" value="${c.value??''}" placeholder="阈值">
+    <span class="unit">${m.unit||''}</span>
+    <span class="hint">${m.period||''}${m.window?(' · 需 '+m.window+' 数据'):''}${m.hint?(' · '+m.hint):''}</span>
+    <button class="icon-btn del" title="删除条件">✕</button>`;
+  div.querySelector('.f').onchange=e=>{
+    const mm=UI[e.target.value]||{};
+    div.querySelector('.unit').textContent=mm.unit||'';
+    div.querySelector('.hint').textContent=(mm.period||'')+(mm.window?(' · 需 '+mm.window+' 数据'):'')+(mm.hint?(' · '+mm.hint):'');
+    renderSentence();
+  };
+  div.querySelector('.o').onchange=renderSentence;
+  div.querySelector('.v').oninput=renderSentence;
+  div.querySelector('.del').onclick=()=>{div.remove();renderSentence();};
+  return div;
+}
+function collect(sec){
+  const root=$(sec==='selection'?'#selConds':'#trigConds');
+  const children=[...root.querySelectorAll('.cond')].map(d=>({field:d.querySelector('.f').value,op:d.querySelector('.o').value,value:Number(d.querySelector('.v').value)}));
+  return {op:$(sec==='selection'?'#selLogic':'#trigLogic').value==='all'?'AND':'OR', children};
+}
+function sentenceOf(sec){
+  const c=collect(sec);
+  if(!c.children.length) return '（还没有条件，点「+ 加条件」）';
+  const j=c.op==='AND'?' <i>且</i> ':' <i>或</i> ';
+  return c.children.map(x=>{const m=UI[x.field]||{};return `<b>${esc(m.label||x.field)}</b> ${x.op} <b>${x.value}</b>${m.unit?(' '+m.unit):''}`;}).join(j);
+}
+function renderSentence(){
+  const s1=$('#selSentence'), s2=$('#trigSentence');
+  if(s1) s1.innerHTML='盘后筛选（P 日收盘后）：'+sentenceOf('selection');
+  if(s2) s2.innerHTML='盘中触发（D 日逐根 5 分钟）：'+sentenceOf('trigger');
+}
+function draftRule(){
+  const r=JSON.parse(JSON.stringify(RULE));
+  r.selection=collect('selection'); r.trigger=collect('trigger');
+  r.notification=r.notification||{};
+  const attach=[...$('#trigConds').querySelectorAll('.cond')].filter(d=>d.querySelector('.a')&&d.querySelector('.a').checked).map(d=>d.querySelector('.f').value);
+  if(attach.length) r.notification.attach_fields=attach; else delete r.notification.attach_fields;
+  let name=($('#draftName')?$('#draftName').value:'').trim();
+  if(!name) name=RULE.rule_id+'_draft';
+  if(!/^[a-zA-Z][a-zA-Z0-9_]{1,40}$/.test(name)) name=name.replace(/[^a-zA-Z0-9_]/g,'_').replace(/^[^a-zA-Z]+/,'')||'my_rule';
+  r.rule_id=name;
+  return r;
+}
+async function pageStrategy(){
+  const rs=await api('/api/rules');
+  pageShell('策略规则','',
+  panel('规则版本',`<div class="logic-line">
+      <select id="ruleRef" style="min-width:280px">${rs.published.map(p=>`<option value="${p.ref}">${p.title?esc(p.title)+' · ':''}${p.ref}</option>`).join('')}${rs.drafts.map(d=>`<option value="${d}">[草稿] ${d}</option>`).join('')}</select>
+      <button class="outline-btn" onclick="loadRule()">载入</button>
+      <span id="ruleMeta" class="tiny muted"></span>
+    </div>
+    <div class="tiny muted" style="padding:0 14px 12px">内置默认：绿盘低吸+黄金分割（lvp_golden，自动取最新已发布版本，GOLDEN_FIB 观察区）。发布后旧版本仍可运行，互不覆盖。</div>`)
+  +spacing+
+  panel('盘后筛选条件（P 日收盘后计算，决定候选名单）',`
+    <div class="logic-line">满足 <select id="selLogic" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb"><option value="all">全部条件</option><option value="any">任一条件</option></select>
+      <button class="mini-outline" onclick="addCond('selection')">+ 加条件</button></div>
+    <div id="selConds"></div>
+    <div class="sentence" id="selSentence"></div>`)
+  +spacing+
+  panel('盘中触发条件（D 日逐根 5 分钟，决定何时提醒）',`
+    <div class="logic-line">满足 <select id="trigLogic" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb"><option value="all">全部条件</option><option value="any">任一条件</option></select>
+      <button class="mini-outline" onclick="addCond('trigger')">+ 加条件</button></div>
+    <div id="trigConds"></div>
+    <div class="sentence" id="trigSentence"></div>
+    <div class="panel-note">勾选「随提醒显示」的指标不参与判断，只附在提醒回执里；缺数据的条件显示「待核验」及原因。</div>`)
+  +spacing+
+  panel('草稿 / 预览 / 发布',`<div class="logic-line">
+      版本名 <input id="draftName" placeholder="留空自动命名" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px 8px;color:#e4e8eb;width:180px">
+      <button class="outline-btn" onclick="saveDraft()">保存草稿</button>
+      <button class="outline-btn" onclick="previewRule()">预览差异</button>
+      <button class="primary-btn small" onclick="publishRule()">发布为新版本</button>
+      <span class="tiny muted">P 日</span><input id="pDay" value="${STATE.p_day||20261117}" size="9" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+      <span class="tiny muted">D 日</span><input id="dDay" value="${STATE.monitor_day||20261118}" size="9" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+    </div>
+    <div id="previewOut"><div class="empty compact">预览显示：候选增减名单（带每只的指标值）+ 提醒数增减。</div></div>`));
+  const sel=$('#ruleRef');
+  const pubsNoDraft=rs.published.map(p=>p.ref);
+  sel.value=defaultRef(pubsNoDraft);
+  await loadRule();
+}
+async function loadRule(){
+  const ref=$('#ruleRef').value; if(!ref) return;
+  const r=await api('/api/rule?ref='+encodeURIComponent(ref));
+  if(r.error){toast(r.error,true);return;}
+  RULE=r.rule; CURRENT_REF=ref;
+  $('#ruleMeta').textContent=`${RULE.rule_id}@${RULE.version||'draft'} · ${RULE.status||'DRAFT'} · sha ${(RULE.sha256||'—').slice(0,12)} · 观察区 ${RULE.zone&&RULE.zone.type||'—'}`;
+  const sc=$('#selConds'); sc.innerHTML='';
+  RULE.selection.children.forEach(c=>sc.appendChild(condRow('selection',c)));
+  $('#selLogic').value=RULE.selection.op==='OR'?'any':'all';
+  const tc=$('#trigConds'); tc.innerHTML='';
+  const af=new Set((RULE.notification||{}).attach_fields||[]);
+  RULE.trigger.children.forEach(c=>{
+    const d=condRow('trigger',c);
+    const m=UI[c.field]||{};
+    if((m.spec||{}).granularity==='MINUTE_5M'){
+      const l=document.createElement('label');
+      l.style.cssText='grid-column:1/-1;color:#9aa2a9;font-size:10px;display:flex;gap:6px;align-items:center';
+      l.innerHTML=`<input type="checkbox" class="a" ${af.has(c.field)?'checked':''} style="accent-color:#ff8500"> 随提醒显示（不参与判断）`;
+      l.querySelector('.a').onchange=renderSentence;
+      d.appendChild(l);
+    }
+    tc.appendChild(d);
+  });
+  $('#trigLogic').value=RULE.trigger.op==='OR'?'any':'all';
+  renderSentence();
+}
+function addCond(sec){
+  const root=$(sec==='selection'?'#selConds':'#trigConds');
+  const d=condRow(sec,{});
+  const sel=d.querySelector('.f');
+  if(sel.options.length) sel.onchange({target:sel});
+  root.appendChild(d);
+  renderSentence();
+}
+async function saveDraft(){
+  const r=draftRule();
+  const resp=await api('/api/rule/draft',{rule:r});
+  toast(resp.ok?('草稿已保存：'+r.rule_id+'（重启后可找回）'):('保存失败：'+resp.error),!resp.ok);
+}
+async function previewRule(){
+  const r=draftRule();
+  const out=$('#previewOut');
+  out.innerHTML='<div class="empty compact">预览计算中…</div>';
+  const pv=await api('/api/rule/preview',{rule:r,p_day:+$('#pDay').value,d_day:+$('#dDay').value});
+  if(!pv.ok){out.innerHTML=`<div class="error-view"><b>预览失败</b><span>${esc(pv.error)}</span></div>`;return;}
+  const mkLi=(x,vals)=>{const ks=Object.entries(vals).filter(([k,v])=>v!=null).slice(0,3);return `<li><b>${x.code}</b>${ks.map(([k,v])=>` <span class="tiny muted">${esc((UI[k]||{}).label||k)}=${typeof v==='number'?+v.toFixed(4):v}</span>`).join('')}</li>`;};
+  const trig=pv.trigger||{};
+  out.innerHTML=`
+    <div class="kv" style="border-bottom:1px solid #252a2d">
+      <div class="row2"><span>候选数变化（P 日 ${pv.p_day}）</span><b>${pv.base_n} → ${pv.edited_n}（新增 ${pv.gained.length} · 移除 ${pv.lost.length}）</b></div>
+      <div class="row2"><span>盘中提醒（D 日 ${pv.d_day}）</span><b>${trig.error?('无法计算：'+esc(trig.error)):((trig.base??'—')+' → '+(trig.edited??'—')+' 条')}</b></div>
+      ${pv.unknown_values?`<div class="row2"><span>待核验</span><b class="orange-text">${pv.unknown_values} 只股票有指标缺数据</b></div>`:''}
+    </div>
+    <div class="diff-grid">
+      <div class="diff-col"><h3 style="color:#7fd0aa">新增候选（前 30）</h3><ul>${pv.gained.map(x=>mkLi(x,x.values)).join('')||'<li class="muted">无</li>'}</ul></div>
+      <div class="diff-col"><h3 style="color:#ff9f9a">移除候选（前 30）</h3><ul>${pv.lost.map(x=>mkLi(x,x.values)).join('')||'<li class="muted">无</li>'}</ul></div>
+    </div>`;
+}
+async function publishRule(){
+  if(!confirm('发布为新版本？已冻结计划仍绑定原版本。'))return;
+  const r=draftRule();
+  await api('/api/rule/draft',{rule:r});
+  const resp=await api('/api/rule/publish',{rule_id:r.rule_id});
+  toast(resp.ok?('已发布 '+resp.ref):('发布失败：'+resp.error),!resp.ok);
+  if(resp.ok){CURRENT_REF=resp.ref;pageStrategy();}
+}
+
+/* ================= 复盘 · 研究 ================= */
+let revTab='ledger';
+const KIND_SAMPLE_CN={TRIGGERED:'已触发',POOLED_NOT_TRIGGERED:'未触发',FILTERED_OUT:'未入池',MISSING_DATA:'缺数据',NO_FILL:'触发未成交'};
+async function pageReview(){
+  const tabs=[['ledger','复盘账本'],['bt','回测'],['research','因子研究'],['mine','因子挖掘']];
+  pageShell('复盘 · 研究','',
+  `<div class="review-tabs">${tabs.map(([k,l])=>`<button class="${revTab===k?'active':''}" onclick="revTab='${k}';pageReview()">${l}</button>`).join('')}</div><div id="revBody"></div>`);
+  const B=$('#revBody');
+  if(revTab==='ledger'){
+    const r=await api('/api/review');
+    if(!r.ok){B.innerHTML=panel('复盘账本','<div class="empty">先运行一次。</div>');return;}
+    const s=r.summary||{};
+    const kinds=Object.entries(s.sample_kind_counts||{});
+    B.innerHTML=panel('复盘账本（运行 '+r.run_id+'）',`<div class="kv">
+      <div class="row2"><span>规则</span><b>${s.rule_ref||'—'}</b></div>
+      <div class="row2"><span>样本总数</span><b>${s.sample_count??'—'}</b></div>
+      ${kinds.map(([k,v])=>`<div class="row2"><span>${KIND_SAMPLE_CN[k]||k}</span><b>${v}</b></div>`).join('')}
+    </div>
+    <div class="panel-note">逐样本明细（后 20 条）见下表。</div>
+    <div class="table-wrap"><table><tr><th>代码</th><th>状态</th><th>说明</th></tr>${(r.samples||[]).slice(-20).map(x=>`<tr><td><b>${x.code||''}</b></td><td>${KIND_SAMPLE_CN[x.sample_kind||x.kind]||x.sample_kind||x.kind||''}</td><td class="cell-wrap">${esc(JSON.stringify(x).slice(0,140))}</td></tr>`).join('')}</table></div>`);
+  }else if(revTab==='bt'){
+    B.innerHTML=panel('策略回测（对最近运行的触位信号模拟成交）',`<div class="button-row" style="padding:12px 14px"><button class="primary-btn small" onclick="doBacktest()">回测最近运行</button><span id="btState" class="tiny muted"></span></div><div id="btOut"><div class="empty compact">费用口径：佣金 0.025% + 双边滑点 0.1% + 盈利卖出印花税 0.05%；T+1 严格出场。</div></div>`);
+  }else if(revTab==='research'){
+    B.innerHTML=panel('因子研究（单因子 IC 检验）',`<div class="logic-line">
+        <select id="factorName" style="min-width:260px;background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb"></select>
+        公式 <input id="factorExpr" value="ret_5d / atr14" size="18" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+        P 日（逗号分隔）<input id="factorP" value="${recentDaysStr(3)}" size="20" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+        <button class="primary-btn small" onclick="doFactor()">多日评估</button>
+      </div>
+      <div class="logic-line"><button class="outline-btn" onclick="doFactorLibrary()">因子库总览（全部因子一次评估）</button><span class="tiny muted">首次约数分钟，结果有缓存</span></div>
+      <div class="panel-note">IC = 因子值与次日收益的按日 Spearman 相关；「待核验」表示当日样本窗口未成熟或缺数据。</div>
+      <div id="factorOut"></div>`);
+    fillFactorNames();
+  }else{
+    B.innerHTML=panel('因子挖掘（因子族组合搜索，嵌套留出防前视）',`<div class="logic-line">
+        测试日（逗号分隔）<input id="mineDays" value="${recentDaysStr(5)}" size="26" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+        purge <input id="minePurge" value="1" size="3" style="background:#0c0e0f;border:1px solid #343a3e;border-radius:3px;padding:5px;color:#e4e8eb">
+        <button class="primary-btn small" onclick="doMine()">开始挖掘</button><span id="mineState" class="tiny muted"></span>
+      </div>
+      <div class="panel-note">训练窗与测试日间隔 purge 个交易日；候选默认 pending，过门槛（|IC|>0.03 且正 IC 折 ≥ 2/3）才可晋级。</div>
+      <div id="mineOut"></div>`);
+  }
+}
+function fillFactorNames(){
+  const lib={'动量':{mom_5d:'近5日涨幅',mom_20d:'近20日涨幅',mom_60d:'近60日涨幅'},'深度':{drawdown_60h:'距60日高点回撤',drawdown_20h:'距20日高点回撤'},'波动':{vol_atr14:'14日波幅',vol_adj_mom:'波动调整动量'},'量能':{volratio_5_20:'5日量/20日量',turnover_proxy:'近似换手'},'趋势':{ma20_above:'收盘>MA20',ma20_slope:'MA20斜率'},'位置':{rsi6_d:'日K RSI(6)',macd_hist_d:'日K MACD柱'}};
+  $('#factorName').innerHTML=Object.entries(lib).map(([f,items])=>`<optgroup label="── ${f} ──">${Object.entries(items).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</optgroup>`).join('');
+  $('#factorName').onchange=pickFactor;
+}
+function pickFactor(){
+  const name=$('#factorName').value;
+  const lib={mom_5d:'ret_5d',mom_20d:'ret_20d',mom_60d:'ret_60d',drawdown_60h:'0 - dist_60h',drawdown_20h:'0 - dist_20h',vol_atr14:'atr14',vol_adj_mom:'ret_5d / atr14',volratio_5_20:'vol_ratio_5d',turnover_proxy:'daily_turnover_proxy',ma20_above:'close_above_ma20',ma20_slope:'ma20_slope5',rsi6_d:'rsi6',macd_hist_d:'macd_hist'};
+  $('#factorExpr').value=lib[name]||name;
+}
+async function doBacktest(){
+  $('#btState').textContent='回测中…';
+  const r=await api('/api/backtest/run',{});
+  const out=$('#btOut');
+  if(!r.ok){out.innerHTML=`<div class="error-view"><b>回测失败</b><span>${esc(JSON.stringify(r).slice(0,300))}</span></div>`;$('#btState').textContent='失败';return;}
+  const s=r.summary;
+  let hold='';
+  for(const k of ['1','3','5']){
+    const h=s['hold_'+k+'d'];
+    hold+=h
+      ?`<div class="row2"><span>持仓 ${k} 日</span><b>可结算 ${h.n} 笔 · 胜率 ${(h.win*100).toFixed(0)}% · 价格表现 ${pct(h.mean_ret)} · 含成本 ${pct(h.mean_pnl)}</b></div>`
+      :`<div class="row2"><span>持仓 ${k} 日</span><b class="muted">窗口数据不足（导入新数据后重跑）</b></div>`;
+  }
+  const nr=s.no_fill_reasons||{};
+  const eq=s.equity_curve||[];
+  const eqHtml=eq.length
+    ? `<div class="table-wrap" style="padding:0 14px 12px"><table><tr><th>时间</th><th>累计（${s.equity_key}）</th></tr>${eq.filter((_,i)=>i%Math.max(1,Math.floor(eq.length/20))===0||i===eq.length-1).map(p=>`<tr><td>${fmtTs(p.ts)}</td><td>${pct(p.cum_pnl)}</td></tr>`).join('')}</table></div>`
+    : `<div class="panel-note">资金曲线：暂无可结算样本（T+1 出场需要次日数据）。</div>`;
+  const rowsHtml=`<div class="table-wrap" style="padding:0 14px 12px"><table><tr><th>代码</th><th>入场时间</th><th>入场价</th><th>1日价格</th><th>1日盈亏</th></tr>${(r.rows||[]).filter(x=>x.status==='FILLED').slice(0,20).map(x=>`<tr><td><b>${x.code}</b></td><td>${fmtTs(x.entry_ts)}</td><td>${x.entry}</td><td>${pct(x.ret_1d)}</td><td>${pct(x.pnl_1d)}</td></tr>`).join('')}</table></div>`;
+  out.innerHTML=`<div class="kv">
+    <div class="row2"><span>信号 / 成交 / 未成交</span><b>${s.signals} / ${s.filled} / ${s.no_fill}</b></div>
+    ${s.no_fill?`<div class="row2"><span>未成交原因</span><b>${Object.entries(nr).map(([k,v])=>({SUSPENDED_OR_ONE_PRICE_BAR:'停牌/一字',NEAR_LIMIT_DOWN:'临近跌停'}[k]||k)+' '+v).join(' · ')}</b></div>`:''}
+    ${hold}
+    <div class="row2"><span>成本口径</span><b>佣金 0.025% + 双边滑点 0.1%${s.cost_basis&&s.cost_basis.stamp_tax?' + 盈利印花税 0.05%':''}；${esc(s.t_plus_1||'')}</b></div>
+  </div>${eqHtml}${rowsHtml}`;
+  $('#btState').textContent='完成';
+}
+async function doFactorLibrary(){
+  const out=$('#factorOut');
+  out.innerHTML='<div class="empty compact">评估因子库全部因子（首次约数分钟）…</div>';
+  const days=$('#factorP').value.split(',').map(x=>+x.trim()).filter(Boolean);
+  const r=await api('/api/research/library',{days});
+  if(!r.ok){out.innerHTML=`<div class="error-view"><b>评估失败</b><span>${esc(JSON.stringify(r).slice(0,300))}</span></div>`;return;}
+  const fams={};
+  for(const row of r.rows){(fams[row.family]=fams[row.family]||[]).push(row);}
+  out.innerHTML=Object.entries(fams).map(([fam,rows])=>`
+    <div class="section-title" style="margin-top:10px"><span>${esc(fam)}</span></div>
+    <div class="table-wrap"><table><tr><th>因子</th><th>公式</th><th>IC</th><th>样本</th><th>状态</th></tr>
+    ${rows.map(x=>`<tr><td><b>${esc(x.label)}</b> <span class="tiny muted">${x.name}</span></td><td class="mono">${esc(x.expr)}</td><td><b class="${(x.ic??0)>0?'green':'red'}">${x.ic!=null?x.ic:'—'}</b></td><td>${x.n??'—'}</td><td>${x.ok?'<span class="pill green">已评估</span>':`<span class="pill orange">${esc((x.error||'').slice(0,40))}</span>`}</td></tr>`).join('')}
+    </table></div>`).join('');
+}
+async function doMine(){
+  $('#mineState').textContent='挖掘中（约 1 分钟）…';
+  const days=$('#mineDays').value.split(',').map(x=>+x.trim()).filter(Boolean);
+  const r=await api('/api/research/mine',{days,purge:+$('#minePurge').value||1});
+  const out=$('#mineOut');
+  if(!r.ok){out.innerHTML=`<div class="error-view"><b>挖掘失败</b><span>${esc(JSON.stringify(r).slice(0,300))}</span></div>`;$('#mineState').textContent='失败';return;}
+  const foldRows=(r.folds||[]).map(f=>f.skipped
+    ?`<tr><td>${f.test_day}</td><td colspan="4" class="muted">跳过：${esc(f.skipped)}</td></tr>`
+    :`<tr><td>${f.test_day}</td><td class="cell-wrap">${f.factors.join(' + ')}</td><td>${f.train_ic}</td><td><b class="${f.test_ic>0?'green':'red'}">${f.test_ic}</b></td><td>${(f.train_days||[]).length} 个训练日</td></tr>`).join('');
+  const candRows=(r.candidates||[]).map(c=>`<tr><td class="cell-wrap">${c.factors.join(' + ')}</td><td>${c.folds_n}</td><td>${c.mean_ic}</td><td>${c.pos_ratio}</td><td><span class="pill ${c.promotable?'green':'orange'}">${c.promotable?'可晋级':'pending'}</span></td></tr>`).join('');
+  out.innerHTML=`<div class="section-title" style="margin-top:10px"><span>逐折结果</span></div>
+    <div class="table-wrap"><table><tr><th>测试日</th><th>因子组合</th><th>训练 IC</th><th>样本外 IC</th><th>训练窗</th></tr>${foldRows||'<tr><td colspan="5" class="muted">无</td></tr>'}</table></div>
+    <div class="section-title" style="margin-top:10px"><span>候选库</span></div>
+    <div class="table-wrap"><table><tr><th>因子组合</th><th>折数</th><th>均值 IC</th><th>正 IC 占比</th><th>状态</th></tr>${candRows||'<tr><td colspan="5" class="muted">无候选</td></tr>'}</table></div>`;
+  $('#mineState').textContent='完成';
+}
+async function doFactor(){
+  const out=$('#factorOut');
+  out.innerHTML='<div class="empty compact">计算中…</div>';
+  const days=$('#factorP').value.split(',').map(x=>+x.trim()).filter(Boolean);
+  const r=await api('/api/research/evaluate',{expr:$('#factorExpr').value,days});
+  if(r.error){out.innerHTML=`<div class="error-view"><b>评估失败</b><span>${esc(r.error)}</span></div>`;return;}
+  const sm=r.summary||{};
+  const dayRows=(r.days||[]).map(d=>{
+    const ic=d.ic!=null?d.ic:(d.summary&&d.summary.ic);
+    return `<tr><td>${d.p_day||d.day||''}</td><td>${d.n??d.coverage_n??'—'}</td><td><b class="${(ic??0)>0?'green':'red'}">${ic!=null?+ic.toFixed(4):'待核验'}</b></td><td class="cell-wrap">${d.note?esc(d.note):(d.missing_n?('缺失 '+d.missing_n):'')}</td></tr>`;
+  }).join('');
+  out.innerHTML=`<div class="kv">
+      <div class="row2"><span>因子公式</span><b>${esc($('#factorExpr').value)}</b></div>
+      <div class="row2"><span>多日汇总</span><b>${sm.ic!=null?('IC '+sm.ic):esc(JSON.stringify(sm).slice(0,120))}</b></div>
+    </div>
+    <div class="table-wrap"><table><tr><th>P 日</th><th>样本</th><th>IC</th><th>备注</th></tr>${dayRows||'<tr><td colspan="4" class="muted">无结果</td></tr>'}</table></div>`;
+}
+
+/* ================= Stargazer 助手 ================= */
+const QUICK_CMDS=['怎么用盘后选股','怎么改规则并预览','黄金位怎么算的','推送怎么配置','回测怎么用','因子挖掘怎么做','现在数据更新到哪天'];
+async function pageAssistant(){
+  pageShell('Stargazer 助手','',
+  `<div class="assistant-layout">
+    <div class="sg-side">
+      ${panel('快捷指令 <span class="pill" style="margin-left:6px">仅填入输入框</span>',`<div class="sg-quick">
+        ${QUICK_CMDS.map(q=>`<button class="sg-quick-btn" onclick="fillAsk('${q}')">&gt;_ ${q}</button>`).join('')}
+      </div>
+      <div class="sidebar-note">指令只是对话文本，由本地知识库识别意图回答；不预设股票代码，也不返回模拟回复。</div>`)}
+      ${panel('推送通知','<div id="pushNotify"><div class="empty compact">读取中…</div></div>')}
+    </div>
+    ${panel('对话 <span class="pill green" style="margin-left:6px">真实后端</span>',`<div class="chat-log" id="chatLog">
+      <div class="msg ai"><div class="avatar2">SG</div><div class="bubble2">你好，我是 Stargazer 助手。左侧点快捷指令会填入输入框，回车或点发送提问；推送通知在左下查看。</div></div>
+    </div>
+    <div class="chat-in"><input id="chatInput" placeholder="输入问题，回车发送" onkeydown="if(event.key==='Enter')ask()"><button class="primary-btn small" onclick="ask()">发送</button></div>`)}
+  </div>`);
+  loadPushNotify();
+}
+function fillAsk(q){const i=$('#chatInput'); if(i){i.value=q;i.focus();}}
+let notifyOpen=false;
+async function loadPushNotify(){
+  const el=$('#pushNotify'); if(!el) return;
+  const r=await api('/api/push/log');
+  const ns=r.notifications||[];
+  el.innerHTML=`<button class="sg-expand-btn" onclick="notifyOpen=!notifyOpen;loadPushNotify()">${notifyOpen?'▾':'▸'} 查看通知（${ns.length} 条）</button>
+    ${notifyOpen?`<div class="sg-events">${ns.slice(0,20).map(n=>`<div class="sg-event-row"><time>${esc(String(n.sent_at||'').slice(5,16))}</time><b>${esc(n.title||'')}</b><span>${esc(n.channel||'')} ${n.ok?'<span class="pill green">成功</span>':'<span class="pill red">失败</span>'} ${esc(n.error||'')}</span></div>`).join('')||'<div class="empty compact">暂无通知</div>'}</div>`:''}
+    <div class="tiny muted" style="padding:6px 14px">运行触位汇总、推送测试都会记录在此；渠道在总览「推送配置」。</div>`;
+}
+async function ask(preset){
+  const inp=$('#chatInput');
+  const q=(preset||(inp&&inp.value)||'').trim();
+  if(!q) return;
+  if(inp) inp.value='';
+  const log=$('#chatLog');
+  log.insertAdjacentHTML('beforeend',`<div class="msg user"><div class="avatar2">我</div><div class="bubble2">${esc(q)}</div></div>`);
+  log.insertAdjacentHTML('beforeend',`<div class="msg ai" id="pendingMsg"><div class="avatar2">SG</div><div class="bubble2" style="color:#9aa2a9">思考中…</div></div>`);
+  log.scrollTop=log.scrollHeight;
+  const r=await api('/api/assistant/chat',{q});
+  const pm=$('#pendingMsg');
+  if(pm) pm.remove();
+  log.insertAdjacentHTML('beforeend',`<div class="msg ai"><div class="avatar2">SG</div><div class="bubble2">${esc(r.reply||'（无回答）')}${r.topic?`<div style="margin-top:7px;color:#858c93;font-size:10px">主题：${esc(r.topic)}</div>`:''}</div></div>`);
+  log.scrollTop=log.scrollHeight;
+}
+
+/* ================= 观察名单 ================= */
+async function pageWatch(){
+  pageShell('观察名单','',`<div id="watchBody"><div class="empty">读取中…</div></div>`);
+  const r=await api('/api/watch');
+  renderWatch(r);
+}
+function renderWatch(r){
+  const items=r.items||[];
+  $('#watchBody').innerHTML=panel(`观察条目（${items.length}）<span class="pill" style="margin-left:8px">区间关注区待接入</span>`,`
+    <div class="button-row" style="padding:12px 14px 0"><button class="primary-btn small" onclick="openWatchEdit(null)">＋ 加入观察</button></div>
+    <div class="table-wrap"><table><tr><th>股票</th><th>现价</th><th>涨跌</th><th>目标买入</th><th>止损</th><th>策略</th><th>理由</th><th>操作</th></tr>
+    ${items.map(x=>`<tr>
+      <td><b>${x.code}</b><small>${esc(x.name||'')}</small></td>
+      <td>${x.latest_close??'—'}</td>
+      <td class="${(x.change_pct??0)>=0?'up':'down'}">${x.change_pct!=null?x.change_pct.toFixed(2)+'%':'—'}</td>
+      <td>${x.target_buy??'未提供'}</td><td>${x.stop_loss??'未提供'}</td>
+      <td class="cell-wrap">${esc(x.strategy||'未提供')}</td><td class="cell-wrap">${esc(x.reason||'未提供')}</td>
+      <td><div class="button-row"><button class="mini-outline" onclick="openWatchEdit('${x.code}')">编辑</button><button class="mini-outline" onclick="delWatch('${x.code}')">删除</button></div></td>
+    </tr>`).join('')||'<tr><td colspan="8"><div class="empty compact">观察名单为空</div></td></tr>'}</table></div>
+    <div class="panel-note">删除只移除观察条目；与持仓、正式计划互不干涉。刷新与重启从 watch.json 读回。</div>`);
+}
+async function openWatchEdit(code){
+  const cur=code?(await api('/api/watch')).items.find(x=>x.code===code):null;
+  modal(code?('编辑观察条目 '+code):'加入观察',`
+    <div class="form-grid">
+      <label>股票代码<input id="wCode" value="${cur?cur.code:''}" ${cur?'disabled':''} placeholder="6 位代码"></label>
+      <label>名称<input id="wName" value="${cur?esc(cur.name||''):''}"></label>
+      <label>目标买入价<input id="wTarget" value="${cur&&cur.target_buy!=null?cur.target_buy:''}"></label>
+      <label>止损价<input id="wStop" value="${cur&&cur.stop_loss!=null?cur.stop_loss:''}"></label>
+      <label>策略<input id="wStrategy" value="${cur?esc(cur.strategy||''):''}"></label>
+      <label>理由<input id="wReason" value="${cur?esc(cur.reason||''):''}"></label>
+    </div>`,
+    `<button class="outline-btn" onclick="closeModal()">取消</button><button class="primary-btn small" onclick="saveWatch()">保存</button>`);
+}
+async function saveWatch(){
+  const code=$('#wCode').value.trim();
+  const num=v=>{const n=Number(v);return v.trim()===''||!isFinite(n)?null:n;};
+  const r=await api('/api/watch',{code,name:$('#wName').value,target_buy:num($('#wTarget').value),stop_loss:num($('#wStop').value),strategy:$('#wStrategy').value,reason:$('#wReason').value});
+  if(!r.ok){toast('保存失败：'+r.error,true);return;}
+  toast('已保存观察条目 '+r.saved);
+  closeModal(); pageWatch();
+}
+async function delWatch(code){
+  if(!confirm('删除观察条目 '+code+'？')) return;
+  const resp=await fetch('/api/watch?code='+encodeURIComponent(code),{method:'DELETE'}).then(x=>x.json());
+  toast(resp.ok?('已删除 '+code):'删除失败');
+  pageWatch();
+}
+
+/* ================= Corvus 信息（生产版归档只读） ================= */
+async function pageCorvus(){
+  pageShell('Corvus 信息','',`<div id="corvusBody"><div class="empty">读取中…</div></div>`);
+  const g=await api('/api/prod/global_quotes');
+  const B=$('#corvusBody');
+  if(!g.ok){
+    B.innerHTML=panel('全球市场（统一总览）',`<div class="empty compact">${esc(g.error||'归档未找到')}；完整版不虚构行情。</div>`)
+      +spacing+panel('近期公告 / 市场快讯','<div class="empty compact">生产版在线采集，完整版本地无归档，不展示模拟内容。</div>');
+    return;
+  }
+  const tone=v=>(v??0)>=0?'up':'down';
+  B.innerHTML=panel(`全球市场（统一总览）<span class="pill" style="margin-left:8px">可用于决策（snapshot）</span>`,`
+    <div class="context-list"><span>快照生成 <b>${g.generated_at||'未提供'}</b></span><span>品种数 <b>${g.items.length}</b></span><span>来源<b class="cell-wrap">${esc(g.note||'')}</b></span></div>
+    <div class="table-wrap"><table><tr><th>品种</th><th>状态</th><th>数值</th><th>变动</th><th>口径</th><th>市场时区</th><th>报价时间</th></tr>
+    ${g.items.map(it=>`<tr><td><b>${esc(it.variety)}</b><div class="tiny muted">${esc(it.category||'')}</div></td>
+      <td><span class="pill green">有效</span></td>
+      <td><b>${it.value} ${esc(it.unit||'')}</b></td>
+      <td class="${tone(it.change)}">${it.change!=null?(it.change+' '+esc(it.change_unit||'')):'—'}</td>
+      <td>${esc(it.basis||'')}</td><td>${esc(it.market||'')} · ${esc(it.timezone||'')}</td>
+      <td class="tiny muted">${esc(it.quote_time||'')}<div>${esc(it.quote_flag||'')}</div></td></tr>`).join('')}
+    </table></div>`)
+  +spacing
+  +panel('近期公告（近 30 天）','<div class="empty compact">生产版在线采集（公告资料库），完整版本地无归档，不展示模拟内容；持仓页的相关公告同理。</div>')
+  +spacing
+  +panel('近期市场快讯','<div class="empty compact">生产版在线采集（财联社快讯），完整版本地无归档；总览页的「Corvus 近期快讯」面板同样如实标注。</div>');
+}
+
+/* ================= 路由 ================= */
+const PAGES={overview:pageOverview,plan:pagePlan,monitor:pageMonitor,positions:pagePositions,watch:pageWatch,strategy:pageStrategy,review:pageReview,assistant:pageAssistant,corvus:pageCorvus};
+document.querySelectorAll('#mainNav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#mainNav button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  PAGES[b.dataset.p]().catch(e=>{V.innerHTML=`<div class="error-view"><b>页面载入失败</b><span>${esc(String(e))}</span></div>`;});
+});
+async function boot(){
+  const f=await api('/api/factors'); UI=f.ui;
+  const ts=await api('/api/tarot_status').catch(()=>({available:false}));
+  TAROT=ts.available;
+  await pageOverview();
+}
+boot().catch(e=>{V.innerHTML=`<div class="error-view"><b>载入失败</b><span>${esc(String(e))}（按 Ctrl+F5 强制刷新）</span></div>`;});
+</script>
+</body>
+</html>
