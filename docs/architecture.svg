@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" font-family="Manrope,'Noto Sans SC',sans-serif">
+  <rect width="1200" height="720" fill="#08090a"/>
+  <text x="60" y="58" fill="#ff9d19" font-size="26" font-weight="800">Stargazer 完整版 · 架构</text>
+  <text x="60" y="84" fill="#858c93" font-size="13">判断与表达分离：垂直模型下判断，LLM 只做调度与表达，交易全程模拟</text>
+
+  <!-- 层标题 -->
+  <text x="60" y="140" fill="#c58631" font-size="12" letter-spacing="2">交互层</text>
+  <text x="60" y="262" fill="#c58631" font-size="12" letter-spacing="2">调度层（LLM · 不替代模型下判断）</text>
+  <text x="60" y="392" fill="#c58631" font-size="12" letter-spacing="2">判断层（自研垂直模型）</text>
+  <text x="60" y="522" fill="#c58631" font-size="12" letter-spacing="2">规则引擎与数据层（本地闭环）</text>
+
+  <!-- 交互层 -->
+  <g font-size="13" fill="#e7e9ec" text-anchor="middle">
+    <rect x="60" y="152" width="250" height="64" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="185" y="180">Web 工作台（9 页）</text><text x="185" y="200" fill="#858c93" font-size="11">总览/计划/监控/持仓/复盘…</text>
+    <rect x="340" y="152" width="250" height="64" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="465" y="180">Stargazer 助手</text><text x="465" y="200" fill="#858c93" font-size="11">对话问答 · 推送通知</text>
+    <rect x="620" y="152" width="250" height="64" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="745" y="180">钉钉机器人 / Pushplus</text><text x="745" y="200" fill="#858c93" font-size="11">提醒推送 · 反向调用</text>
+    <rect x="900" y="152" width="240" height="64" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="1020" y="180">MCP Client</text><text x="1020" y="200" fill="#858c93" font-size="11">Kimi / Claude 等 Agent</text>
+  </g>
+
+  <!-- 调度层 -->
+  <g font-size="13" fill="#e7e9ec" text-anchor="middle">
+    <rect x="60" y="274" width="530" height="70" rx="6" fill="#14181a" stroke="#ff8500" stroke-opacity="0.55"/>
+    <text x="325" y="302">LLM 调度与表达</text>
+    <text x="325" y="324" fill="#858c93" font-size="11">意图识别 · 工具编排 · 自然语言回复（不产生交易判断）</text>
+    <rect x="620" y="274" width="250" height="70" rx="6" fill="#14181a" stroke="#292d30"/>
+    <text x="745" y="302">function calling ×24</text><text x="745" y="324" fill="#858c93" font-size="11">桌面助手工具集</text>
+    <rect x="900" y="274" width="240" height="70" rx="6" fill="#14181a" stroke="#292d30"/>
+    <text x="1020" y="302">MCP SDK 工具 ×11</text><text x="1020" y="324" fill="#858c93" font-size="11">stdio · 本地安全</text>
+  </g>
+
+  <!-- 判断层 -->
+  <g font-size="13" fill="#e7e9ec" text-anchor="middle">
+    <rect x="60" y="404" width="340" height="70" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="230" y="432">选股模型（Tarot）</text><text x="230" y="454" fill="#858c93" font-size="11">候选排序 · 计划草案</text>
+    <rect x="430" y="404" width="340" height="70" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="600" y="432">信息模型（Corvus）</text><text x="600" y="454" fill="#858c93" font-size="11">公告/快讯采集与归档</text>
+    <rect x="800" y="404" width="340" height="70" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="970" y="432">风险模型（Pyxis）</text><text x="970" y="454" fill="#858c93" font-size="11">指数关键位 · 风险研判</text>
+  </g>
+
+  <!-- 规则与数据层 -->
+  <g font-size="13" fill="#e7e9ec" text-anchor="middle">
+    <rect x="60" y="534" width="340" height="88" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="230" y="562">规则引擎 rules_lab</text>
+    <text x="230" y="584" fill="#858c93" font-size="11">契约校验 · 因子注册 · 黄金观察区</text>
+    <text x="230" y="602" fill="#858c93" font-size="11">选股 / 监控 / 回放 / 复盘 同一套计算</text>
+    <rect x="430" y="534" width="340" height="88" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="600" y="562">本地行情底座</text>
+    <text x="600" y="584" fill="#858c93" font-size="11">通达信日线/5分钟K · 快照指纹</text>
+    <text x="600" y="602" fill="#858c93" font-size="11">扫描 / 导入 / 补缺 · 失败回滚</text>
+    <rect x="800" y="534" width="340" height="88" rx="6" fill="#111315" stroke="#292d30"/>
+    <text x="970" y="562">模拟执行</text>
+    <text x="970" y="584" fill="#858c93" font-size="11">回测（费用/滑点/T+1）· 模拟持仓</text>
+    <text x="970" y="602" fill="#858c93" font-size="11">本地收件箱 · 不连接实盘</text>
+  </g>
+
+  <!-- 箭头 -->
+  <g stroke="#4a5055" stroke-width="1.4" fill="none" marker-end="url(#arr)">
+    <line x1="325" y1="216" x2="325" y2="270"/>
+    <line x1="745" y1="216" x2="745" y2="270"/>
+    <line x1="1020" y1="216" x2="1020" y2="270"/>
+    <line x1="230" y1="344" x2="230" y2="400"/>
+    <line x1="600" y1="344" x2="600" y2="400"/>
+    <line x1="970" y1="344" x2="970" y2="400"/>
+    <line x1="230" y1="474" x2="230" y2="530"/>
+    <line x1="600" y1="474" x2="600" y2="530"/>
+    <line x1="970" y1="474" x2="970" y2="530"/>
+  </g>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a5055"/>
+    </marker>
+  </defs>
+</svg>
