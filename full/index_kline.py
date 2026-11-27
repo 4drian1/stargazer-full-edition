@@ -8,6 +8,7 @@
 """
 from __future__ import annotations
 import struct
+from datetime import datetime
 from pathlib import Path
 
 STEMS = {'SSE': 'sh999999', 'SZSE': 'sz399001', 'CYB': 'sz399006'}
@@ -41,3 +42,31 @@ def index_daily(symbol, last_n=120, vipdoc_root=None):
         bars.append(dict(ts=d, open=round(o, 2), high=round(h, 2), low=round(l, 2),
                          close=round(c, 2), volume=int(v)))
     return bars[-last_n:], dropped
+
+
+def index_minute(symbol, last_n=120, vipdoc_root=None, now=None):
+    from full.vipdoc_reader import vipdoc_root as default_root
+    from full.strong_pool import ZONE
+    from tdx_native_reader_v1 import grid_5min, parse_lc5, row_values_ok
+
+    stem = STEMS.get(symbol)
+    if not stem:
+        raise ValueError('BAD_INDEX_SYMBOL')
+    root = Path(vipdoc_root) if vipdoc_root else default_root()
+    path = root/stem[:2]/'fzline'/(stem+'.lc5')
+    if not path.is_file():
+        raise ValueError('INDEX_MINUTE_MISSING:'+str(path))
+    cutoff = int((now or datetime.now(ZONE)).strftime('%Y%m%d%H%M%S'))
+    grouped = {}
+    for row in parse_lc5(path.read_bytes()):
+        if row['ts'] <= cutoff:
+            grouped.setdefault(row['day'],[]).append(row)
+    bars, dropped = [], 0
+    for day, rows in sorted(grouped.items())[-4:]:
+        expected = [ts for ts in grid_5min(day) if ts<=cutoff]
+        if [r['ts'] for r in rows] != expected or not all(row_values_ok(r) for r in rows):
+            dropped += len(rows)
+            continue
+        bars.extend(dict(ts=r['ts'],open=r['open'],high=r['high'],low=r['low'],close=r['close'],
+                         volume=r['raw_volume']) for r in rows)
+    return bars[-last_n:],dropped

@@ -23,7 +23,7 @@ def backtest_run(run_dir, hold_days=(1, 3, 5), fee=0.00025, stamp_tax=0.0005,
     ev_files = sorted((run_dir / 'events').glob('*.json'))
     if not ev_files:
         return dict(ok=False, error='NO_EVENTS')
-    snap = open_snapshot()
+    snap = open_snapshot(daily_only=True)
     day = int(ev_files[-1].stem)
     events = json.loads(ev_files[-1].read_text(encoding='utf-8'))['events']
     fills = json.loads((run_dir / 'freeze' / ('%s.json' % day)).read_text(encoding='utf-8'))

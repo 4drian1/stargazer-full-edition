@@ -19,16 +19,32 @@ import market_data_config_v1 as md_cfg  # noqa: E402
 
 STOCK_PREFIXES = ('sh60', 'sh68', 'sz00', 'sz30', 'bj')
 
-import market_data_config_v1 as md_cfg  # noqa: E402
-
-
 def vipdoc_root() -> Path:
+    if not os.environ.get('STARGAZER_MARKET_DATA'):
+        import json
+        config = Path(__file__).resolve().parents[1]/'data/source_config.json'
+        try:
+            saved = json.loads(config.read_bytes()).get('tdx_path')
+            if saved:
+                return Path(saved).expanduser()
+        except (OSError, ValueError):
+            pass
     return md_cfg.vipdoc_root()
 
 
 def calendar_days() -> list[int]:
-    import tdx_daily_source_v2 as td
-    return td.calendar_days()
+    import importlib.util
+    import json
+    package = importlib.util.find_spec('akshare')
+    if package and package.origin:
+        file = Path(package.origin).parent/'file_fold/calendar.json'
+        if file.is_file():
+            return sorted(set(map(int,json.loads(file.read_bytes()))))
+    installed = _DESKTOP.parent/'_dev_venv/Lib/site-packages/akshare/file_fold/calendar.json'
+    if installed.is_file():
+        return sorted(set(map(int,json.loads(installed.read_bytes()))))
+    from rules_lab.paths import SNAPSHOT
+    return sorted(set(map(int,json.loads((SNAPSHOT/'calendar.json').read_bytes())['days'])))
 
 
 def stock_stems() -> list[str]:
@@ -49,7 +65,7 @@ def stock_stems() -> list[str]:
 def daily_rows(stem: str, last_n: int, end_day: int) -> list[dict]:
     """返回 end_day 往前 last_n 个交易日的日线行（含 end_day）。"""
     import tdx_daily_source_v2 as td
-    path = md_cfg.vipdoc_root() / stem[:2] / 'lday' / (stem + '.day')
+    path = vipdoc_root() / stem[:2] / 'lday' / (stem + '.day')
     frame, _meta = td.read_day(path, int(end_day))
     frame = frame.tail(last_n)
     rows = []

@@ -18,7 +18,7 @@ sys.path.insert(0, str(FE))                     # full_edition 优先于 v1.1
 
 import rules_lab.replay as replay
 import rules_lab.rules as rules
-from rules_lab.paths import REPORTS, ensure_dirs, read_json
+from rules_lab.paths import REPORTS, SNAPSHOT, ensure_dirs, read_json
 from rules_lab.selection import run_selection
 from rules_lab.snapshot import open_snapshot
 
@@ -47,7 +47,6 @@ def _verify_snapshot():
     """正常入口的快照完整性校验：manifest 指纹自洽 + 数据文件哈希匹配。"""
     import gzip
     import hashlib
-    from rules_lab.paths import SNAPSHOT
     mp = SNAPSHOT / 'snapshot_manifest.json'
     if not mp.is_file():
         raise SystemExit('SNAPSHOT_MISSING:' + str(mp))
@@ -85,10 +84,12 @@ def cmd_run(a):
         rep = replay.run_replay(a.rule, days=a.days or None, cutoff=a.cutoff,
                                 restart_check=not a.no_restart_check,
                                 fail_on=a.fail_on or None, fresh=not a.resume,
-                                crash_points=a.crash_at or None)
+                                crash_points=a.crash_at or None,require_minutes=a.require_minutes)
     except Exception as exc:
-        print(json.dumps(dict(ok=False, error='%s:%s' % (type(exc).__name__, str(exc))[:300]),
-                         ensure_ascii=False))
+        failed = dict(ok=False,error=('%s:%s' % (type(exc).__name__,exc))[:300])
+        if a.result is not None:
+            a.result.update(failed)
+        print(json.dumps(failed,ensure_ascii=False))
         return 1
     integrity = rep.get('integrity') or {}
     if getattr(a, 'with_tarot_shadow', None):
@@ -101,7 +102,7 @@ def cmd_run(a):
             for d in (rep.get('days') or []):
                 freeze_p = run_dir / 'freeze' / ('%s.json' % d)
                 if freeze_p.is_file():
-                    shadow = run_shadow(str(freeze_p), str(FE / 'snapshot'),
+                    shadow = run_shadow(str(freeze_p), str(SNAPSHOT),
                                         run_dir / 'out' / ('tarot_shadow_%s.json' % d))
                     integrity['tarot_shadow'] = dict(
                         day=d, candidates=shadow['summary']['candidates'],
@@ -111,13 +112,15 @@ def cmd_run(a):
                         source='tarot_shadow/local-frozen-weights')
         except Exception as exc:
             integrity['tarot_shadow'] = dict(error='%s:%s' % (type(exc).__name__, str(exc))[:200])
-    print(json.dumps(dict(ok=True, run_id=rep.get('run_id'), rule_ref=rep.get('rule_ref'),
+    summary = dict(ok=True, run_id=rep.get('run_id'), rule_ref=rep.get('rule_ref'),
                           days=rep.get('days'), day_notes=rep.get('day_notes'),
                           inbox_counts=integrity.get('inbox_counts'),
                           tarot_shadow=integrity.get('tarot_shadow'),
                           review_summary=integrity.get('review_summary'),
-                          files=len((rep.get('manifest') or {}).get('files', {}))),
-                     ensure_ascii=False)[:1800])
+                          files=len((rep.get('manifest') or {}).get('files', {})))
+    if a.result is not None:
+        a.result.update(summary)
+    print(json.dumps(summary, ensure_ascii=False)[:1800])
     return 0
 
 
@@ -262,7 +265,7 @@ def cmd_serve(a):
     return 0
 
 
-def main(argv=None):
+def main(argv=None, *, result=None):
     ap = argparse.ArgumentParser(prog='full')
     sub = ap.add_subparsers(dest='cmd', required=True)
     p = sub.add_parser('run', help='全链回放：选股→冻结→监控→复盘')
@@ -279,6 +282,7 @@ def main(argv=None):
     p.add_argument('--run-id', default=None, help='指定运行（redo-monitor 必填）')
     p.add_argument('--with-tarot-shadow', action='store_true',
                    help='影子开关（默认关）：对冻结候选追加 Tarot 评分与来源，不参与入池')
+    p.add_argument('--require-minutes',action='store_true',help='缺整日分钟归档时返回失败')
     p.set_defaults(fn=cmd_run)
     p = sub.add_parser('select')
     p.add_argument('--rule', default='strong_pullback@v1')
@@ -303,6 +307,7 @@ def main(argv=None):
     p = sub.add_parser('serve')
     p.set_defaults(fn=cmd_serve)
     a = ap.parse_args(argv)
+    a.result = result
     ensure_dirs()
     return a.fn(a)
 

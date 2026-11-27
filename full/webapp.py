@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from threading import Lock
 
 FE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(FE.parent))
@@ -17,12 +18,36 @@ sys.path.insert(0, str(FE))
 
 from rules_lab import rules  # noqa: E402
 from rules_lab.factors import factor_catalog  # noqa: E402
-from rules_lab.paths import ensure_dirs  # noqa: E402
+from rules_lab.paths import SNAPSHOT, ensure_dirs  # noqa: E402
 from rules_lab.selection import run_selection  # noqa: E402
 from rules_lab.snapshot import open_snapshot  # noqa: E402
 from rules_lab.state_store import RunContext  # noqa: E402
+from full.agent_lock import SnapshotLock  # noqa: E402
 
 BASE_RULE = 'lvp_golden'  # 不带版本号：按规则索引解析最新已发布版本（v1/v2…），包内外都有效
+_PLAN_LOCK = Lock()
+_DATA_LOCK = SnapshotLock()
+
+
+def check_agent_binding(body):
+    binding = body.get('_agent_binding')
+    if not binding:
+        return
+    if not isinstance(binding,dict) or binding.get('snapshot') != snapshot_manifest()['snapshot_fingerprint']:
+        raise ValueError('STALE_SNAPSHOT')
+    if binding.get('rule_sha') and binding['rule_sha'] != rules.get(body['rule'])['sha256']:
+        raise ValueError('STALE_RULE')
+
+
+def _run_directory(root, ref=None):
+    if ref is not None:
+        import re
+        if not isinstance(ref,str) or not re.fullmatch('[a-f0-9]{16}',ref):
+            raise ValueError('INVALID_RUN_ID')
+        path = root/ref
+        return path if (path/'run_manifest.json').is_file() else None
+    path = max(root.glob('*/run_manifest.json'),key=lambda p:p.stat().st_mtime,default=None)
+    return path.parent if path else None
 
 # 「选周期 → 选指标 → 写条件」的界面规格：分类、中文名、句式与口径说明。
 # 字段 ID/阈值/版本仍按原口径读写；这里只影响展示与选择。
@@ -220,7 +245,7 @@ def source_config():
 
 
 def snapshot_manifest():
-    return json.loads((FE / 'snapshot' / 'snapshot_manifest.json').read_text(encoding='utf-8'))
+    return json.loads((SNAPSHOT / 'snapshot_manifest.json').read_text(encoding='utf-8'))
 
 
 def default_p_day():
@@ -233,13 +258,13 @@ def default_monitor_day():
 
 def recent_trading_days(n=5, end=None):
     """最近 n 个不晚于 end（默认 P 日）的交易日，旧→新。"""
-    days = json.loads((FE / 'snapshot' / 'calendar.json').read_text(encoding='utf-8'))['days']
+    days = json.loads((SNAPSHOT / 'calendar.json').read_text(encoding='utf-8'))['days']
     end = int(end or default_p_day() or 0)
     elig = [int(d) for d in days if int(d) <= end]
     return elig[-n:]
 
 
-def create_app():
+def create_app(sync_daily=None):
     from flask import Flask, jsonify, request, Response
     app = Flask('full_edition_web', static_folder=str(FE / 'full' / 'static'),
                 static_url_path='/static')
@@ -388,27 +413,26 @@ def create_app():
         body = request.get_json(force=True) or {}
         ref = body.get('rule') or BASE_RULE
         days = body.get('days') or [default_monitor_day()]
-        with_shadow = bool(body.get('with_tarot_shadow')) or model_switch()[1].get('selection', False)
+        with_shadow = bool(body.get('with_tarot_shadow', model_switch()[1].get('selection', False)))
         import full.cli as cli
-        argv = ['run', '--rule', ref, '--days'] + [str(int(d)) for d in days]
-        if with_shadow:
-            argv.append('--with-tarot-shadow')
-        rc = cli.main(argv)
-        push_note = None
-        if rc == 0:
-            from rules_lab.paths import STATE
-            rs = sorted((STATE / 'runs').glob('*/run_manifest.json'), key=lambda x: x.stat().st_mtime)
-            if rs:
-                from full.pushplus import build_summary
-                from full.push_config import send_summary, load as push_load
-                ch = push_load()['channel']
-                if ch == 'none':
-                    push_note = '推送未配置（总览 → 推送配置）'
-                else:
-                    pr = send_summary(*build_summary(rs[-1].parent))
-                    push_note = ('已推送（%s）' % ch) if pr.get('ok') else \
-                        '推送未发：%s' % pr.get('reason', pr.get('resp', ''))
-        return jsonify(dict(ok=rc == 0, push=push_note))
+        if not _DATA_LOCK.acquire(blocking=False):
+            return jsonify(dict(ok=False,error='行情快照正在更新或使用')), 409
+        try:
+            check_agent_binding(body)
+            argv = ['run', '--rule', ref, '--days'] + [str(int(d)) for d in days]
+            if body.get('_agent_binding'):
+                argv.append('--require-minutes')
+            if with_shadow:
+                argv.append('--with-tarot-shadow')
+            result = {}
+            rc = cli.main(argv,result=result)
+        except (TypeError, ValueError, OSError, SystemExit) as exc:
+            return jsonify(dict(ok=False,error=str(exc)[:220],mode='REPLAY')), 409
+        finally:
+            _DATA_LOCK.release()
+        return jsonify(dict(ok=rc==0,mode='REPLAY',run_id=result.get('run_id'),
+                            error=result.get('error'),
+                            push='历史回放使用本地收件箱' if rc==0 else None))
 
 
     @app.route('/api/model_switch', methods=['GET', 'POST'])
@@ -416,11 +440,11 @@ def create_app():
         p, doc = model_switch()
         if request.method == 'POST':
             body = request.get_json(force=True) or {}
-            for k in ('selection', 'risk'):
-                if k in body:
-                    doc[k] = bool(body[k])
+            if body.get('risk'):
+                return jsonify(dict(ok=False,error='完整版风险模型入口尚未接入')), 409
+            doc.update(selection=bool(body.get('selection', doc.get('selection'))),risk=False)
             p.write_text(json.dumps(doc, ensure_ascii=False), encoding='utf-8')
-        return jsonify(doc)
+        return jsonify(dict(doc,risk=False,risk_available=False))
 
     @app.route('/api/source/config', methods=['GET', 'POST'])
     def api_source_config():
@@ -429,11 +453,15 @@ def create_app():
             body = request.get_json(force=True) or {}
             if body.get('source') in ('tdx', 'stockdb'):
                 doc['source'] = body['source']
+            if body.get('tdx_path'):
+                root = Path(str(body['tdx_path']).strip()).expanduser()
+                if not any((root/venue/'lday').is_dir() for venue in ('sh','sz','bj')):
+                    return jsonify(dict(ok=False,error='请选择含 sh/lday 或 sz/lday 的通达信 vipdoc 目录')), 400
             for k in ('tdx_path', 'stockdb_base'):
                 if body.get(k):
                     doc[k] = str(body[k]).strip()
             p.write_text(json.dumps(doc, ensure_ascii=False), encoding='utf-8')
-        return jsonify(doc)
+        return jsonify(dict(doc,active_source='tdx',stockdb_research_only=True))
 
     @app.route('/api/source/diagnostics')
     def api_source_diagnostics():
@@ -455,7 +483,7 @@ def create_app():
                 _sys.path.insert(0, root)
             from _stockdb import make_opener, http_get_raw, recs_of
             t0 = time.time()
-            recs = recs_of(http_get_raw(make_opener(), doc.get('stockdb_base') or 'http://127.0.0.1:7899', '日k', '300118', '*'))
+            recs = recs_of(http_get_raw(make_opener(), doc.get('stockdb_base') or 'http://127.0.0.1:7899', '日k', '300118', '*', timeout=3))
             dates = sorted({int(r['date']) for r in recs if r.get('date')})
             out['stockdb'].update(ok=True, ms=int((time.time() - t0) * 1000),
                                   rows=len(recs), first=dates[0] if dates else None,
@@ -474,7 +502,7 @@ def create_app():
         import time as _t
         td = FE / 'data' / 'tasks'
         td.mkdir(parents=True, exist_ok=True)
-        tid = 'task_%s' % _t.strftime('%Y%m%d_%H%M%S')
+        tid = 'task_%s_%d' % (_t.strftime('%Y%m%d_%H%M%S'),_t.time_ns())
         rec = dict(task_id=tid, name=name, started_at=_t.strftime('%H:%M:%S'),
                    finished_at=_t.strftime('%H:%M:%S'), detail=detail)
         (td / (tid + '.json')).write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding='utf-8')
@@ -490,18 +518,29 @@ def create_app():
                     out.append(json.loads(f.read_text(encoding='utf-8')))
                 except Exception:
                     pass
+        from full.mcp_tools import recent_tasks
+        from datetime import datetime
+        for job in recent_tasks():
+            out.append(dict(task_id=job['task_id'],name=job['action'],
+                            started_at=datetime.fromtimestamp(job['created_at']).isoformat(timespec='seconds'),
+                            detail={'status':job['status']}))
         return jsonify(dict(tasks=out))
 
     @app.route('/api/research/mine', methods=['POST'])
     def api_mine():
         body = request.get_json(force=True) or {}
         from full.mining import mine
+        if not _DATA_LOCK.acquire(blocking=False):
+            return jsonify(dict(ok=False,error='行情快照正在更新或使用')),409
         try:
+            check_agent_binding(body)
             rep = mine(body.get('rule') or BASE_RULE,
                        p_days=[int(d) for d in (body.get('days') or recent_trading_days(5))],
                        purge=int(body.get('purge') or 1))
         except Exception as exc:
             return jsonify(dict(ok=False, error='%s:%s' % (type(exc).__name__, str(exc))[:160]))
+        finally:
+            _DATA_LOCK.release()
         return jsonify(rep)
 
     @app.route('/api/state')
@@ -514,12 +553,12 @@ def create_app():
             if rs:
                 run_id = rs[-1].parents[1].name
                 n = sum(1 for _ in rs[-1].open(encoding='utf-8'))
-        man = json.loads((FE / 'snapshot' / 'snapshot_manifest.json').read_text(encoding='utf-8'))
+        man = json.loads((SNAPSHOT / 'snapshot_manifest.json').read_text(encoding='utf-8'))
         # 数据更新至哪天（快照日线最大日期，抽样探测）
         data_through = None
         try:
             import gzip
-            d = json.loads(gzip.decompress((FE / 'snapshot' / 'daily.json.gz').read_bytes()))
+            d = json.loads(gzip.decompress((SNAPSHOT / 'daily.json.gz').read_bytes()))
             di = d['columns'].index('date')
             data_through = max(rows[-1][di] for rows in d['codes'].values() if rows)
         except Exception:
@@ -531,10 +570,10 @@ def create_app():
                             data_through=data_through,
                             recent_days=recent_trading_days(7),
                             calendar_through=str(json.loads(
-                                (FE / 'snapshot' / 'calendar.json').read_text(encoding='utf-8'))
+                                (SNAPSHOT / 'calendar.json').read_text(encoding='utf-8'))
                                 ['days'][-1]),
-                            model_switch=model_switch()[1],
-                            source=source_config()[1]))
+                            model_switch=dict(model_switch()[1],risk=False,risk_available=False),
+                            source=dict(source_config()[1],active_source='tdx',stockdb_research_only=True)))
 
     @app.route('/api/last_run')
     def api_last_run():
@@ -576,7 +615,7 @@ def create_app():
         if not src.is_dir():
             return jsonify(dict(ok=False, error='IMPORT_DIR_MISSING:' + str(src)))
         from full.data_center import scan, rule_window
-        rep = scan(src, FE / 'snapshot')
+        rep = scan(src, SNAPSHOT)
         rep['rule_check_window_days'] = rule_window(body.get('rule') or BASE_RULE)
         rep['task_id'] = _task_log('scan', dict(summary=rep.get('summary')))
         return jsonify(dict(ok=True, **rep))
@@ -597,15 +636,17 @@ def create_app():
         from full.data_center import strategy_runnable_days
         import json as _j
         body = request.get_json(silent=True) or {}
-        return jsonify(strategy_runnable_days(FE / 'snapshot', body.get('rule') or BASE_RULE))
+        return jsonify(strategy_runnable_days(SNAPSHOT, body.get('rule') or BASE_RULE))
 
     @app.route('/api/review')
     def api_review():
-        from rules_lab.paths import STATE
-        rs = sorted((STATE / 'runs').glob('*/run_manifest.json'), key=lambda x: x.stat().st_mtime)
-        if not rs:
+        from rules_lab.paths import run_root
+        try:
+            run_dir = _run_directory(run_root(),request.args.get('run_id'))
+        except ValueError as exc:
+            return jsonify(dict(ok=False,error=str(exc))),400
+        if not run_dir:
             return jsonify(dict(ok=False, error='NO_RUN'))
-        run_dir = rs[-1].parent
         out = dict(ok=True, run_id=run_dir.name)
         sp = run_dir / 'out' / 'review_summary.json'
         if sp.is_file():
@@ -623,12 +664,24 @@ def create_app():
     @app.route('/api/backtest/run', methods=['POST'])
     def api_backtest():
         body = request.get_json(force=True) or {}
-        from rules_lab.paths import STATE
-        rs = sorted((STATE / 'runs').glob('*/run_manifest.json'), key=lambda x: x.stat().st_mtime)
-        if not rs:
-            return jsonify(dict(ok=False, error='NO_RUN'))
+        from rules_lab.paths import run_root,sha256_file
         from full.backtest import backtest_run
-        rep = backtest_run(rs[-1].parent)
+        if not _DATA_LOCK.acquire(blocking=False):
+            return jsonify(dict(ok=False,error='行情快照正在更新或使用')),409
+        try:
+            check_agent_binding(body)
+            run_dir = _run_directory(run_root(),body.get('run_id'))
+            if not run_dir:
+                return jsonify(dict(ok=False,error='NO_RUN')),404
+            stamp = (body.get('_agent_binding') or {}).get('run_sha')
+            if stamp and stamp != sha256_file(run_dir/'run_manifest.json'):
+                return jsonify(dict(ok=False,error='STALE_RUN')),409
+            rep = backtest_run(run_dir)
+            rep['run_id'] = run_dir.name
+        except ValueError as exc:
+            return jsonify(dict(ok=False,error=str(exc))),409
+        finally:
+            _DATA_LOCK.release()
         return jsonify(rep)
 
     @app.route('/api/research/evaluate', methods=['POST'])
@@ -656,7 +709,15 @@ def create_app():
         body = request.get_json(force=True) or {}
         from full.gap_fill import fill_gaps
         days = body.get('days') or None
-        rep = fill_gaps(FE / 'snapshot', days=[int(d) for d in days] if days else None)
+        if not _DATA_LOCK.acquire(blocking=False):
+            return jsonify(dict(ok=False,error='行情快照正在更新或使用')), 409
+        try:
+            check_agent_binding(body)
+            rep = fill_gaps(SNAPSHOT, days=[int(d) for d in days] if days else None)
+        except ValueError as exc:
+            return jsonify(dict(ok=False,error=str(exc))),409
+        finally:
+            _DATA_LOCK.release()
         rep['task_id'] = _task_log('fill_gaps', dict(status=rep.get('status'), filled=rep.get('filled')))
         return jsonify(dict(ok=rep['status'] in ('PUBLISHED', 'NO_GAPS'), **rep))
 
@@ -665,7 +726,16 @@ def create_app():
         body = request.get_json(force=True) or {}
         src = Path(body.get('src') or (FE / 'import_dir'))
         from full.data_center import import_daily
-        rep = import_daily(src, FE / 'snapshot', body.get('rule') or BASE_RULE)
+        if not _DATA_LOCK.acquire(blocking=False):
+            return jsonify(dict(ok=False,error='行情快照正在更新或使用')), 409
+        try:
+            check_agent_binding(body)
+            rep = import_daily(src, SNAPSHOT, body.get('rule') or BASE_RULE,
+                               include_minutes=body.get('include_minutes',True) is not False)
+        except ValueError as exc:
+            return jsonify(dict(ok=False,error=str(exc))),409
+        finally:
+            _DATA_LOCK.release()
         rep['task_id'] = _task_log('import', dict(status=rep.get('status'), imported=rep.get('imported'), error=rep.get('error')))
         return jsonify(rep)
 
@@ -707,14 +777,19 @@ def create_app():
     @app.route('/api/index_kline')
     def api_index_kline():
         symbol = str(request.args.get('symbol') or 'SSE').upper()
+        period = request.args.get('period') or '1d'
+        if period not in ('1d','5m'):
+            return jsonify(dict(ok=False,error='BAD_INDEX_PERIOD')), 400
         try:
-            from full.index_kline import index_daily
-            bars, dropped = index_daily(symbol, 120)
+            from full.index_kline import STEMS, index_daily, index_minute
+            bars, dropped = (index_minute if period=='5m' else index_daily)(symbol,120)
         except Exception as exc:
             return jsonify(dict(ok=False, error='%s:%s' % (type(exc).__name__, str(exc)[:120])))
-        return jsonify(dict(ok=bool(bars), symbol=symbol, bars=bars,
+        return jsonify(dict(ok=bool(bars), symbol=symbol, period=period, bars=bars,
                             dropped_records=dropped,
                             source='local_tdx_vipdoc',
+                            source_file=STEMS[symbol]+('.lc5' if period=='5m' else '.day'),
+                            error=None if bars else '未找到满足时间网格的指数 K 线',
                             last_complete_ts=bars[-1]['ts'] if bars else None))
 
     # ---------- 生产版交易计划只读引用 ----------
@@ -723,16 +798,89 @@ def create_app():
         from full.plan_reference import load_production_plan
         return jsonify(load_production_plan())
 
+    @app.route('/api/plan/select', methods=['POST'])
+    def api_plan_select():
+        from datetime import datetime
+        from full.cli import _verify_snapshot
+        from full.strong_pool import ZONE, _day_pair
+        from full.vipdoc_reader import calendar_days
+        from rules_lab.freeze import run_freeze
+        from rules_lab.paths import STATE
+        from rules_lab.state_store import make_run_id
+
+        if not _PLAN_LOCK.acquire(blocking=False):
+            return jsonify(dict(ok=False,error='规则选股正在运行')), 409
+        if not _DATA_LOCK.acquire(blocking=False):
+            _PLAN_LOCK.release()
+            return jsonify(dict(ok=False,error='行情快照正在更新或使用')), 409
+        try:
+            now = datetime.now(ZONE)
+            p_day, day = _day_pair(now,calendar_days())
+            body = request.get_json(silent=True) or {}
+            check_agent_binding(body)
+            binding = body.get('_agent_binding') or {}
+            if binding and (p_day,day) != (binding.get('p_day'),binding.get('observation_day')):
+                return jsonify(dict(ok=False,error='STALE_OBSERVATION_DAY')),409
+            if sync_daily and int(snapshot_manifest().get('daily_through') or 0) < p_day:
+                if binding:
+                    return jsonify(dict(ok=False,error='规则快照待同步，请更新数据后重新提交任务')),409
+                sync_daily(p_day)
+            _verify_snapshot()
+            snap = open_snapshot(p_day,daily_only=True)
+            if not any(snap.daily_row(c,p_day) for c in snap.codes()):
+                return jsonify(dict(ok=False,error=f'规则快照缺 {p_day} 日线，请先导入')), 409
+            rule = rules.get(body.get('rule') or BASE_RULE)
+            run_id = make_run_id(mode='postclose_selection',day=day,rule=rule['sha256'],snapshot=snap.fingerprint)
+            run = RunContext(run_id,root_base=STATE/'plans')
+            universe = [c for c in snap.codes() if snap.daily_row(c,p_day)]
+            selection = run_selection(snap,rule,p_day,run,universe=universe,day=day)
+            plan = run_freeze(snap,rule,p_day,day,selection,run)
+            from full.golden import golden_references
+            for candidate in plan['candidates']:
+                candidate['available_at'] = now.strftime('%Y%m%d%H%M%S')
+                candidate['golden_references'] = golden_references(
+                    snap.daily_asof(candidate['code'],p_day),candidate['reference_close'],candidate['atr14'] or 0.0)
+            plan.update(generated_at=now.isoformat(),built_at=now.strftime('%Y%m%d%H%M%S'),source='LOCAL_RULE_SELECTION')
+            run.write('freeze',f'{day}.json',value=plan)
+            run.finish({'mode':'postclose_selection'})
+            return jsonify(dict(ok=True,run_id=run_id,day=day,p_day=p_day,count=plan['candidate_count']))
+        except (ValueError, KeyError, OSError, RuntimeError, SystemExit) as exc:
+            return jsonify(dict(ok=False,error=str(exc)[:240])), 409
+        finally:
+            _DATA_LOCK.release()
+            _PLAN_LOCK.release()
+
     # ---------- 盘后选股结果（冻结计划卡片） ----------
     @app.route('/api/plan/latest')
     def api_plan_latest():
-        from rules_lab.paths import STATE
-        from full.vipdoc_reader import stock_names
-        rs = sorted((STATE / 'runs').glob('*/freeze/*.json'),
-                    key=lambda p: p.stat().st_mtime)
+        from datetime import datetime
+        from rules_lab.paths import STATE,run_root
+        from full.strong_pool import ZONE,_day_pair
+        from full.vipdoc_reader import calendar_days,stock_names
+        ref = request.args.get('run_id')
+        try:
+            if ref is None:
+                rs = sorted((STATE/'plans').glob('*/freeze/*.json'),key=lambda p:p.stat().st_mtime)
+                if not rs:
+                    rs = sorted(run_root().glob('*/freeze/*.json'),key=lambda p:p.stat().st_mtime)
+            else:
+                path = _run_directory(STATE/'plans',ref) or _run_directory(run_root(),ref)
+                rs = sorted((path/'freeze').glob('*.json')) if path else []
+        except ValueError as exc:
+            return jsonify(dict(ok=False,error=str(exc))),400
         if not rs:
-            return jsonify(dict(ok=False, error='NO_FROZEN_PLAN（先在盘中监控跑一次）'))
+            return jsonify(dict(ok=False, error='暂无规则候选，请先运行盘后选股'))
         d = json.loads(rs[-1].read_text(encoding='utf-8'))
+        source = d.get('source') or 'REPLAY'
+        expected = None
+        plan_status = 'REPLAY'
+        if source=='LOCAL_RULE_SELECTION':
+            try:
+                target_p,expected = _day_pair(datetime.now(ZONE),calendar_days())
+                plan_status = ('READY' if (str(target_p),str(expected)) ==
+                               (str(d.get('observation_day')),str(d.get('day'))) else 'STALE')
+            except (OSError,ValueError,KeyError):
+                plan_status = 'UNVERIFIED'
         names = {}
         try:
             names = stock_names()
@@ -748,7 +896,8 @@ def create_app():
                               atr14=c.get('atr14')))
         return jsonify(dict(ok=True, run_id=rs[-1].parents[1].name,
                             rule_ref=d.get('rule_ref'), day=d.get('day'),
-                            p_day=d.get('snapshot', {}).get('p_day') if isinstance(d.get('snapshot'), dict) else None,
+                            p_day=d.get('observation_day'), generated_at=d.get('generated_at'), source=source,
+                            status=plan_status,expected_observation_day=expected,
                             count=d.get('candidate_count'), dropped=d.get('dropped', []),
                             candidates=cands))
 
@@ -777,7 +926,7 @@ def create_app():
         rows = [r for r in rep.get('rows', []) if r.get('status') == 'FILLED']
         # 最新收盘（快照日线）
         import gzip as _gz
-        daily = json.loads(_gz.decompress((FE / 'snapshot' / 'daily.json.gz').read_bytes()))
+        daily = json.loads(_gz.decompress((SNAPSHOT / 'daily.json.gz').read_bytes()))
         cidx = daily['columns'].index('close')
         didx = daily['columns'].index('date')
         latest = {}
@@ -914,7 +1063,7 @@ def create_app():
         import gzip as _gz
         out = []
         try:
-            d = _j.loads(_gz.decompress((FE / 'snapshot' / 'daily.json.gz').read_bytes()))
+            d = _j.loads(_gz.decompress((SNAPSHOT / 'daily.json.gz').read_bytes()))
             cidx, didx = d['columns'].index('close'), d['columns'].index('date')
             from full.vipdoc_reader import stock_names
             names = stock_names()
@@ -923,7 +1072,7 @@ def create_app():
                 close = rr[-1][cidx] if rr else None
                 day = rr[-1][didx] if rr else None
                 prev = rr[-2][cidx] if rr and len(rr) > 1 else None
-                out.append(dict(**it, name=it.get('name') or names.get(it['code'], ''),
+                out.append(dict(it, name=it.get('name') or names.get(it['code'], ''),
                                 latest_close=close, latest_day=day,
                                 change_pct=(round((close / prev - 1) * 100, 2) if (close and prev) else None)))
         except Exception:
@@ -947,11 +1096,29 @@ def create_app():
         from full.strong_pool import load_or_compute
         return jsonify(load_or_compute())
 
+    @app.route('/api/strong_pool/watch', methods=['POST'])
+    def api_strong_pool_watch():
+        from full.strong_pool import change_watch
+        body = request.get_json(silent=True) or {}
+        try:
+            cfg = change_watch(body.get('action'),str(body.get('board') or '').strip(),strong=True)
+            return jsonify(dict(ok=True,boards=cfg['boards']))
+        except (ValueError, OSError, ImportError) as exc:
+            return jsonify(dict(ok=False,error=str(exc)[:220])),400
+
     @app.route('/api/strong_pool/prepare', methods=['POST'])
     def api_strong_pool_prepare():
-        from full.strong_pool import compute
-        _task_log('strong_pool_prepare', dict(status='RECOMPUTED'))
-        return jsonify(compute())
+        from full.strong_pool import prepare
+        if not _DATA_LOCK.acquire(blocking=False):
+            return jsonify(dict(ok=False,error='行情快照正在更新或使用')), 409
+        try:
+            result = prepare()
+        except (ValueError, OSError, RuntimeError, ImportError, SystemExit) as exc:
+            result = dict(ok=False,error=str(exc)[:260])
+        finally:
+            _DATA_LOCK.release()
+        _task_log('strong_pool_prepare', result)
+        return jsonify(result), 200 if result['ok'] else 409
 
     @app.route('/api/strong_pool/board')
     def api_strong_pool_board():
@@ -965,6 +1132,18 @@ def create_app():
                                     rows=b['qualified'], note=b.get('note')))
         return jsonify(dict(ok=False, error='BOARD_NOT_FOUND:' + name))
 
+    @app.route('/api/board_monitor', methods=['GET','POST'])
+    def api_board_monitor():
+        from full.board_monitor import state
+        from full.strong_pool import change_watch
+        try:
+            if request.method=='POST':
+                body = request.get_json(silent=True) or {}
+                change_watch(body.get('action'),str(body.get('board') or '').strip())
+            return jsonify(state())
+        except (OSError,RuntimeError,ValueError,ImportError) as exc:
+            return jsonify(dict(ok=False,error=str(exc)[:220])), 400
+
     # ---------- 助手（本地知识库，不调外部模型） ----------
     @app.route('/api/assistant/chat', methods=['POST'])
     def api_assistant_chat():
@@ -972,7 +1151,7 @@ def create_app():
         body = request.get_json(force=True) or {}
         st = None
         try:
-            man = json.loads((FE / 'snapshot' / 'snapshot_manifest.json').read_text(encoding='utf-8'))
+            man = json.loads((SNAPSHOT / 'snapshot_manifest.json').read_text(encoding='utf-8'))
             st = dict(data_through=None, p_day=man.get('p_day'), monitor_day=man.get('monitor_day'),
                       latest_run=None, model_switch=model_switch()[1], source=source_config()[1])
         except Exception:
@@ -995,7 +1174,13 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument('--port', type=int, default=17891)
     a = ap.parse_args(argv)
-    create_app().run(host='127.0.0.1', port=a.port, threaded=True)
+    app = create_app()
+    from werkzeug.serving import make_server
+    server = make_server('127.0.0.1',a.port,app,threaded=True)
+    from full.board_monitor import start
+    start()
+    print(f'完整版已启动 http://127.0.0.1:{a.port}',flush=True)
+    server.serve_forever()
 
 
 if __name__ == '__main__':

@@ -38,11 +38,15 @@ def replay_params(rule_ref, days, cutoff, restart_check, fail_on):
 
 def run_replay(rule_ref, *, days=None, cutoff=None, restart_check=True,
                fail_on=None, compute_report=True, fresh=True,
-               crash_points=None):
+               crash_points=None, require_minutes=False):
     snap = open_snapshot(cutoff)
     rule = rules.get(rule_ref)
     ref = '%s@%s' % (rule['rule_id'], rule['version'])
     days = [int(d) for d in (days or default_days(snap))]
+    if require_minutes:
+        missing = [d for d in days if not snap.minute_day_codes(d)]
+        if missing:
+            raise ValueError('MISSING_REPLAY_MINUTES:'+','.join(map(str,missing)))
     fail_on = set(fail_on or [])
     params = replay_params(ref, days, cutoff, restart_check, fail_on)
     params['rule_sha256'] = rule['sha256']

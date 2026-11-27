@@ -20,7 +20,7 @@ def _load_gz(name):
 
 
 class Snapshot:
-    def __init__(self, *, cutoff=None):
+    def __init__(self, *, cutoff=None, daily_only=False):
         self.manifest = read_json(SNAPSHOT / 'snapshot_manifest.json')
         if self.manifest.get('contract') != 'RULES_LAB_SNAPSHOT_MANIFEST_V1':
             raise RuntimeError('SNAPSHOT_CONTRACT_MISMATCH')
@@ -28,7 +28,7 @@ class Snapshot:
         self.cutoff = int(cutoff) if cutoff else None
 
         d = _load_gz('daily.json.gz')
-        m = _load_gz('minutes.json.gz')
+        m = {'columns': [], 'days': {}} if daily_only else _load_gz('minutes.json.gz')
         ce = _load_gz('corporate_events.json.gz')
         self.daily_columns = d['columns']
         self.minute_columns = m['columns']
@@ -43,6 +43,7 @@ class Snapshot:
                 self.daily[code] = kept
                 self._daily_index[code] = {r['date']: r for r in kept}
         self.minutes = {}
+        self.daily_only = daily_only
         for day, codes in m['days'].items():
             if self.cutoff is not None and int(day) > self.cutoff:
                 continue
@@ -117,8 +118,8 @@ class Snapshot:
         return dict(fingerprint=self.fingerprint, cutoff=self.cutoff,
                     daily_last=self.calendar[-1], calendar_source=self.calendar_source,
                     price_basis=self.price_basis,
-                    minute_day_count=len(self.minutes))
+                    minute_day_count=self.manifest.get('minute_days') if self.daily_only else len(self.minutes))
 
 
-def open_snapshot(cutoff=None) -> Snapshot:
-    return Snapshot(cutoff=cutoff)
+def open_snapshot(cutoff=None, *, daily_only=False) -> Snapshot:
+    return Snapshot(cutoff=cutoff,daily_only=daily_only)

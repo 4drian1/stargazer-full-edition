@@ -15,7 +15,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]          # full_edition/
 SNAPSHOT = Path(os.environ.get('RULES_LAB_SNAPSHOT_DIR') or ROOT / 'snapshot')
 RUN = ROOT / 'run'
-STATE = RUN / 'state'
+STATE = Path(os.environ.get('RULES_LAB_STATE_DIR') or RUN/'state').resolve()
+if STATE != ROOT and ROOT not in STATE.parents:
+    raise ValueError('STATE_OUTSIDE_FULL_EDITION')
 CACHE = RUN / 'cache'
 BUILD = RUN / 'build'
 REPORTS = ROOT / 'reports'

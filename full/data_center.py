@@ -28,7 +28,6 @@ sys.path.insert(0, str(FE.parents[1] / 'stargazer_desktop'))
 
 DAY_STRUCT = '<IIIIIfII'
 LC5_STRUCT = '<HHfffffiI'
-LC5_STRUCT = '<HHfffffiI'
 
 
 def _iter_day(path):
@@ -221,7 +220,7 @@ def rule_window(rule_ref='strong_pullback@v1'):
     return min(need, 130)   # 黄金地图分支最多 123，封顶 130
 
 
-def import_daily(src: Path, snap_dir: Path, rule_ref='strong_pullback@v1'):
+def import_daily(src: Path, snap_dir: Path, rule_ref='strong_pullback@v1', *, include_minutes=True):
     snap_dir = Path(snap_dir)
     rep = scan(src, snap_dir)
     conflicts = [e for e in rep['entries'] if e['status'] == 'CONFLICT']
@@ -231,7 +230,7 @@ def import_daily(src: Path, snap_dir: Path, rule_ref='strong_pullback@v1'):
                                for e in conflicts[:20]],
                     note='价格冲突默认拒绝导入；核对来源后重试，旧快照保留')
     updates = [e for e in rep['entries'] if e['status'] in ('NEW_DATE', 'NEW_CODE')]
-    has_lc5 = bool(_find_files(Path(src))['lc5'])
+    has_lc5 = include_minutes and bool(_find_files(Path(src))['lc5'])
     if not updates and not has_lc5:
         return dict(ok=True, status='NOTHING_NEW', summary=rep['summary'])
     staging = Path(str(snap_dir) + '_staging')
@@ -246,7 +245,7 @@ def import_daily(src: Path, snap_dir: Path, rule_ref='strong_pullback@v1'):
             shutil.rmtree(staging, ignore_errors=True)
             return dict(ok=True, status='NOTHING_NEW', summary=rep['summary'])
         _extend_calendar(staging)
-        _refresh_manifest(staging, src)
+        _refresh_manifest(staging, src, lc5_rep)
     except Exception as exc:
         shutil.rmtree(staging, ignore_errors=True)
         return dict(ok=False, status='PUBLISH_FAILED', error=str(exc)[:200],
@@ -302,9 +301,22 @@ def _apply_daily(staging: Path, src: Path, updates):
         json.dumps(d, ensure_ascii=False, separators=(',', ':')).encode(), mtime=0))
 
 
-def _refresh_manifest(staging: Path, src: Path):
+def _refresh_manifest(staging: Path, src: Path, minute_report):
     mp = staging / 'snapshot_manifest.json'
     man = json.loads(mp.read_text(encoding='utf-8'))
+    with gzip.open(staging/'daily.json.gz', 'rt', encoding='utf-8') as stream:
+        daily = json.load(stream)
+    dates = sorted(set(map(int,json.loads((staging/'calendar.json').read_bytes())['days'])))
+    date_col = daily['columns'].index('date')
+    daily_dates = {int(row[date_col]) for rows in daily['codes'].values() for row in rows}
+    if minute_report:
+        valid_days = minute_report['runnable_days']
+        for p_day, day in reversed(list(zip(dates,dates[1:]))):
+            if p_day in daily_dates and day in valid_days:
+                man.update(p_day=p_day, monitor_day=day)
+                break
+        man['minute_days'] = minute_report['minute_days']
+    man['daily_through'] = max(daily_dates,default=None)
     man['data_sha256'] = {f.name: hashlib.sha256((staging / f.name).read_bytes()).hexdigest()
                           for f in staging.iterdir()
                           if f.name != 'snapshot_manifest.json'}
@@ -408,8 +420,9 @@ def _apply_minutes(staging: Path, src: Path):
             imported += 1
     if imported:
         mp.write_bytes(gzip.compress(
-            json.dumps(doc, ensure_ascii=False, separators=(',', ':')).encode(), mtime=0))
-    return dict(imported=imported, skipped=skipped, skipped_bad_grid=bad_days[:20])
+            json.dumps(doc, ensure_ascii=False, separators=(',', ':')).encode(), compresslevel=3, mtime=0))
+    return dict(imported=imported, skipped=skipped, skipped_bad_grid=bad_days[:20],minute_days=len(doc['days']),
+                runnable_days={int(d) for d,codes in doc['days'].items() if len(codes)>=20})
 
 
 def _extend_calendar(staging: Path):

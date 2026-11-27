@@ -33,9 +33,9 @@ def load():
 
 
 def save(doc):
-    CFG.parent.mkdir(parents=True, exist_ok=True)
+    from rules_lab.paths import atomic_write_json
     merged = {**DEFAULT, **{k: str(doc.get(k) or '').strip() for k in DEFAULT}}
-    CFG.write_text(json.dumps(merged, ensure_ascii=False, indent=1), encoding='utf-8')
+    atomic_write_json(CFG,merged)
     return merged
 
 
@@ -52,7 +52,7 @@ def public_view():
                 pushplus_token_tail=mask(c['pushplus_token']))
 
 
-def send_dingtalk(title, text, cfg=None, timeout=10):
+def send_dingtalk(title, text, cfg=None, timeout=10, *, include_heading=True):
     cfg = cfg or load()
     url = cfg['dingtalk_webhook']
     if not url:
@@ -67,16 +67,16 @@ def send_dingtalk(title, text, cfg=None, timeout=10):
     # 钉钉 markdown 折叠单个换行：段落用空行分隔
     body = json.dumps({'msgtype': 'markdown',
                        'markdown': {'title': title,
-                                    'text': '### ' + title + '\n\n' + text.replace('\n', '\n\n')}},
+                                    'text': ('### '+title+'\n\n' if include_heading else '')+text.replace('\n','\n\n')}},
                       ensure_ascii=False).encode('utf-8')
     req = urllib.request.Request(url, data=body, headers={'Content-Type': 'application/json'})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
             resp = json.loads(r.read().decode('utf-8', 'replace'))
         ok = resp.get('errcode') == 0
-        return dict(ok=ok, resp=resp if not ok else dict(errcode=0))
+        return dict(ok=ok, resp=dict(errcode=resp.get('errcode')))
     except Exception as exc:
-        return dict(ok=False, reason='%s:%s' % (type(exc).__name__, str(exc)[:120]))
+        return dict(ok=False, reason=type(exc).__name__, unknown=True)
 
 
 def send_pushplus(title, content, cfg=None):
@@ -85,13 +85,13 @@ def send_pushplus(title, content, cfg=None):
     return send(title, content, tk=cfg['pushplus_token'] or None)
 
 
-def send_summary(title, content):
+def send_summary(title, content, *, cfg=None, include_heading=True):
     """按配置的渠道发运行汇总；channel=none 返回未配置（不影响本地回执）。每次发送落盘日志。"""
-    c = load()
+    c = cfg or load()
     import datetime
     log_entry = None
     if c['channel'] == 'dingtalk':
-        r = send_dingtalk(title, content, c)
+        r = send_dingtalk(title, content, c, include_heading=include_heading)
         log_entry = dict(channel='dingtalk', ok=bool(r.get('ok')),
                          error=None if r.get('ok') else str(r.get('reason', r.get('resp')))[:200])
     elif c['channel'] == 'pushplus':
@@ -101,7 +101,7 @@ def send_summary(title, content):
     else:
         return dict(channel='none', ok=False, reason='CHANNEL_NONE（仅本地收件箱）')
     log_entry.update(title=title[:80], sent_at=datetime.datetime.now().isoformat(timespec='seconds'),
-                     content_head=content.split('\n')[1][:60] if '\n' in content else '')
+                     content_head=content.split('\n')[0][:120])
     try:
         with (FE / 'data' / 'push_log.jsonl').open('a', encoding='utf-8') as fh:
             fh.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
